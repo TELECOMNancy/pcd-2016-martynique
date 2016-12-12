@@ -31,18 +31,53 @@ The API key is stored in *src/main/resources/youtube.properties*
 	
 	youtube.apikey=XXXXX
 
+#Dependancies
 
-#Day 1
+for more details, check the [pom.xml](https://github.com/TELECOMNancy/pcd-2016-martynique/blob/master/pom.xml) !
+
+
+- [Youtube API Client Library for Java](https://developers.google.com/api-client-library/java/), communication with the Youtube API
+- [javaFX](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm), building of modern user interfaces in java 8
+
+
+# Roles
+
+@Mcdostone: Project manager
+@MartyEz: Crazy coder
+@Answermouth: User Interface Developer and test developper
+@Minous: User Interface Developer and test developper
+
+# Expected features
+
+
+1. Searching a video using the Youtube API
+2. Watching a video hosted on Youtube
+3. Getting the list of videos depending on a user query
+4. Controlling the video player (play, pause, volume, fullscreen ...)
+5. Watching an offline video
+6. Saving favorites videos
+7. Creating a playlist
+8. Improving user experience thanks to advanced thumbnails
+9. Suggesting videos the user depending on its criteria
+10. Making navigation more easier for the user
+11. Authentificating the user on Youtube
+12. Commenting or liking  a video
+13. Displaying more information about a video (comments, description)
+
+
+
+#Day 1#Monday
 
 features
 ----
-* La liste des fonctionnalités prévues, en cours de développement, réalisées
-* Les instructions pour installer et utiliser votre programme
-* Les informations utiles à son fonctionnement.
+
+Minious and Answermouth: features 2 and 4
+MartyEz and Mcdostone: features 1 and 9
 
 
 # Some resources
  - [jfoenix](http://www.jfoenix.com/),  implementation of Google Material Design using Java components.
+ - [Example of JavaFX app](https://github.com/Mcdostone/sort-my-photos)
 
 #authors
 
