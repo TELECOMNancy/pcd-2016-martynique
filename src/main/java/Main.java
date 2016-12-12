@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        SceneManager sm = new SceneManager(primaryStage);
+        SceneManager sm = SceneManager.getInstance(primaryStage);
         sm.startHomepage();
     }
 

@@ -1,5 +1,6 @@
 package controllers;
 
+import app.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,6 +33,8 @@ public class SearchController {
                 	Search search = new Search(searchField.getText());
                 	search.executeApiRequest();
                 	search.printResult();
+
+                    SceneManager.getInstance(null).showResults(search.searchResultList());
                 }
             }
         });
