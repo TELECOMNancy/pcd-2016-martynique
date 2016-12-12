@@ -9,3 +9,17 @@
 .searchField *.text {
     -fx-text-alignment: center;
 }
+
+
+.button {
+	-fx-padding: 5px 20px;
+	-fx-border-color: transparent;
+	-fx-cursor: hand;
+	-fx-background-color: transparent;
+	-fx-background-insets: 0 0 0 0, 0, 0, 0;
+    -fx-background-radius: 0 0 0 0, 0, 0, 0;
+}
+#searchButton {
+	-fx-background-image: url("../assets/search.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
