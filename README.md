@@ -47,7 +47,10 @@ features
 #authors
 
 @MartyEz, Lucas MARTINEZ
+
 @Answermouth, Ansel GAMET
+
 @Minious, Eliot GODARD
+
 @Mcdostone, Yann PRONO
 
