@@ -122,3 +122,5 @@ src/main/resources/watermark.jpg
 
 target/
 .idea/
+
+savedVideos/
