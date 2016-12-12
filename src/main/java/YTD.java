@@ -12,7 +12,8 @@ public class YTD {
     public static void main(String[] args) {
         try {
             String url = "https://www.youtube.com/watch?v=s10ARdfQUOY";
-            String path = System.getProperty("user.dir") + "\\savedVideos\\";
+            //String url = "https://www.youtube.com/embed/WldIsP2dUxg"
+            String path = System.getProperty("user.dir") + "/savedVideos/";
             VGet v = new VGet(new URL(url), new File(path));
             v.download();
         } catch (Exception e) {

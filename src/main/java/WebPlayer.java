@@ -1,43 +1,47 @@
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
-import javafx.concurrent.Worker.State;
+
+import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaView;
  
 @SuppressWarnings("restriction")
-public class WebPlayer extends Application {
-    public static void main(String[] args) {
-        launch(args);
+public class WebPlayer extends Pane implements VideoPlayer{
+    private WebView player;
+    
+    public WebPlayer(int height, int width, String source) {
+        super();
+        this.setHeight(height);
+        this.setWidth(width);
+        
+        this.player = new WebView();
+        WebEngine webEngine = this.player.getEngine();
+        
+        /*
+        webEngine.getLoadWorker().stateProperty().addListener(
+                new ChangeListener<State>() {
+                    public void changed(ObservableValue ov, State oldState, State newState) {
+                        if (newState == State.SUCCEEDED) {
+                            primaryStage.setTitle(webEngine.getTitle());
+                        }
+                    }
+                });
+        */        
+        
+        webEngine.load(source);
+        
+        this.getChildren().add(this.player);
     }
     
-    @Override
-    public void start(final Stage primaryStage) {
-        primaryStage.setTitle("Martynique");
-        
-        StackPane root = new StackPane();
-        WebView webView = new WebView();
-        final WebEngine webEngine = webView.getEngine();
-		
-        /* CHANGE WINDOW'S NAME WITH YT VIDEO'S NAME
-		webEngine.getLoadWorker().stateProperty().addListener(
-		    new ChangeListener<State>() {
-		        public void changed(ObservableValue ov, State oldState, State newState) {
-		            if (newState == State.SUCCEEDED)
-		                primaryStage.setTitle(webEngine.getTitle());
-		        }
-		    }
-		);
-		*/
-        
-        //webEngine.load("http://www.google.com");
-        webEngine.load("https://www.youtube.com/embed/FIRT7lf8byw");
-        
-        root.getChildren().add(webView);
-        primaryStage.setScene(new Scene(root, 600, 500));
-        primaryStage.show();
+    public String getMediaName() {
+        return this.player.getEngine().getTitle();
+    }
+    
+    public String getSource() {
+        return this.player.getEngine().getLocation();
+    }
+
+    public MediaView getPlayer() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
