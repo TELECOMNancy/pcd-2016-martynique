@@ -31,6 +31,14 @@ The API key is stored in *src/main/resources/youtube.properties*
 	
 	youtube.apikey=XXXXX
 
+#Dependancies
+
+for more details, check the [pom.xml](https://github.com/TELECOMNancy/pcd-2016-martynique/blob/master/pom.xml) !
+
+
+- [Youtube API Client Library for Java](https://developers.google.com/api-client-library/java/), communication with the Youtube API
+- [javaFX](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm), building of modern user interfaces in java 8
+
 
 # Roles
 
