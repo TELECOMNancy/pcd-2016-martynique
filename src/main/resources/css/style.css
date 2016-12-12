@@ -1,0 +1,11 @@
+.pane {
+	-fx-background-color: rgb(34, 34, 34);
+}
+
+.searchField {
+    -fx-text-fill: white;
+}
+
+.searchField *.text {
+    -fx-text-alignment: center;
+}
