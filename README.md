@@ -87,5 +87,5 @@ MartyEz and Mcdostone: features 1 and 9
 
 @Minious, Eliot GODARD
 
-@Mcdostone, Yann PRONO
+@Mcdostone, Yann PRONOs
 
