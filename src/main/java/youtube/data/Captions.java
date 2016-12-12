@@ -190,7 +190,7 @@ public class Captions {
 
       // Set the download state for the caption track file.
       MediaHttpDownloaderProgressListener downloadProgressListener = new MediaHttpDownloaderProgressListener() {
-          @Override
+          //@Override
           public void progressChanged(MediaHttpDownloader downloader) throws IOException {
               switch (downloader.getDownloadState()) {
                   case MEDIA_IN_PROGRESS:
@@ -266,7 +266,7 @@ public class Captions {
 
         // Set the upload state for the caption track file.
         MediaHttpUploaderProgressListener progressListener = new MediaHttpUploaderProgressListener() {
-            @Override
+            //@Override
             public void progressChanged(MediaHttpUploader uploader) throws IOException {
                 switch (uploader.getUploadState()) {
                     // This value is set before the initiation request is
@@ -395,7 +395,7 @@ public class Captions {
 
       // Set the upload state for the caption track file.
       MediaHttpUploaderProgressListener progressListener = new MediaHttpUploaderProgressListener() {
-          @Override
+          //@Override
           public void progressChanged(MediaHttpUploader uploader) throws IOException {
               switch (uploader.getUploadState()) {
                   // This value is set before the initiation request is
