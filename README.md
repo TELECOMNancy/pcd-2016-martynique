@@ -69,6 +69,7 @@ MartyEz and Mcdostone: features 1 and 9
 
 # Some resources
  - [jfoenix](http://www.jfoenix.com/),  implementation of Google Material Design using Java components.
+ - [Example of JavaFX app](https://github.com/Mcdostone/sort-my-photos)
 
 #authors
 
