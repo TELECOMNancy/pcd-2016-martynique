@@ -1,43 +1,49 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import javafx.concurrent.Worker.State;
+import javafx.fxml.FXMLLoader;
  
 @SuppressWarnings("restriction")
 public class WebPlayerV2 extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
-    @Override
+	private Stage primaryStage;
+	private BorderPane rootLayout;
+	
+	@Override
     public void start(final Stage primaryStage) {
+		this.primaryStage = primaryStage;
         primaryStage.setTitle("Martynique");
         
-        StackPane root = new StackPane();
-        WebView webView = new WebView();
-        final WebEngine webEngine = webView.getEngine();
-		
-        /* CHANGE WINDOW'S NAME WITH YT VIDEO'S NAME
-		webEngine.getLoadWorker().stateProperty().addListener(
-		    new ChangeListener<State>() {
-		        public void changed(ObservableValue ov, State oldState, State newState) {
-		            if (newState == State.SUCCEEDED)
-		                primaryStage.setTitle(webEngine.getTitle());
-		        }
-		    }
-		);
-		*/
-        
-        //webEngine.load("http://www.google.com");
-        webEngine.load("https://www.youtube.com/embed/FIRT7lf8byw");
-        
-        root.getChildren().add(webView);
-        primaryStage.setScene(new Scene(root, 600, 500));
-        primaryStage.show();
+        initRootlayout();
     }
+	
+	public void initRootlayout(){
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WebPlayerV2.class.getResource("src/main/resources/sample.fxml"));
+			rootLayout = (BorderPane) loader.load();
+			
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			
+			StackPane root = new StackPane();
+	        WebView webView = new WebView();
+	        final WebEngine webEngine = webView.getEngine();
+	        webEngine.load("https://www.youtube.com/embed/FIRT7lf8byw");
+	        
+	        rootLayout.setCenter(webView);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
