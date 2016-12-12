@@ -32,13 +32,39 @@ The API key is stored in *src/main/resources/youtube.properties*
 	youtube.apikey=XXXXX
 
 
-#Day 1
+# Roles
+
+@Mcdostone: Project manager
+@MartyEz: Crazy coder
+@Answermouth: User Interface Developer and test developper
+@Minous: User Interface Developer and test developper
+
+# Expected features
+
+
+1. Searching a video using the Youtube API
+2. Watching a video hosted on Youtube
+3. Getting the list of videos depending on a user query
+4. Controlling the video player (play, pause, volume, fullscreen ...)
+5. Watching an offline video
+6. Saving favorites videos
+7. Creating a playlist
+8. Improving user experience thanks to advanced thumbnails
+9. Suggesting videos the user depending on its criteria
+10. Making navigation more easier for the user
+11. Authentificating the user on Youtube
+12. Commenting or liking  a video
+13. Displaying more information about a video (comments, description)
+
+
+
+#Day 1#Monday
 
 features
 ----
-* La liste des fonctionnalités prévues, en cours de développement, réalisées
-* Les instructions pour installer et utiliser votre programme
-* Les informations utiles à son fonctionnement.
+
+Minious and Answermouth: features 2 and 4
+MartyEz and Mcdostone: features 1 and 9
 
 
 # Some resources
