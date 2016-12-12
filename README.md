@@ -11,8 +11,8 @@ First of all, install all softwares you need to work. Minimum requirements are:
  - an IDE ([eclipse](https://eclipse.org/downloads/), [IntelliJ IDEA](https://www.jetbrains.com/idea/), [netBeans](https://netbeans.org/downloads/))
  - [Git](https://git-scm.com/downloads) (surprising isn't it ?)
  - [JUnit4](http://junit.org/junit4/) ([Who will make tests?](http://www.commitstrip.com/shop/45-thickbox_default/affiche-tester-c-est-douter.jpg))
- - [SceneBuilder](http://gluonhq.com/labs/scene-builder/) if we choose javaFX
- - A build manager (maven, gradle) if we have time
+ - [SceneBuilder](http://gluonhq.com/labs/scene-builder/) if we choose javaFX (We have chossen JavaFX :D)
+ - The build manager maven(useful for dependancies)
 
 
 Ok, here we are! Be sure you can clone the repo (use [SSH keys](https://help.github.com/articles/generating-an-ssh-key/) to be more faster).
@@ -75,8 +75,12 @@ Minious and Answermouth: features 2 and 4
 MartyEz and Mcdostone: features 1 and 9
 
 
+Recap
+-----
+
+
 # Some resources
- - [jfoenix](http://www.jfoenix.com/),  implementation of Google Material Design using Java components.
+ - [Jfoenix](http://www.jfoenix.com/),  implementation of Google Material Design using Java components.
  - [Example of JavaFX app](https://github.com/Mcdostone/sort-my-photos)
  - [Color specifications of Youtube] (https://www.youtube.com/yt/brand/color.html)
 
