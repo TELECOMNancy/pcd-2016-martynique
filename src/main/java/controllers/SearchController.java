@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import models.Search;
 
 /**
  * Controller for searching videos on Youtube
@@ -26,8 +27,12 @@ public class SearchController {
         this.searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.getCode().equals(KeyCode.ENTER))
+                if(event.getCode().equals(KeyCode.ENTER)){
                     System.out.println("#QUERY '" + searchField.getText() + "'");
+                	Search search = new Search(searchField.getText());
+                	search.executeApiRequest();
+                	search.printResult();
+                }
             }
         });
     }
