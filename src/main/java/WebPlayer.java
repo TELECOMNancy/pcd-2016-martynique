@@ -21,21 +21,20 @@ public class WebPlayer extends Application {
         StackPane root = new StackPane();
         WebView webView = new WebView();
         final WebEngine webEngine = webView.getEngine();
-        
-        webEngine.getLoadWorker().stateProperty().addListener(
-                new ChangeListener<State>() {
-                    public void changed(ObservableValue ov, State oldState, State newState) {
-                        if (newState == State.SUCCEEDED) {
-                            primaryStage.setTitle(webEngine.getTitle());
-                        }
-                    }
-                });
-        
-        //hdhqdqkdqsgdqgdyiqiygdfyfqfsufdfqsduqsdyqdutquodyit
-        
+		
+        /* CHANGE WINDOW'S NAME WITH YT VIDEO'S NAME
+		webEngine.getLoadWorker().stateProperty().addListener(
+		    new ChangeListener<State>() {
+		        public void changed(ObservableValue ov, State oldState, State newState) {
+		            if (newState == State.SUCCEEDED)
+		                primaryStage.setTitle(webEngine.getTitle());
+		        }
+		    }
+		);
+		*/
         
         //webEngine.load("http://www.google.com");
-        webEngine.load("https://www.youtube.com/embed/WldIsP2dUxg");
+        webEngine.load("https://www.youtube.com/embed/FIRT7lf8byw");
         
         root.getChildren().add(webView);
         primaryStage.setScene(new Scene(root, 600, 500));
