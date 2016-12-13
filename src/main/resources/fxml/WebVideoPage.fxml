@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="Player" prefHeight="272.0" prefWidth="279.0" style="-fx-background-color: e52d27;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane style="-: ;" BorderPane.alignment="CENTER">
+         <left>
+            <Button fx:id="Return" mnemonicParsing="false" text="Return" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Button fx:id="FS" mnemonicParsing="false" text="FS" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </top>
+</BorderPane>

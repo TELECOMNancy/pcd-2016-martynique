@@ -1,3 +1,4 @@
+package views;
 import java.io.File;
 
 import javafx.scene.layout.Pane;
@@ -43,8 +44,8 @@ public class LocalPlayer extends Pane implements VideoPlayer {
         this.getChildren().addAll(player);
     }
 
-    public MediaView getPlayer() {
-        return this.player;
+    public String getPlayerType() {
+        return "LocalPlayer";
     }
     
     public String getMediaName() {

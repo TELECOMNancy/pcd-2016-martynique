@@ -2,6 +2,8 @@ package views;
 
 import com.google.api.services.youtube.model.SearchResult;
 import com.jfoenix.controls.JFXListCell;
+
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -10,11 +12,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import models.Video;
 
+import javafx.scene.input.MouseEvent;
+
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 /**
  * Created by mcdostone on 12/12/16.
  */
+
 public class SearchResultListViewCell extends JFXListCell<Video> {
 
     @FXML
@@ -43,6 +49,7 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
                     e.printStackTrace();
                 }
             }
+
             if(value != null) {
 
                 this.title.setText(value.getTitle());

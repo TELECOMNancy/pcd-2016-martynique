@@ -1,65 +1,66 @@
-import java.io.File;
-import java.io.IOException;
-
-import javafx.scene.layout.Pane;
-
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.media.Media;
-
-import javafx.fxml.FXMLLoader;
+ import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
  
+/**
+*
+* @web http://java-buddy.blogspot.com/
+*/
 @SuppressWarnings("restriction")
-public class test extends Pane implements VideoPlayer {  
-    private MediaView player;
-    
-    public test(int height, int width, String source) {
-        super();
-        this.setHeight(height);
-        this.setWidth(width);
-        
-        source = "E:/workspace/pcd-2016-martynique/src/main/resources/fxml/localPlayer.fxml";
-        
-        /*
-        //String source = getParameters().getRaw().get(0);
-        //String source = "E:/workspace/pcd-2016-martynique/savedVideos/test.mp4";
-        //String source = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
-        
-        String url = "";
-        try{
-            File video = new File(source);
-            url = video.toURI().toURL().toString();
-            System.out.println("URL: "+url);
-        }catch(Exception e){
-            System.err.println(e.toString());
-        }
-        
-        Media media = new Media(url);
-        
-        // Create the player and set to play automatically.
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-
-        // Create the view and add it to the Scene.
-        MediaView player = new MediaView(mediaPlayer);
-        
-        player.setFitHeight(this.getHeight());
-        player.setFitWidth(this.getWidth());
-        
-        this.getChildren().addAll(player);
-        */
-    }
-
-    public MediaView getPlayer() {
-        return this.player;
-    }
-    
-    public String getMediaName() {
-        // a changer pour recuperer depuis les meta données
-        return this.player.getMediaPlayer().getMedia().getSource();
-    }
-
-    public String getSource() {
-        return this.player.getMediaPlayer().getMedia().getSource();
-    }
+public class test extends Application {
+ 
+  /**
+   * @param args the command line arguments
+   */
+  public static void main(String[] args) {
+      launch(args);
+  }
+ 
+  @Override
+  public void start(Stage primaryStage) {
+     
+      primaryStage.setTitle("http://java-buddy.blogspot.com/");
+     
+      final Label label = new Label("Selected: ");
+     
+      final ListView<String> listView = new ListView<>();
+      ObservableList<String> list =FXCollections.observableArrayList (
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday");
+      
+      listView.setItems(list);
+ 
+      listView.setOnMouseClicked(new EventHandler<MouseEvent>(){
+ 
+          @Override
+          public void handle(MouseEvent arg0) {
+             
+              label.setText("Selected: " +
+                  listView.getSelectionModel().getSelectedItems());
+              System.out.println("hello");
+          }
+ 
+      });
+     
+      VBox vBox = new VBox();
+      vBox.getChildren().addAll(label, listView);
+     
+      StackPane root = new StackPane();
+      root.getChildren().add(vBox);
+      primaryStage.setScene(new Scene(root, 300, 250));
+      primaryStage.show();
+  }
 }
