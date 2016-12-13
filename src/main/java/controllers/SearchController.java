@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import models.Search;
+import utils.Search;
 
 /**
  * Controller for searching videos on Youtube
