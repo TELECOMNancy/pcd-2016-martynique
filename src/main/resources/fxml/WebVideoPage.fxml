@@ -12,6 +12,9 @@
          <right>
             <Button fx:id="FS" mnemonicParsing="false" text="FS" BorderPane.alignment="CENTER" />
          </right>
+         <center>
+            <Button fx:id="Download" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Download" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </top>
 </BorderPane>

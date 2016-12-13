@@ -13,6 +13,8 @@ import java.util.List;
 
 import views.WebPlayer;
 
+import utils.YTD;
+
 /**
  * The main Controller of the app
  */
@@ -60,6 +62,15 @@ public class AppController {
         
         this.root.setTop(null);
         this.root.setCenter(bp);
+    }
+    
+    public void stopWebVideo() {
+        ((WebPlayer) ((BorderPane) this.root.getCenter()).getCenter()).stop();
+    }
+    
+    public void download(String ID) {
+        //YTD.download(ID);
+        System.out.println("Nope");
     }
     
     public void goFullScreen() {
