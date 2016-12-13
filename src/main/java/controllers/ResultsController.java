@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Controller for results of request.
  */
-public class ResultsController {
+public class ResultsController extends Controller {
 
     @FXML
     JFXListView<SearchResult> results;

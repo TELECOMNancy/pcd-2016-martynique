@@ -1,7 +1,5 @@
 package controllers;
 
-import app.SceneManager;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,14 +17,11 @@ import models.Search;
  * @author MartyEz
  * @author Answermouth
  */
-public class SearchController {
+public class SearchController extends Controller {
 
-    @FXML TextField searchField;
+    @FXML private TextField searchField;
 
-    @FXML
-    private Button searchButton;
-
-    public SearchController() {}
+    @FXML private Button searchButton;
 
     @FXML
     private void initialize() {
@@ -53,6 +48,8 @@ public class SearchController {
         Search search = new Search(searchField.getText());
         search.executeApiRequest();
         search.printResult();
-        SceneManager.getInstance(null).showResults(search.searchResultList());
+        this.appController.showResults(search.searchResultList());
     }
+
+
 }
