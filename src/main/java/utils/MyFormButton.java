@@ -8,6 +8,7 @@ public class MyFormButton extends Button {
 	public MyFormButton(Answer answer){
 		this.answer = answer;
 		this.setText(this.answer.getText());
+		// this.getStyleClass().add("formButton");
 	}
 	
 	public Answer getAnswer(){
