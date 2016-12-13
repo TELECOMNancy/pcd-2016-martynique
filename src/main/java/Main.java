@@ -16,6 +16,10 @@ public class Main extends Application {
     private void initDB() {
         VideoDB.createTable();
         FavoriteDB.createTable();
+        Video v = new Video("y", "google.fr", "fjkd555");
+
+        new VideoDB(v).create();
+        new FavoriteDB(new Favorite(v)).create();
     }
 
     @Override

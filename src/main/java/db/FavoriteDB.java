@@ -75,8 +75,8 @@ public class FavoriteDB extends ModelDB<Favorite> {
 
     @Override
     public String insertQuery() {
-        //return superinsertQuery() + "(id_video) VALUES(?)";
-        return "fkkf";
+        return super.insertQuery() + "(id_video) VALUES(?)";
+
     }
 
     @Override
@@ -91,9 +91,8 @@ public class FavoriteDB extends ModelDB<Favorite> {
 
     public static void createTable() {
         String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
-                "id INTEGER AUTO_INCREMENT, " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "id_video INTEGER NOT NULL, " +
-                "PRIMARY KEY (id)," +
                 "FOREIGN KEY (id_video) REFERENCES Videos(id))";
 
         try {
