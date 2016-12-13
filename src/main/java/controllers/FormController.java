@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.HashMap;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ public class FormController extends Controller {
     private HBox buttonsContainer;
 
     private Question curQuestion;
+    private HashMap<String, String> flags;
 
     @FXML
     private void initialize() {
@@ -25,9 +28,9 @@ public class FormController extends Controller {
     	//       PRESETS       //
     	/////////////////////////
     	Question q1 = new Question("Que voulez-vous faire ?");
-    	Question q2 = new Question("Quel genre ?");
-    	Question q3 = new Question("Quel domaine ?");
-    	Question q4 = new Question("Combien de temps avez-vous ?");
+    	Question q2 = new Question("Quel genre ?", "TYPE");
+    	Question q3 = new Question("Quel domaine ?", "TYPE");
+    	Question q4 = new Question("Combien de temps avez-vous ?", "TEMPS");
 
     	Answer a1_1 = new Answer("Me divertir", q2);
     	Answer a1_2 = new Answer("M'instruire", q3);
@@ -56,6 +59,8 @@ public class FormController extends Controller {
     	
     	update();
     	
+    	flags = new HashMap<String, String>();
+    	
     	/*
     	this.searchButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
@@ -70,10 +75,14 @@ public class FormController extends Controller {
     	if(this.curQuestion != null){
 	    	this.questionLabel.setText(this.curQuestion.getText());
 	    	for(int i=0;i<this.curQuestion.getAnswers().size();i++){
-	    		MyFormButton curButton = new MyFormButton(this.curQuestion.getAnswers().get(i));
+	    		Answer curAnswer = this.curQuestion.getAnswers().get(i);
+	    		MyFormButton curButton = new MyFormButton(curAnswer);
 	    		curButton.setOnMousePressed(new EventHandler<MouseEvent>() {
 	                @Override
 	                public void handle(MouseEvent event) {
+	                	if(curQuestion.isMemorised())
+	                		flags.put(curQuestion.getFlag(), curAnswer.getText());
+	                	
 	                    curQuestion = curButton.getAnswer().getLeadingQuestion();
 	                    buttonsContainer.getChildren().clear();
 	                    update();
@@ -82,7 +91,9 @@ public class FormController extends Controller {
 	    		this.buttonsContainer.getChildren().add(curButton);
 	    	}
     	}
-    	else
+    	else{
     		this.questionLabel.setText("DONE");
+    		System.out.println(this.flags.toString());
+    	}
     }
 }
