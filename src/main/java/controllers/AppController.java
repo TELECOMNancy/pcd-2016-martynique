@@ -30,7 +30,10 @@ public class AppController {
     @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
+        wp = new WebPlayer();
     }
+    
+    private WebPlayer wp;
     
     public void showHome() {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
@@ -55,7 +58,6 @@ public class AppController {
         
         BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
         
-        WebPlayer wp = new WebPlayer();
         wp.play(videoID);
         
         bp.setCenter(wp);
