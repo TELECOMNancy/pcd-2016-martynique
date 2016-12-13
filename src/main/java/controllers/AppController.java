@@ -13,6 +13,8 @@ import java.util.List;
 
 import views.WebPlayer;
 
+import utils.YTD;
+
 /**
  * The main Controller of the app
  */
@@ -24,11 +26,14 @@ public class AppController {
 
     @FXML
     private SearchController searchController;
-    
+
     @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
+        wp = new WebPlayer();
     }
+    
+    private WebPlayer wp;
     
     public void showHome() {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
@@ -53,13 +58,21 @@ public class AppController {
         
         BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
         
-        WebPlayer wp = new WebPlayer();
         wp.play(videoID);
         
         bp.setCenter(wp);
         
         this.root.setTop(null);
         this.root.setCenter(bp);
+    }
+    
+    public void stopWebVideo() {
+        ((WebPlayer) ((BorderPane) this.root.getCenter()).getCenter()).stop();
+    }
+    
+    public void download(String ID) {
+        //YTD.download(ID);
+        System.out.println("Nope");
     }
     
     public void goFullScreen() {

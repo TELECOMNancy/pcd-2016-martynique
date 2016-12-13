@@ -1,20 +1,22 @@
 package utils;
 import java.util.ArrayList;
 
+import controllers.FormController.Flag;
+
 public class Question {
 	private ArrayList<Answer> answers;
 	private String question;
-	private String flag;
+	private Flag flag;
 	private boolean memorise;
 	
-	private Question(String question, ArrayList<Answer> answers, String flag, boolean memorise){
+	private Question(String question, ArrayList<Answer> answers, Flag flag, boolean memorise){
 		this.answers = answers;
 		this.flag = flag;
 		this.question = question;
 		this.memorise = memorise;
 	}
 	
-	public Question(String question, ArrayList<Answer> answers, String flag){
+	public Question(String question, ArrayList<Answer> answers, Flag flag){
 		this(question, answers, flag, true);
 	}
 	
@@ -22,7 +24,7 @@ public class Question {
 		this(question, answers, null, false);
 	}
 	
-	public Question(String question, String flag){
+	public Question(String question, Flag flag){
 		this(question, new ArrayList<Answer>(), flag);
 	}
 	
@@ -38,7 +40,7 @@ public class Question {
 		return this.question;
 	}
 	
-	public String getFlag(){
+	public Flag getFlag(){
 		return this.flag;
 	}
 	

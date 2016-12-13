@@ -26,6 +26,10 @@ public class WebPlayer extends BorderPane implements VideoPlayer{
         player.getEngine().load( "https://www.youtube.com/embed/"+videoID);
     }
     
+    public void stop() {
+        this.player.getEngine().load(null);
+    }
+    
     public String getMediaName() {
         return this.player.getEngine().getTitle();
     }

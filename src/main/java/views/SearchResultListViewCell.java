@@ -32,7 +32,6 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
     private FXMLLoader loader;
 
     public void updateItem(Video value, boolean empty) {
-
         super.updateItem(value, empty);
 
         if(empty || value == null) {
@@ -49,6 +48,7 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
                     e.printStackTrace();
                 }
             }
+
             if(value != null) {
 
                 this.title.setText(value.getTitle());

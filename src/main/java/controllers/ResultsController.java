@@ -22,7 +22,6 @@ public class ResultsController extends Controller {
     @FXML
     JFXListView<Video> results;
 
-
     private ObservableList<Video> searchResultsObservableList;
 
     public ResultsController(List<Video> results) {
