@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
@@ -36,7 +37,6 @@ public class WebPlayerV2 extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			StackPane root = new StackPane();
 	        WebView webView = new WebView();
 	        final WebEngine webEngine = webView.getEngine();
 	        webEngine.load("https://www.youtube.com/embed/FIRT7lf8byw");
