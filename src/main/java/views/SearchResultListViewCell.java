@@ -8,13 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import models.Video;
 
 import java.io.IOException;
 
 /**
  * Created by mcdostone on 12/12/16.
  */
-public class SearchResultListViewCell extends JFXListCell<SearchResult> {
+public class SearchResultListViewCell extends JFXListCell<Video> {
 
     @FXML
     private GridPane searchResult;
@@ -25,7 +26,7 @@ public class SearchResultListViewCell extends JFXListCell<SearchResult> {
 
     private FXMLLoader loader;
 
-    public void updateItem(SearchResult value, boolean empty) {
+    public void updateItem(Video value, boolean empty) {
         super.updateItem(value, empty);
 
         if(empty || value == null) {
@@ -42,10 +43,10 @@ public class SearchResultListViewCell extends JFXListCell<SearchResult> {
                     e.printStackTrace();
                 }
             }
-            if(value != null && value.getSnippet() != null) {
+            if(value != null) {
 
-                this.title.setText(value.getSnippet().getTitle());
-                this.thumbnail.setImage(new Image(value.getSnippet().getThumbnails().getDefault().getUrl()));
+                this.title.setText(value.getTitle());
+                this.thumbnail.setImage(new Image(value.getThumbnail()));
             }
 
             this.setText(null);

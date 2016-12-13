@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import models.Video;
 import views.SearchResultListViewCell;
 
 import java.util.List;
@@ -15,13 +16,15 @@ import java.util.List;
 public class ResultsController extends Controller {
 
     @FXML
-    JFXListView<SearchResult> results;
+    JFXListView<Video> results;
 
-    private ObservableList<SearchResult> searchResultsObservableList;
+    private ObservableList<Video> searchResultsObservableList;
 
-    public ResultsController(List<SearchResult> results) {
-        this.results = new JFXListView<SearchResult>();
+    public ResultsController(List<Video> results) {
+        this.results = new JFXListView<Video>();
         this.searchResultsObservableList = FXCollections.observableArrayList();
+        if(searchResultsObservableList == null)
+        	System.out.println("YYOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         this.searchResultsObservableList.addAll(results);
     }
 
