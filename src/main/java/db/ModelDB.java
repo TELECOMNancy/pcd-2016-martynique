@@ -15,6 +15,7 @@ public abstract class ModelDB<T> implements CRUD<T> {
     public ModelDB(String table) {
         this.connection = ConnectionDB.getInstance();
         this.table = table;
+
     }
 
     public void delete(Identifiable i) {
@@ -29,21 +30,20 @@ public abstract class ModelDB<T> implements CRUD<T> {
     }
 
     public String insertQuery() {
-        return "INSERT INTO " + this.table;
+        System.out.println(table);
+        return "INSERT INTO " + table;
     }
 
     public String updateQuery() {
-        return "UPDATE  " + this.table;
+        return "UPDATE  " + table;
     }
 
     public String deleteQuery() {
-        return "DELETE FROM " + this.table  + " WHERE id = (?)";
+        return "DELETE FROM " + table  + " WHERE id = (?)";
     }
 
     public String allQuery() {
-        return "SELECT * FROM " + this.table;
+        return "SELECT * FROM " + table;
     }
-
-    public abstract void createTable();
 
 }
