@@ -17,6 +17,7 @@ import models.Search;
  * @author MartyEz
  * @author Answermouth
  */
+@SuppressWarnings("restriction")
 public class SearchController extends Controller {
 
     @FXML private TextField searchField;
