@@ -18,7 +18,7 @@ public class Question {
 		this.answers.add(answer);
 	}
 	
-	public String getQuestion(){
+	public String getText(){
 		return this.question;
 	}
 	

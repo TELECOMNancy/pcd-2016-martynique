@@ -13,7 +13,11 @@ public class Answer {
 		this.leadingQuestion = leadingQuestion;
 	}
 
-	public String getAnswer() {
+	public String getText() {
 		return this.answer;
+	}
+	
+	public Question getLeadingQuestion(){
+		return this.leadingQuestion;
 	}
 }

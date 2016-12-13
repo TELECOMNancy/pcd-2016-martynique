@@ -1,8 +1,10 @@
 package controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import utils.Answer;
 import utils.MyFormButton;
@@ -52,9 +54,7 @@ public class FormController extends Controller {
     	this.curQuestion = q1;
     	/////////////////////////////
     	
-    	this.questionLabel.setText(this.curQuestion.getQuestion());
-    	for(int i=0;i<this.curQuestion.getAnswers().size();i++)
-    		this.buttonsContainer.getChildren().add(new MyFormButton(this.curQuestion.getAnswers().get(i).getAnswer()));
+    	update();
     	
     	/*
     	this.searchButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -64,5 +64,25 @@ public class FormController extends Controller {
             }
         });
         */
+    }
+    
+    private void update(){
+    	if(this.curQuestion != null){
+	    	this.questionLabel.setText(this.curQuestion.getText());
+	    	for(int i=0;i<this.curQuestion.getAnswers().size();i++){
+	    		MyFormButton curButton = new MyFormButton(this.curQuestion.getAnswers().get(i));
+	    		curButton.setOnMousePressed(new EventHandler<MouseEvent>() {
+	                @Override
+	                public void handle(MouseEvent event) {
+	                    curQuestion = curButton.getAnswer().getLeadingQuestion();
+	                    buttonsContainer.getChildren().clear();
+	                    update();
+	                }
+	            });
+	    		this.buttonsContainer.getChildren().add(curButton);
+	    	}
+    	}
+    	else
+    		this.questionLabel.setText("DONE");
     }
 }

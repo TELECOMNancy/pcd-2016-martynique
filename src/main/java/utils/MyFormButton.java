@@ -3,10 +3,14 @@ package utils;
 import javafx.scene.control.Button;
 
 public class MyFormButton extends Button {
-	private String answer;
+	private Answer answer;
 	
-	public MyFormButton(String answer){
+	public MyFormButton(Answer answer){
 		this.answer = answer;
-		this.setText(this.answer);
+		this.setText(this.answer.getText());
+	}
+	
+	public Answer getAnswer(){
+		return this.answer;
 	}
 }
