@@ -1,31 +1,17 @@
 import app.SceneManager;
-import db.FavoriteDB;
-import db.VideoDB;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import models.Favorite;
-import models.Video;
 
-@SuppressWarnings("restriction")
-public class Main extends Application {
-
-    private void initDB() {
-        VideoDB.createTable();
-        FavoriteDB.createTable();
-        Video v = new Video("y", "google.fr", "fjkd555");
-
-        new VideoDB(v).create();
-        new FavoriteDB(new Favorite(v)).create();
-    }
+public class Main_Form_Test extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        this.initDB();
-
-        FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
+    public void start(Stage primaryStage) throws Exception{
+        FXMLLoader loader = SceneManager.getLoader("form.fxml");
         Parent root = SceneManager.getComponent(loader);
         primaryStage.setTitle("Youtube app");
         primaryStage.setMinHeight(450);
