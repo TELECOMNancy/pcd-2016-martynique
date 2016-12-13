@@ -5,8 +5,7 @@ import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import views.SearchResultListViewCell;
 
 import java.util.List;
 
@@ -16,22 +15,20 @@ import java.util.List;
 public class ResultsController {
 
     @FXML
-    JFXListView<String> results;
+    JFXListView<SearchResult> results;
 
-    List<SearchResult> ff;
+    private ObservableList<SearchResult> searchResultsObservableList;
 
     public ResultsController(List<SearchResult> results) {
-        this.results = new JFXListView<String>();
-        this.ff = results;
+        this.results = new JFXListView<SearchResult>();
+        this.searchResultsObservableList = FXCollections.observableArrayList();
+        this.searchResultsObservableList.addAll(results);
     }
 
     @FXML
     private void initialize() {
-        ObservableList<String> items = FXCollections.observableArrayList();
-        for(SearchResult r: ff)
-            items.add(r.getSnippet().getTitle());
-
-        this.results.setItems(items);
+        this.results.getItems().addAll(this.searchResultsObservableList);
+        this.results.setCellFactory(param -> new SearchResultListViewCell());
     }
 
 }
