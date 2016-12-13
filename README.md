@@ -79,6 +79,15 @@ Recap
 -----
 
 
+#Day 2#Tuesday
+
+features
+----
+
+Minious and Answermouth: features 3 and 6
+MartyEz and Mcdostone: features 4 and 5
+
+
 # Some resources
  - [Jfoenix](http://www.jfoenix.com/),  implementation of Google Material Design using Java components.
  - [Example of JavaFX app](https://github.com/Mcdostone/sort-my-photos)
