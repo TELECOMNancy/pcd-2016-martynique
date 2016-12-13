@@ -16,12 +16,13 @@ public class Favorite implements Identifiable {
         return this.fav;
     }
 
-    public void setID(int id) {
-        this.id = id;
-    }
-
     @Override
     public int getID() {
         return this.id;
+    }
+
+    @Override
+    public void setID(int id) {
+        this.id = id;
     }
 }

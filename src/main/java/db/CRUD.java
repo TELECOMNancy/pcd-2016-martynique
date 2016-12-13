@@ -1,5 +1,7 @@
 package db;
 
+import models.Identifiable;
+
 import java.util.List;
 
 /**
@@ -13,5 +15,5 @@ public interface CRUD<T> {
 
     public void update();
 
-    public void delete();
+    public void delete(Identifiable i);
 }

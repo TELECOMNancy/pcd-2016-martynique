@@ -37,7 +37,7 @@ public class FavoriteDB extends ModelDB<Favorite> {
         try {
             Statement st = this.connection.createStatement();
             PreparedStatement prep;
-            prep = this.connection.prepareStatement(this.insertQuery());
+            prep = this.connection.prepareStatement(this.updateQuery());
             prep.setInt(1, this.f.getFavorite().getID());
             prep.setInt(2, this.f.getID());
             prep.executeUpdate();
@@ -68,27 +68,32 @@ public class FavoriteDB extends ModelDB<Favorite> {
     }
 
     @Override
-    public void delete() {
+    public String insertQuery() {
+        return super.insertQuery() + "(id_video) VALUES(?)";
+    }
+
+    @Override
+    public String updateQuery() {
+        return super.updateQuery() + " SET id_video  = (?) WHERE id_favorite = (?)";
+    }
+
+    @Override
+    public String deleteQuery() {
+        return super.deleteQuery() + " WHERE id_favorite = (?)";
+    }
+
+    public void createTable() {
+        String createString = "CREATE TABLE " + this.table +  " ( " +
+                "id INTEGER AUTO_INCREMENT, " +
+                "id_video INTEGER NOT NULL, " +
+                "PRIMARY KEY (id_favorite))," +
+                "FOREIGN KEY (id_video) REFERENCES Videos(id_video)";
         try {
-            Statement st  = this.connection.createStatement();
-            PreparedStatement prep = this.connection.prepareStatement(this.insertQuery());
-            prep.setInt(1, this.f.getID());
-            prep.executeUpdate();
+            Statement st = this.connection.createStatement();
+            st.executeQuery(createString);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public String insertQuery() {
-        return super.insertQuery() + "(id_video) VALUES(?)";
-    }
-
-    public String updateQuery() {
-        return super.updateQuery() + " SET id_video  = (?) WHERE id_favorite = (?)";
-    }
-
-    public String deleteQuery() {
-        return super.deleteQuery() + " WHERE id_favorite = (?)";
-    }
 }

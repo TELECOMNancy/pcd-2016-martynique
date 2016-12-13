@@ -6,4 +6,6 @@ package models;
 public interface  Identifiable {
 
     public int getID();
+
+    public void setID(int id);
 }

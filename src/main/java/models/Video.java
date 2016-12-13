@@ -16,9 +16,14 @@ public class Video implements Identifiable {
         this.code = code;
     }
 
-
+    @Override
     public int getID() {
         return this.id;
+    }
+
+    @Override
+    public void setID(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
