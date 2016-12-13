@@ -20,7 +20,6 @@ import java.io.IOException;
 /**
  * Created by mcdostone on 12/12/16.
  */
-
 public class SearchResultListViewCell extends JFXListCell<Video> {
 
     @FXML

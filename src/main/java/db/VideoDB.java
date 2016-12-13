@@ -22,7 +22,6 @@ public class VideoDB extends ModelDB<Video> {
         try {
             Statement st = this.connection.createStatement();
             PreparedStatement prep;
-            System.out.println(this.insertQuery());
             prep = this.connection.prepareStatement(this.insertQuery(), Statement.RETURN_GENERATED_KEYS);
 
             prep.setString(1, this.v.getTitle());
@@ -93,12 +92,11 @@ public class VideoDB extends ModelDB<Video> {
 
     public static void createTable() {
         String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
-                "id INTEGER AUTO_INCREMENT, " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "title varchar(255) NOT NULL, " +
                 //"url varchar(255) NOT NULL, " +
                 "thumbnail varchar(255), " +
-                "code varchar(255) NOT NULL, " +
-                "PRIMARY KEY (id))";
+                "code varchar(255) NOT NULL)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             st.executeUpdate(createString);

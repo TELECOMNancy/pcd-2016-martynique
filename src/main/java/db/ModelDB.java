@@ -29,10 +29,7 @@ public abstract class ModelDB<T> implements CRUD<T> {
         }
     }
 
-    public String insertQuery() {
-        System.out.println(table);
-        return "INSERT INTO " + table;
-    }
+    public String insertQuery() {  return "INSERT INTO " + table; }
 
     public String updateQuery() {
         return "UPDATE  " + table;

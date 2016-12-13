@@ -20,7 +20,8 @@ import java.util.List;
 public class ResultsController extends Controller {
 
     @FXML
-    private JFXListView<Video> results;
+    JFXListView<Video> results;
+
     private ObservableList<Video> searchResultsObservableList;
 
     public ResultsController(List<Video> results) {

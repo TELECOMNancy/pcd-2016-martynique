@@ -4,14 +4,13 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-
+*.db
 
 ### eclipse
 
@@ -120,7 +119,12 @@ src/main/resources/youtube.properties
 src/main/resources/sample-video.mp4
 src/main/resources/watermark.jpg
 
-target/
+
+target/archive-tmp
+target/classes
+target/generated-sources
+target/maven-archiver
 .idea/
 
 savedVideos/
+/target/

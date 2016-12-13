@@ -40,11 +40,28 @@ for more details, check the [pom.xml](https://github.com/TELECOMNancy/pcd-2016-m
 - [javaFX](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm), building of modern user interfaces in java 8
 
 
+#Install
+
+We used maven to build the JAR file.  execute this command to build it:
+
+	mvn package
+
+
+It will generate the Martynique.jar into the target/ directory.
+
+	java -jar target/Martynique.jar
+
+Have fun!
+
+
 # Roles
 
 @Mcdostone: Project manager
+
 @MartyEz: Crazy coder
+
 @Answermouth: User Interface Developer and test developper
+
 @Minous: User Interface Developer and test developper
 
 # Expected features
@@ -77,6 +94,15 @@ MartyEz and Mcdostone: features 1 and 9
 
 Recap
 -----
+
+
+#Day 2#Tuesday
+
+features
+----
+
+Minious and Answermouth: features 3 and 6
+MartyEz and Mcdostone: features 4 and 5
 
 
 # Some resources
