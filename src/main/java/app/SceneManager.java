@@ -1,7 +1,5 @@
 package app;
 
-import com.google.api.services.youtube.model.SearchResult;
-import controllers.ResultsController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +8,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Manages all scenes of the app.

@@ -2,10 +2,7 @@ package db;
 
 import models.Video;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +10,10 @@ import java.util.List;
 public class VideoDB extends ModelDB<Video> {
 
     private Video v;
+    private static final String TABLE = "Videos";
 
     public VideoDB(Video v) {
-        super("Videos");
+        super(TABLE);
         this.v = v;
     }
 
@@ -24,11 +22,16 @@ public class VideoDB extends ModelDB<Video> {
         try {
             Statement st = this.connection.createStatement();
             PreparedStatement prep;
+            System.out.println(this.insertQuery());
             prep = this.connection.prepareStatement(this.insertQuery(), Statement.RETURN_GENERATED_KEYS);
+
             prep.setString(1, this.v.getTitle());
-            prep.setString(1, this.v.getThumbnail());
-            prep.setString(1, this.v.getCode());
-            this.v.setID(prep.executeUpdate());
+            prep.setString(2, this.v.getThumbnail());
+            prep.setString(3, this.v.getCode());
+            prep.executeUpdate();
+            ResultSet tableKeys = prep.getGeneratedKeys();
+            tableKeys.next();
+            this.v.setID(tableKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,7 +78,7 @@ public class VideoDB extends ModelDB<Video> {
 
     @Override
     public String insertQuery() {
-        return super.insertQuery() + "(title, thumbnail, code) VALUES(?,?,?,?)";
+        return super.insertQuery() + "(title, thumbnail, code) VALUES(?,?,?)";
     }
 
     @Override
@@ -88,17 +91,17 @@ public class VideoDB extends ModelDB<Video> {
         return super.deleteQuery() + " WHERE id_video = (?)";
     }
 
-    public void createTable() {
-        String createString = "CREATE TABLE " + this.table +  " ( " +
-                "id_video INTEGER AUTO_INCREMENT, " +
+    public static void createTable() {
+        String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
+                "id INTEGER AUTO_INCREMENT, " +
                 "title varchar(255) NOT NULL, " +
                 //"url varchar(255) NOT NULL, " +
-                "thumbnail varchar(255) NOT NULL, " +
+                "thumbnail varchar(255), " +
                 "code varchar(255) NOT NULL, " +
-                "PRIMARY KEY (id_video))";
+                "PRIMARY KEY (id))";
         try {
-            Statement st = this.connection.createStatement();
-            st.executeQuery(createString);
+            Statement st = ConnectionDB.getInstance().createStatement();
+            st.executeUpdate(createString);
         } catch (SQLException e) {
             e.printStackTrace();
         }

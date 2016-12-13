@@ -1,6 +1,8 @@
 package db;
 
 import models.Favorite;
+import models.Video;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,14 +10,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- */
+
 public class FavoriteDB extends ModelDB<Favorite> {
 
     private Favorite f;
+    private static final String TABLE = "Favorites";
+
 
     public FavoriteDB(Favorite f) {
-        super("Favorites");
+        super(TABLE);
         this.f = f;
     }
 
@@ -26,7 +29,10 @@ public class FavoriteDB extends ModelDB<Favorite> {
             PreparedStatement prep;
             prep = this.connection.prepareStatement(this.insertQuery(), Statement.RETURN_GENERATED_KEYS);
             prep.setInt(1, this.f.getFavorite().getID());
-            this.f.setID(prep.executeUpdate());
+            prep.executeUpdate();
+            ResultSet tableKeys = prep.getGeneratedKeys();
+            tableKeys.next();
+            this.f.setID(tableKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,7 +75,8 @@ public class FavoriteDB extends ModelDB<Favorite> {
 
     @Override
     public String insertQuery() {
-        return super.insertQuery() + "(id_video) VALUES(?)";
+        //return superinsertQuery() + "(id_video) VALUES(?)";
+        return "fkkf";
     }
 
     @Override
@@ -82,15 +89,16 @@ public class FavoriteDB extends ModelDB<Favorite> {
         return super.deleteQuery() + " WHERE id_favorite = (?)";
     }
 
-    public void createTable() {
-        String createString = "CREATE TABLE " + this.table +  " ( " +
+    public static void createTable() {
+        String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
                 "id INTEGER AUTO_INCREMENT, " +
                 "id_video INTEGER NOT NULL, " +
-                "PRIMARY KEY (id_favorite))," +
-                "FOREIGN KEY (id_video) REFERENCES Videos(id_video)";
+                "PRIMARY KEY (id)," +
+                "FOREIGN KEY (id_video) REFERENCES Videos(id))";
+
         try {
-            Statement st = this.connection.createStatement();
-            st.executeQuery(createString);
+            Statement st = ConnectionDB.getInstance().createStatement();
+            st.executeUpdate(createString);
         } catch (SQLException e) {
             e.printStackTrace();
         }
