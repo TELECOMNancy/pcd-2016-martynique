@@ -27,6 +27,7 @@ public class WebPlayer extends BorderPane implements VideoPlayer{
     }
     
     public void stop() {
+        this.player.getEngine().load(null);
     }
     
     public String getMediaName() {
