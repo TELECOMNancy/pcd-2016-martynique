@@ -18,12 +18,11 @@ public class TestPlayers extends Application {
         
         //String source = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
         
-        //VideoPlayer localPlayer = new LocalPlayer(600, 500, "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4");
-        VideoPlayer webPlayer = new WebPlayer(600, 500, "https://www.youtube.com/embed/SnxNJbWCcng");
+        //VideoPlayer player = new LocalPlayer(600, 500, "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4");
+        //VideoPlayer player = new WebPlayer(600, 500, "https://www.youtube.com/embed/SnxNJbWCcng");
+        VideoPlayer player = new test(600, 500, "https://www.youtube.com/embed/SnxNJbWCcng");
         
-        
-        //root.getChildren().add((Pane) localPlayer);
-        root.getChildren().add((Pane) webPlayer);
+        root.getChildren().add((Pane) player);
         primaryStage.setScene(new Scene(root));
         primaryStage.sizeToScene();
         primaryStage.show();
