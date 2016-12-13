@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -35,10 +36,10 @@ public class Search {
      */
     private static YouTube youtube;
     
-    YouTube.Search.List search;
-    
     private SearchListResponse searchResponse;
     private List<SearchResult> searchResultList;
+    
+    private List<Video> searchVideoList;
     
     private String searchInput;
     
@@ -46,6 +47,7 @@ public class Search {
     
     public Search(String Search){
     	this.searchInput = Search;
+    	searchVideoList = new ArrayList<Video>(); 
     	loadPropertiesFile();
     }
     
@@ -70,8 +72,8 @@ public class Search {
     	return searchResponse;
     }
     
-    public List<SearchResult> searchResultList(){
-    	return searchResultList;
+    public List<Video> getVideoList(){
+    	return searchVideoList;
     }
     
     public void setSearchInput(String newString){
@@ -132,6 +134,31 @@ public class Search {
             // Call the API and print results.
             this.searchResponse = search.execute();
             this.searchResultList = searchResponse.getItems();
+            
+            Iterator<SearchResult> iterator = searchResultList.iterator();
+            
+            if (!iterator.hasNext()) {
+                System.out.println(" There aren't any results for your query22.");
+            }
+
+            while (iterator.hasNext()) {
+            	SearchResult singleVideo = iterator.next();
+                ResourceId rId = singleVideo.getId();
+                
+            	if (rId.getKind().equals("youtube#video")) {
+            	
+            	String videoID = rId.getVideoId();
+
+                Thumbnail thumbnail = singleVideo.getSnippet().getThumbnails().getDefault();
+                
+                String title = singleVideo.getSnippet().getTitle();
+                String thumbnails = thumbnail.getUrl();
+            	Video video = new Video(title,thumbnails,videoID);
+            	this.searchVideoList.add(video);
+            	}
+            	
+            }
+            
 
 
         } catch (GoogleJsonResponseException e) {
@@ -142,6 +169,7 @@ public class Search {
         } catch (Throwable t) {
             t.printStackTrace();
         }
+        
     }
     
     private static void prettyPrint(Iterator<SearchResult> iteratorSearchResults, String query) {
