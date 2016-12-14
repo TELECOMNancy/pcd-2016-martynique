@@ -20,17 +20,17 @@ public class ResultsController extends Controller {
     private ObservableList<Video> searchResultsObservableList;
 
     public ResultsController(List<Video> results) {
+        System.out.println(app.getUser());
+        System.out.println(app.getAppController());
         this.results = new JFXListView<Video>();
         this.searchResultsObservableList = FXCollections.observableArrayList();
-        if(searchResultsObservableList == null)
-        	System.out.println("YYOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         this.searchResultsObservableList.addAll(results);
     }
     
     @FXML
     private void initialize() {
         this.results.setItems(this.searchResultsObservableList);
-        this.results.setCellFactory(param -> new SearchResultListViewCell(this.appController));
+        this.results.setCellFactory(param -> new SearchResultListViewCell(app.getAppController()));
 
         /*this.results.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             //System.out.println("JFXListView Selection Changed (selected: " + newValue.getCode() + ")");

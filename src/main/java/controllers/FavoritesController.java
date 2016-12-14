@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class FavoritesController extends Controller implements Observer {
+public class FavoritesController extends Controller {
 
     @FXML
     JFXListView<Favorite> results;
@@ -28,14 +28,8 @@ public class FavoritesController extends Controller implements Observer {
     }
 
     @FXML
-    private void initialize() {
-    //    this.update(null, null);
-    }
-
-
-    @Override
-    public void update(Observable o, Object arg) {
-        this.favoritesObservableList.addAll(this.user.getFavorites());
+    public void initialize() {
+        this.favoritesObservableList.addAll(app.getUser().getFavorites());
         this.results.setItems(this.favoritesObservableList);
         this.results.setCellFactory(param -> new FavoriteListViewCell());
     }

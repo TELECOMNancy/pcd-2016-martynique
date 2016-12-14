@@ -11,13 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FavoriteDB{
+public class FavoriteDB {
 
-;
     private static final String TABLE = "Favorites";
-
-
-
 
 
     public static void create(Favorite f) {
@@ -67,7 +63,7 @@ public class FavoriteDB{
     }
 
  
-    public List<Favorite> all() {
+    /*public List<Favorite> all() {
         List<Favorite> list = new ArrayList<Favorite>();
         try {
             Statement st  = ConnectionDB.getInstance().createStatement();
@@ -75,7 +71,7 @@ public class FavoriteDB{
 
             while(rs.next()){
 
-                Favorite tmp = new Favorite(VideoDB.findById(rs.getInt("id_video")));
+                //Favorite tmp = new Favorite(VideoDB.findById(rs.getInt("id_video")));
                 tmp.setID(rs.getInt("id"));
                 list.add(tmp);
             }
@@ -85,7 +81,7 @@ public class FavoriteDB{
         }
 
         return list;
-    }
+    }*/
 
  
     public static String allQuery() {

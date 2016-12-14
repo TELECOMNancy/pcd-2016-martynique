@@ -36,7 +36,7 @@ public class PlaylistDB{
         }
     }
     
-   public static Playlist importVideo(int id_playlist){
+   /*public static Playlist importVideo(int id_playlist){
        	   List<Video> listVideo = new ArrayList<Video>();
        
     	   Playlist playlist = getPlaylist(id_playlist);
@@ -58,7 +58,7 @@ public class PlaylistDB{
            
  
        return playlist;
-   }
+   }*/
    
    public static Playlist getPlaylist(int id_playlist){
        PreparedStatement prep;

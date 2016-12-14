@@ -1,19 +1,10 @@
 package controllers;
 
-import models.User;
+import app.App;
 
 public abstract class Controller {
 
-    protected AppController appController;
-    protected User user;
+    protected final App app = App.getInstance();
 
-
-    public void injectAppController(AppController ctrl) {
-        this.appController = ctrl;
-    }
-
-    public void injectUser(User user) {
-        this.user = user;
-    }
-
+    public Controller() {}
 }

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import models.User;
 
 /**
  * Controller for playing web videos.
@@ -30,6 +31,7 @@ public class WebVideoController extends Controller {
     private BorderPane TopBar;
 
     public WebVideoController(String videoID) {
+        super();
         ID = videoID;
         this.FS = new Button();
         this.Return = new Button();
@@ -50,7 +52,7 @@ public class WebVideoController extends Controller {
                 TopBar.setVisible(false);
                 TopBar.setManaged(false);
                 System.out.println("FS");
-                appController.goFullScreen(WebVideoController.this);
+                app.getAppController().goFullScreen(WebVideoController.this);
             }
         });
         
@@ -58,7 +60,7 @@ public class WebVideoController extends Controller {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("Hello");
-                appController.download(ID);
+                app.getAppController().download(ID);
             }
         });
         
@@ -66,8 +68,7 @@ public class WebVideoController extends Controller {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("Return");
-                appController.stopWebVideo();
-                appController.showHome();
+                app.getAppController().showHome();
             }
         });
     }

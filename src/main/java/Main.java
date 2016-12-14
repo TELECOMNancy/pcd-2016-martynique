@@ -1,3 +1,4 @@
+import app.App;
 import app.SceneManager;
 import controllers.AppController;
 import db.FavoriteDB;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class Main extends Application {
 
-    private User user;
+    private final App app = App.getInstance();
 
     private void initDB() {
         VideoDB.createTable();
@@ -27,10 +28,9 @@ public class Main extends Application {
     }
 
     private void initUser() {
-        this.user = new User();
-/*        List<Favorite> fav = new FavoriteDB().all();
+        List<Favorite> fav = new VideoDB().getFavorites();
         for(Favorite f: fav)
-            this.user.addFavorite(f);*/
+            this.app.getUser().addFavorite(f);
     }
 
 
@@ -40,8 +40,7 @@ public class Main extends Application {
         this.initUser();
 
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
-        AppController ctrl = new AppController(this.user);
-        loader.setController(ctrl);
+        loader.setController(this.app.getAppController());
         BorderPane root = (BorderPane) SceneManager.getComponent(loader);
 
         primaryStage.setTitle("Youtube app");

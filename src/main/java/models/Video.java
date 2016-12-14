@@ -9,11 +9,13 @@ public class Video implements Identifiable {
     private String title;
     private String thumbnail;
     private String code;
+    private boolean favorite;
 
     public Video(String title, String thumb, String code) {
         this.title = title;
         this.thumbnail = thumb;
         this.code = code;
+        this.favorite = false;
     }
 
     @Override
@@ -44,6 +46,10 @@ public class Video implements Identifiable {
                 + " - " + this.code;
     }
 
+    public boolean isFavorite() {
+        return this.favorite;
+    }
+
     public boolean equals(Object o) {
         if(o != null && o instanceof Video) {
             Video tmp = (Video) o;
@@ -52,4 +58,7 @@ public class Video implements Identifiable {
         return false;
     }
 
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 }

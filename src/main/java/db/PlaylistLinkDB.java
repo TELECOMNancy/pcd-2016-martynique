@@ -1,15 +1,13 @@
 package db;
 
-import java.sql.Connection;
+import models.Playlist;
+import models.Video;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
-import models.Playlist;
-import models.Video;
 
 public class PlaylistLinkDB {
 	

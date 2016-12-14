@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import models.Favorite;
+import models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ public class YoutubeTabPaneController extends Controller {
     private Tab suggestTab;
 
     public YoutubeTabPaneController() {
-        super();
     }
 
     @FXML
@@ -41,7 +41,6 @@ public class YoutubeTabPaneController extends Controller {
 
         FXMLLoader loader = SceneManager.getLoader("results.fxml");
         FavoritesController ctrl = new FavoritesController();
-        ctrl.injectAppController(this.appController);
         loader.setController(ctrl);
         this.favoritesTab.setContent(SceneManager.getComponent(loader));
 
@@ -49,17 +48,11 @@ public class YoutubeTabPaneController extends Controller {
             @Override
             public void handle(Event event) {
                 if(suggestTab.isSelected())
-                    appController.showSuggestion();
+                    app.getAppController().showSuggestion();
             }
         });
     }
 
     private void showFavorites() {
-        List<Favorite> list = this.appController.getUser().getFavorites();
-
-        if(this.favoritesTab.getContent() == null) {
-
-        }
     }
-
 }

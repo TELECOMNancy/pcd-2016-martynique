@@ -19,8 +19,8 @@ public class User extends Observable {
     }
 
     public void addFavorite(Favorite f) {
-        this.favorites.add(f);
-        System.out.println(this.favorites);
+        if(!this.hasFavorite(f.getFavorite()))
+            this.favorites.add(f);
     }
 
     public List<Favorite> getFavorites() {

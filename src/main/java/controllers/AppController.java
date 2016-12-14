@@ -2,6 +2,7 @@ package controllers;
 
 import app.SceneManager;
 import db.FavoriteDB;
+import db.VideoDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,7 +37,6 @@ public class AppController {
     @FXML private YoutubeTabPaneController youtubeTabPaneController;
     @FXML private ResultsController resultsController;
 
-
     private User user;
     private WebPlayer wp;
 
@@ -46,9 +46,8 @@ public class AppController {
 
     @FXML
     private void initialize() {
-        this.searchController.injectAppController(this);
-        this.youtubeTabPaneController.injectAppController(this);
         wp = new WebPlayer();
+        System.out.println(this.root);
     }
     
     public void showHome() {
@@ -64,17 +63,16 @@ public class AppController {
         if(this.resultsController == null) {
             FXMLLoader loader = SceneManager.getLoader("results.fxml");
             this.resultsController = new ResultsController(results);
-            this.resultsController.injectAppController(this);
             loader.setController(this.resultsController);
             SceneManager.getComponent(loader);
         }
+
         this.root.setCenter(this.resultsController.getScene());
     }
     
     public void showSuggestion() {
     	FXMLLoader loader = SceneManager.getLoader("suggestion.fxml");
     	SuggestionController ctrl = new SuggestionController();
-    	ctrl.injectAppController(this);
         loader.setController(ctrl);
 
         this.root.setCenter(SceneManager.getComponent(loader));
@@ -84,9 +82,7 @@ public class AppController {
         FXMLLoader loader = SceneManager.getLoader("WebVideoPage.fxml");
         
         WebVideoController ctrl = new WebVideoController(videoID);
-        ctrl.injectAppController(this);
         loader.setController(ctrl);
-        
         BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
         
         wp.play(videoID);
@@ -145,14 +141,8 @@ public class AppController {
 
 
     public boolean toggleFavorite(Video value) {
-        Favorite f = new Favorite(value);
-        if(this.user.getFavorites().contains(f)) {
-            this.user.removeFavorite(f);
-            return false;
-        }
-        else {
-            this.user.addFavorite(f);
-            return true;
-        }
+        value.setFavorite(!value.isFavorite());
+        VideoDB.setFavorite(value);
+        return false;
     }
 }
