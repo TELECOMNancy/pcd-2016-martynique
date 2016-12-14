@@ -55,6 +55,15 @@ public class AppController {
         this.root.setCenter(SceneManager.getComponent(loader));
     }
     
+    public void showSuggestion() {
+    	FXMLLoader loader = SceneManager.getLoader("form.fxml");
+        SuggestionController ctrl = new SuggestionController();
+        ctrl.injectAppController(this);
+        loader.setController(ctrl);
+
+        this.root.setCenter(SceneManager.getComponent(loader));
+    }
+    
     public void playWebVideo(String videoID) {
         FXMLLoader loader = SceneManager.getLoader("WebVideoPage.fxml");
         

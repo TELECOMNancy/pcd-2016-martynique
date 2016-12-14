@@ -101,6 +101,10 @@ public class SuggestionController extends Controller {
     		SuggestionDB suggestionDB = new SuggestionDB();
     		List<String> queryReturn = suggestionDB.runSuggestionQuery(flags);
     		System.out.println(queryReturn.toString());
+    		
+    		String selected = queryReturn.get(0);
+    		
+    		appController.playWebVideo(selected);
     	}
     }
     
