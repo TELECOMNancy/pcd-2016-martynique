@@ -16,6 +16,7 @@ import javafx.event.EventHandler;
 
 import java.util.List;
 
+import views.LocalPlayer;
 import views.WebPlayer;
 
 import utils.YTD;
@@ -25,27 +26,21 @@ import utils.YTD;
  */
 public class AppController {
 
-    @FXML
-    private BorderPane root;
-
-    @FXML
-    private SearchController searchController;
-
-    @FXML
-    private YoutubeTabPaneController youtubeTabPaneController;
+    private String savePath = System.getProperty("user.dir") + "\\savedVideos\\";
+    private WebPlayer wp;
     
-    @FXML
-    private SuggestionController suggestController;
+    @FXML private BorderPane root;
 
+    @FXML private SearchController searchController;
+
+    @FXML private YoutubeTabPaneController youtubeTabPaneController;
+    
     @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
         this.youtubeTabPaneController.injectAppController(this);
-        //this.suggestionController.injectAppController(this);
         wp = new WebPlayer();
     }
-    
-    private WebPlayer wp;
     
     public void showHome() {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
@@ -61,7 +56,6 @@ public class AppController {
         ResultsController ctrl = new ResultsController(results);
         ctrl.injectAppController(this);
         loader.setController(ctrl);
-        
         
         this.root.setCenter(SceneManager.getComponent(loader));
     }
@@ -92,6 +86,23 @@ public class AppController {
         this.root.setCenter(bp);
     }
     
+    public void playLocalVideo(String videoID) {
+        FXMLLoader loader = SceneManager.getLoader("localVideo.fxml");
+        
+        LocalVideoController ctrl = new LocalVideoController(videoID);
+        ctrl.injectAppController(this);
+        loader.setController(ctrl);
+        
+        BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
+        
+        wp.play(videoID);
+        
+        bp.setCenter(wp);
+        
+        this.root.setTop(null);
+        this.root.setCenter(bp);
+    }
+    
     public void stopWebVideo() {
         ((WebPlayer) ((BorderPane) this.root.getCenter()).getCenter()).stop();
     }
@@ -101,7 +112,7 @@ public class AppController {
         Task<Void> task = new Task<Void>(){
             //@Overrride
             public Void call() throws Exception {
-                YTD.download(ID);
+                YTD.download(ID, savePath);
                 return null;
             }
         };
@@ -119,12 +130,11 @@ public class AppController {
     }
     
     // a adapter quand on ajoutera le lecteur offline
-    public void goFullScreen(WebVideoController ctrl) {
+    public void goFullScreen(VideoController ctrl) {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(true);
         this.root.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             //@Override
             public void handle(KeyEvent event) {
-                System.out.println("key pressed");
                 ctrl.quitFullScreen();
             }
         });

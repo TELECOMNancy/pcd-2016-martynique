@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="50.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
+<BorderPane maxHeight="50.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchController">
    <center>
       <JFXTextField fx:id="searchField" alignment="CENTER" focusColor="#e52d27" maxWidth="600.0" minWidth="500.0" nodeOrientation="LEFT_TO_RIGHT" prefColumnCount="20" prefWidth="1000.0" promptText="YTP, Kangourou fight ..." styleClass="searchField" stylesheets="@../css/style.css" unFocusColor="#4d4d4d00" BorderPane.alignment="CENTER">
          <font>
@@ -14,6 +14,13 @@
          </font>
       </JFXTextField>
    </center>
+   <left>
+      <Button id="searchButton" fx:id="returnButton" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" snapToPixel="false" stylesheets="@../css/style.css" textFill="TRANSPARENT" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" />
+         </BorderPane.margin>
+      </Button>
+   </left>
    <right>
       <Button id="searchButton" fx:id="searchButton" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" snapToPixel="false" stylesheets="@../css/style.css" textFill="TRANSPARENT" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -21,4 +28,7 @@
          </BorderPane.margin>
       </Button>
    </right>
+   <left>
+      <Button fx:id="returnButton" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" stylesheets="@../css/style.css" textFill="TRANSPARENT" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>

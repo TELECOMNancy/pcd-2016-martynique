@@ -37,6 +37,11 @@
 	-fx-background-size: 18px 18px;
 }
 
+#returnButton {
+	-fx-background-image: url("../assets/return.png") no-repeat;
+	-fx-background-size: 18px 18px;
+}
+
 .content {
     -fx-background-color: rgb(50, 50, 50);
 }

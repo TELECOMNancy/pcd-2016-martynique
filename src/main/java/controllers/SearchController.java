@@ -17,12 +17,13 @@ import utils.Search;
  * @author MartyEz
  * @author Answermouth
  */
-@SuppressWarnings("restriction")
 public class SearchController extends Controller {
 
     @FXML private TextField searchField;
 
     @FXML private Button searchButton;
+    
+    @FXML private Button returnButton;
 
     @FXML
     private void initialize() {
@@ -41,6 +42,14 @@ public class SearchController extends Controller {
             @Override
             public void handle(MouseEvent event) {
                 search();
+            }
+        });
+        
+        this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //search();
+                System.out.println("hello");
             }
         });
     }
