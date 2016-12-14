@@ -11,11 +11,11 @@ First of all, install all softwares you need to work. Minimum requirements are:
  - an IDE ([eclipse](https://eclipse.org/downloads/), [IntelliJ IDEA](https://www.jetbrains.com/idea/), [netBeans](https://netbeans.org/downloads/))
  - [Git](https://git-scm.com/downloads) (surprising isn't it ?)
  - [JUnit4](http://junit.org/junit4/) ([Who will make tests?](http://www.commitstrip.com/shop/45-thickbox_default/affiche-tester-c-est-douter.jpg))
- - [SceneBuilder](http://gluonhq.com/labs/scene-builder/) if we choose javaFX (We have chossen JavaFX :D)
+ - [SceneBuilder](http://gluonhq.com/labs/scene-builder/) if we choose javaFX (We have choosen JavaFX :D)
  - The build manager maven(useful for dependancies)
 
 
-Ok, here we are! Be sure you can clone the repo (use [SSH keys](https://help.github.com/articles/generating-an-ssh-key/) to be more faster).
+Ok, here we are! Be sure you can clone the repo (use [SSH keys](https://help.github.com/articles/generating-an-ssh-key/) to be faster).
 
 #Config
 the ID clients OAuth 2.0 is stored in *src/main/resources/secrets.json*
@@ -105,6 +105,17 @@ Minious and Answermouth: features 3 and 6
 MartyEz and Mcdostone: features 4 and 5
 
 
+#Day 3#wednesday
+
+
+ - Possibility to save favorites in a DB
+ - Possibility to watch videos online
+ - Start the module of videos suggestions
+ - Possibility to watch videos offline
+ - Work about design of app
+
+
+
 # Some resources
  - [Jfoenix](http://www.jfoenix.com/),  implementation of Google Material Design using Java components.
  - [Example of JavaFX app](https://github.com/Mcdostone/sort-my-photos)
@@ -119,4 +130,5 @@ MartyEz and Mcdostone: features 4 and 5
 @Minious, Eliot GODARD
 
 @Mcdostone, Yann PRONOs
+
 
