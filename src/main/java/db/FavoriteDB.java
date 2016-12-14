@@ -62,7 +62,7 @@ public class FavoriteDB extends ModelDB<Favorite> {
             while(rs.next()){
                 //Favorite tmp = new Favorite(rs.getInt("id_video"))
                 Favorite tmp = new Favorite(null);
-                tmp.setID(rs.getInt("id_favorite"));
+                tmp.setID(rs.getInt("id"));
                 list.add(tmp);
             }
             rs.close();

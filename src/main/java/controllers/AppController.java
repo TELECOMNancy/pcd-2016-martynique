@@ -30,8 +30,12 @@ public class AppController {
     private SearchController searchController;
 
     @FXML
+    private YoutubeTabPaneController youtubeTabPaneController;
+
+    @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
+        this.youtubeTabPaneController.injectAppController(this);
         wp = new WebPlayer();
     }
     
