@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,10 +11,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="searchResult" maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="400.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="searchResult" maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="400.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
       <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="100.0" minHeight="80.0" prefHeight="100.0" />
@@ -24,11 +27,19 @@
          </image>
          <viewport>
             <Rectangle2D />
-         </viewport></ImageView>
-      <Label fx:id="title" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" styleClass="title" stylesheets="@../css/style.css" text="Label" GridPane.columnIndex="1">
+         </viewport>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" styleClass="title" stylesheets="@../css/style.css" text="Label" GridPane.columnIndex="1">
          <font>
             <Font name="Roboto Regular" size="16.0" />
          </font>
+      </Label>
+      <Label maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="add-favorite" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
       </Label>
    </children>
 </GridPane>
