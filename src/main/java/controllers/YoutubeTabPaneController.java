@@ -6,9 +6,9 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import models.Favorite;
-import views.YoutubeTabPane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,6 @@ public class YoutubeTabPaneController extends Controller {
 
     private void showFavorites() {
         List<Favorite> list = new ArrayList<Favorite>();
-        System.out.println(list);
         FavoriteDB db = new FavoriteDB(null);
         list = db.all();
 

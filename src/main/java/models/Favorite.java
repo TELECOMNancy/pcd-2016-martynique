@@ -25,4 +25,8 @@ public class Favorite implements Identifiable {
     public void setID(int id) {
         this.id = id;
     }
+
+    public String toString() {
+        return "[" + this.getID()+ "#Favorite] " + fav;
+    }
 }

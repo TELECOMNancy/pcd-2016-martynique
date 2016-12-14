@@ -46,7 +46,6 @@ public class FavoriteListViewCell extends JFXListCell<Favorite> {
             }
 
             if(value != null) {
-
                 this.title.setText(value.getFavorite().getTitle());
                 this.thumbnail.setImage(new Image(value.getFavorite().getThumbnail()));
             }

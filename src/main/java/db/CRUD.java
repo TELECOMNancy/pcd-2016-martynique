@@ -17,5 +17,4 @@ public interface CRUD<T> {
 
     public void delete(Identifiable i);
 
-    public T findById(int id);
 }

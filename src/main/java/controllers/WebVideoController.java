@@ -1,22 +1,10 @@
 package controllers;
 
-import com.google.api.services.youtube.model.SearchResult;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import views.SearchResultListViewCell;
-
-import javafx.scene.input.KeyEvent;
-
-import java.awt.event.ActionEvent;
-import java.util.List;
-
-import views.WebPlayer;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Controller for playing web videos.

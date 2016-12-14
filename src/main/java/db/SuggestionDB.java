@@ -91,11 +91,6 @@ public class SuggestionDB extends ModelDB<Suggestion> {
 	public void update() {}
 
     @Override
-    public Suggestion findById(int id) {
-        return null;
-    }
-
-    @Override
 	public List<Suggestion> all() {
 		return null;
 	}
