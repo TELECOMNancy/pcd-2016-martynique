@@ -1,12 +1,12 @@
+import app.LocalPlayer;
+import app.VideoPlayer;
+import app.WebPlayer;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import views.VideoPlayer;
-import views.WebPlayer;
-import views.LocalPlayer;
  
 public class TestPlayers extends Application {
     public static void main(String[] args) {

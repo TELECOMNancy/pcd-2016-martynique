@@ -123,7 +123,7 @@ public class test extends Application {
 
         public SliderBar() {
             getChildren().addAll(progressBar, slider);
-            getChildren().addAll(slider);
+            //getChildren().addAll(slider);
             bindValues();
         }
         private void bindValues(){

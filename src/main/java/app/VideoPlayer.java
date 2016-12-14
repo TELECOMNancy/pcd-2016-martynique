@@ -1,4 +1,4 @@
-package views;
+package app;
 public interface VideoPlayer {
 
     public String getMediaName();

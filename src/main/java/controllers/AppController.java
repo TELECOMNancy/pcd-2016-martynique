@@ -1,6 +1,8 @@
 package controllers;
 
+import app.LocalPlayer;
 import app.SceneManager;
+import app.WebPlayer;
 import db.FavoriteDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,9 +22,6 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 
 import java.util.List;
-
-import views.LocalPlayer;
-import views.WebPlayer;
 
 import utils.YTD;
 

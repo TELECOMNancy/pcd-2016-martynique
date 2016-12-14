@@ -1,4 +1,4 @@
-package views;
+package app;
 import java.io.File;
 //import java.time.Duration;
 
@@ -34,7 +34,7 @@ public class LocalPlayer extends BorderPane implements VideoPlayer {
         
         // Create the player and set to play automatically.
         MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setAutoPlay(false);
 
         // Create the view and add it to the Scene.
         player = new MediaView(mediaPlayer);
@@ -61,9 +61,8 @@ public class LocalPlayer extends BorderPane implements VideoPlayer {
         player.getMediaPlayer().pause();
     }
 
-    public void setVolume(int vol) {
-        double value = vol/100;
-        player.getMediaPlayer().setVolume(value);
+    public void setVolume(double vol) {
+        player.getMediaPlayer().setVolume(vol/100);
     }
     
     public void setProgress(double progressPct) {

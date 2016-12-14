@@ -1,33 +1,33 @@
 package controllers;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import javafx.beans.value.ChangeListener;
+import app.LocalPlayer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ObservableValue;
 
+import com.jfoenix.controls.JFXSlider;
+
 import javafx.util.Duration;
-
-
-
-
-import views.LocalPlayer;
 
 /**
  * Controller for playing Local videos.
  */
 public class LocalVideoController extends Controller implements VideoController{
     
-    private LocalPlayer lp; 
+    private LocalPlayer lp;
+    private double savedVolume;
     
     @FXML private Button returnButton;
     @FXML private Button fsButton;
@@ -36,7 +36,7 @@ public class LocalVideoController extends Controller implements VideoController{
     @FXML private Button unmuteButton;
     @FXML private Button playButton;
     @FXML private Button pauseButton;
-    @FXML private Slider volume;
+    @FXML private JFXSlider volume;
     @FXML private SliderBar progressBar;
     @FXML private Label Title;
     @FXML private BorderPane Video;
@@ -44,6 +44,9 @@ public class LocalVideoController extends Controller implements VideoController{
     @FXML private BorderPane bottomLayout;
 
     public LocalVideoController(String path) {
+        this.savedVolume = 0;
+        lp = new LocalPlayer(path);
+        
         this.fsButton = new Button();
         this.smallButton = new Button();
         this.returnButton = new Button();
@@ -51,15 +54,13 @@ public class LocalVideoController extends Controller implements VideoController{
         this.unmuteButton = new Button();
         this.playButton = new Button();
         this.pauseButton = new Button();
-        //this.volume = new Slider();
+        this.volume = new JFXSlider();
         this.progressBar = new SliderBar();
-        
-        lp = new LocalPlayer(path);
     }
     
     @FXML
     private void initialize() {
-        this.Title = new Label(lp.getMediaName());
+        this.Title.setText(lp.getMediaName());;
         pause();
         unmute();
         smallButton.setVisible(false);
@@ -67,7 +68,16 @@ public class LocalVideoController extends Controller implements VideoController{
         this.Video.setCenter(lp);
         this.bottomLayout.setTop(this.progressBar);
         
-        lp.getPlayer().currentTimeProperty().addListener(new ChangeListener<Duration>() {
+        this.volume.setValue(100);
+        
+        this.Overlay.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("moved");
+            }
+        });
+        
+        this.lp.getPlayer().currentTimeProperty().addListener(new ChangeListener<Duration>() {
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
                 progressBar
@@ -76,15 +86,28 @@ public class LocalVideoController extends Controller implements VideoController{
             }
         });
         
-        progressBar.sliderValueProperty().addListener((ov) -> {
+        this.progressBar.sliderValueProperty().addListener((ov) -> {
             if (progressBar.isTheValueChanging()) {
-                if (null != lp.getPlayer())
+                if (null != lp.getPlayer()) {
                     // multiply duration by percentage calculated by
                     // slider position
                     lp.setProgress(progressBar
                             .sliderValueProperty().getValue() / 100.0);
-                else
+                } else {
+                    System.out.println("else");
                     progressBar.sliderValueProperty().setValue(0);
+                }
+            }
+        });
+        
+        this.volume.valueProperty().addListener((ov) -> {
+            if (volume.isPressed()) {
+                if (null != lp.getPlayer()) {
+                    lp.setVolume(volume.getValue());
+                    if (volume.getValue() == 0)
+                        mute();
+                }
+                
             }
         });
         
@@ -160,6 +183,8 @@ public class LocalVideoController extends Controller implements VideoController{
         this.muteButton.setManaged(false);
         this.unmuteButton.setVisible(true);
         this.unmuteButton.setManaged(true);
+        savedVolume = volume.getValue();
+        this.volume.setValue(0);
         lp.mute();
     }
     
@@ -168,6 +193,7 @@ public class LocalVideoController extends Controller implements VideoController{
         this.unmuteButton.setManaged(false);
         this.muteButton.setVisible(true);
         this.muteButton.setManaged(true);
+        this.volume.setValue(savedVolume);
         lp.unmute();
     }
     
@@ -202,17 +228,11 @@ public class LocalVideoController extends Controller implements VideoController{
     
     private class SliderBar extends StackPane {
 
-        private Slider slider = new Slider();
-
-        private ProgressBar progressBar = new ProgressBar();
+        private JFXSlider slider = new JFXSlider();
 
         public SliderBar() {
-            getChildren().addAll(progressBar, slider);
-            bindValues();
-        }
-        private void bindValues(){
-            progressBar.prefWidthProperty().bind(slider.widthProperty());
-            progressBar.progressProperty().bind(slider.valueProperty().divide(100));
+            slider.setValue(0);
+            getChildren().addAll(slider);
         }
 
         public DoubleProperty sliderValueProperty() {
@@ -220,7 +240,7 @@ public class LocalVideoController extends Controller implements VideoController{
         }
 
         public boolean isTheValueChanging() {
-            return slider.isValueChanging();
+            return slider.isPressed();
         }
     }
 }
