@@ -60,7 +60,7 @@ public class FavoriteDB extends ModelDB<Favorite> {
             ResultSet rs = prep.executeQuery();
 
             if(rs.next()) {
-                f = new Favorite(VideoDB.findById(rs.getInt("id_video")));
+                f = new Favorite(new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("code")));
                 f.setID(rs.getInt("id"));
             }
         } catch (SQLException e) {
@@ -77,6 +77,7 @@ public class FavoriteDB extends ModelDB<Favorite> {
             ResultSet rs = st.executeQuery(allQuery());
 
             while(rs.next()){
+
                 Favorite tmp = new Favorite(VideoDB.findById(rs.getInt("id_video")));
                 tmp.setID(rs.getInt("id"));
                 list.add(tmp);
@@ -87,6 +88,11 @@ public class FavoriteDB extends ModelDB<Favorite> {
         }
 
         return list;
+    }
+
+    @Override
+    public String allQuery() {
+        return super.allQuery() + " NATURAL JOIN Videos";
     }
 
     @Override

@@ -26,6 +26,14 @@ public class Favorite implements Identifiable {
         this.id = id;
     }
 
+    public boolean equals(Object o) {
+        if(o != null && o instanceof Favorite) {
+            Favorite tmp = (Favorite) o;
+            return this.getID() == tmp.getID();
+        }
+        return false;
+    }
+
     public String toString() {
         return "[" + this.getID()+ "#Favorite] " + fav;
     }

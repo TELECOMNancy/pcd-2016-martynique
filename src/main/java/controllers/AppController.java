@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import models.User;
 import models.Video;
 import javafx.stage.Stage;
 
@@ -38,15 +39,21 @@ public class AppController {
     @FXML
     private SuggestionController suggestController;
 
+    private User user;
+
+    private WebPlayer wp;
+
+    public AppController() {
+        this.user = new User();
+    }
+
     @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
         this.youtubeTabPaneController.injectAppController(this);
-        //this.suggestionController.injectAppController(this);
+        this.suggestController.injectAppController(this);
         wp = new WebPlayer();
     }
-    
-    private WebPlayer wp;
     
     public void showHome() {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
