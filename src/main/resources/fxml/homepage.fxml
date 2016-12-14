@@ -15,4 +15,11 @@
          </BorderPane.margin>
       </HBox>
    </top>
+   <center>
+      <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
+         <children>
+            <fx:include fx:id="youtubeTabPane" source="youtubeTabPane.fxml" />
+         </children>
+      </HBox>
+   </center>
 </BorderPane>

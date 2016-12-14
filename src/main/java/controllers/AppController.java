@@ -33,8 +33,12 @@ public class AppController {
     private SearchController searchController;
 
     @FXML
+    private YoutubeTabPaneController youtubeTabPaneController;
+
+    @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
+        this.youtubeTabPaneController.injectAppController(this);
         wp = new WebPlayer();
     }
     
@@ -52,6 +56,15 @@ public class AppController {
     public void showResults(List<Video> results) {
         FXMLLoader loader = SceneManager.getLoader("results.fxml");
         ResultsController ctrl = new ResultsController(results);
+        ctrl.injectAppController(this);
+        loader.setController(ctrl);
+
+        this.root.setCenter(SceneManager.getComponent(loader));
+    }
+    
+    public void showSuggestion() {
+    	FXMLLoader loader = SceneManager.getLoader("form.fxml");
+        SuggestionController ctrl = new SuggestionController();
         ctrl.injectAppController(this);
         loader.setController(ctrl);
 
