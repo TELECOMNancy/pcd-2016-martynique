@@ -28,8 +28,8 @@ public class SuggestionDB extends ModelDB<Suggestion> {
         		WHERE += "AND ";
 		
 			if(s == Flag.TAG){
-				WHERE += "tag = '" + flags.get(s)+"' ";
-				JOIN = "INNER JOIN Tags ON Suggestions.id_tag = Tags.id ";
+				WHERE += "Tags.tag = '" + flags.get(s)+"' ";
+				JOIN = "INNER JOIN Tags ON Suggestions.id = Tags.id_video ";
 			}
 			if(s == Flag.LENGTH)
     			WHERE += flags.get(s)+" ";
@@ -64,8 +64,7 @@ public class SuggestionDB extends ModelDB<Suggestion> {
         String createString1 = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "code varchar(255) NOT NULL, " +
-                "length INTEGER NOT NULL, " +
-                "id_tag INTEGER)";
+                "length INTEGER NOT NULL)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             st.executeUpdate(createString1);
@@ -75,6 +74,7 @@ public class SuggestionDB extends ModelDB<Suggestion> {
         
         String createString2 = "CREATE TABLE IF NOT EXISTS " + TABLE_JOIN +  " ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "id_video INTEGER NOT NULL, " +
                 "tag varchar(255) NOT NULL)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
