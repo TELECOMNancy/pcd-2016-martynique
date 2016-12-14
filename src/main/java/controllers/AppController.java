@@ -9,7 +9,10 @@ import javafx.scene.control.Alert.AlertType;
 import models.Video;
 import javafx.stage.Stage;
 
+import javafx.scene.input.KeyEvent;
+
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 
 import java.util.List;
 
@@ -39,6 +42,10 @@ public class AppController {
     
     public void showHome() {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
+        this.root.setTop(null);
+        this.root.setBottom(null);
+        this.root.setRight(null);
+        this.root.setLeft(null);
         this.root.setCenter(SceneManager.getComponent(loader));
     }
 
@@ -94,8 +101,16 @@ public class AppController {
         new Thread(task).start();
     }
     
-    public void goFullScreen() {
+    // a adapter quand on ajoutera le lecteur offline
+    public void goFullScreen(WebVideoController ctrl) {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(true);
+        this.root.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            //@Override
+            public void handle(KeyEvent event) {
+                System.out.println("key pressed");
+                ctrl.quitFullScreen();
+            }
+        });
     }
     
     public void quitFullScreen() {

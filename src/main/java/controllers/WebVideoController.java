@@ -37,6 +37,9 @@ public class WebVideoController extends Controller {
     
     @FXML
     private BorderPane Player;
+    
+    @FXML
+    private BorderPane TopBar;
 
     public WebVideoController(String videoID) {
         ID = videoID;
@@ -45,15 +48,21 @@ public class WebVideoController extends Controller {
         this.Download = new Button();
     }
     
+    public void quitFullScreen() {
+        TopBar.setVisible(true);
+        TopBar.setManaged(true);
+    }
+    
     @FXML
     private void initialize() {
         
         this.FS.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //Player.getTop().setVisible(false);
+                TopBar.setVisible(false);
+                TopBar.setManaged(false);
                 System.out.println("FS");
-                appController.goFullScreen();
+                appController.goFullScreen(WebVideoController.this);
             }
         });
         
