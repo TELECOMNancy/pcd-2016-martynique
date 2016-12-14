@@ -21,8 +21,8 @@ public class PlaylistLinkDB {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(insertQuery(), Statement.RETURN_GENERATED_KEYS);
 
-            prep.setString(1, Integer.toString(play.getID()));
-            prep.setString(2, Integer.toString(vid.getID()));
+            prep.setString(1, (play.getID()));
+            prep.setString(2, vid.getID());
             
             prep.executeUpdate();
 

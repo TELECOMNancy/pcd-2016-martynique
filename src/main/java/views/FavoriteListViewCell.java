@@ -7,13 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import models.Favorite;
 import models.Video;
 
 import java.io.IOException;
 
 
-public class FavoriteListViewCell extends JFXListCell<Favorite> {
+public class FavoriteListViewCell extends JFXListCell<Video> {
 
     @FXML
     private GridPane favorite;
@@ -24,7 +23,7 @@ public class FavoriteListViewCell extends JFXListCell<Favorite> {
 
     private FXMLLoader loader;
 
-    public void updateItem(Favorite value, boolean empty) {
+    public void updateItem(Video value, boolean empty) {
         super.updateItem(value, empty);
 
         if(empty || value == null) {
@@ -43,8 +42,8 @@ public class FavoriteListViewCell extends JFXListCell<Favorite> {
             }
 
             if(value != null) {
-                this.title.setText(value.getFavorite().getTitle());
-                this.thumbnail.setImage(new Image(value.getFavorite().getThumbnail()));
+                this.title.setText(value.getTitle());
+                this.thumbnail.setImage(new Image(value.getThumbnail()));
             }
 
             this.setText(null);

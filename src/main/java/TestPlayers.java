@@ -6,8 +6,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import views.VideoPlayer;
 import views.WebPlayer;
+import views.LocalPlayer;
  
-@SuppressWarnings("restriction")
 public class TestPlayers extends Application {
     public static void main(String[] args) {
         launch(args);
@@ -20,10 +20,10 @@ public class TestPlayers extends Application {
         
         //String source = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
         
-        //VideoPlayer player = new LocalPlayer(600, 500, "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4");
-        VideoPlayer player = new WebPlayer();
+        VideoPlayer player = new LocalPlayer("E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4");
+        //VideoPlayer player = new WebPlayer();
         //((WebPlayer) player).play("SNE2oCZH_4k");
-        ((WebPlayer) player).play("Nj6PFaDmp6c");
+        //((WebPlayer) player).play("Nj6PFaDmp6c");
         
         
         //VideoPlayer player = new test(600, 500, "https://www.youtube.com/embed/SnxNJbWCcng");

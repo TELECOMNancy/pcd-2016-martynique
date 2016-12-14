@@ -3,10 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Playlist implements Identifiable{
+public class Playlist implements Identifiable {
 
-	
-	private int id;
+	private ID id;
 	private String name;
 	List<Video> videoList;
 	
@@ -50,17 +49,15 @@ public class Playlist implements Identifiable{
 			System.out.println("La video n'existe pas dans la playlist");
 			
 	}
-	
 
 	@Override
-	public int getID() {
-		return id;
+	public String getID() {
+		return this.name;
 	}
 
 	@Override
-	public void setID(int id) {
+	public void setID(ID id) {
 		this.id = id;
-		
 	}
 
 }

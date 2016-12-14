@@ -5,7 +5,7 @@ package models;
  */
 public interface  Identifiable {
 
-    public int getID();
+    public String getID();
 
-    public void setID(int id);
+    public void setID(ID id);
 }

@@ -1,17 +1,11 @@
 import app.App;
 import app.SceneManager;
-import controllers.AppController;
-import db.FavoriteDB;
-import db.SuggestionDB;
 import db.VideoDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import models.Favorite;
-import models.User;
 import models.Video;
 
 import java.util.List;
@@ -28,8 +22,8 @@ public class Main extends Application {
     }
 
     private void initUser() {
-        List<Favorite> fav = new VideoDB().getFavorites();
-        for(Favorite f: fav)
+        List<Video> fav = new VideoDB().getFavorites();
+        for(Video f: fav)
             this.app.getUser().addFavorite(f);
     }
 
@@ -44,8 +38,8 @@ public class Main extends Application {
         BorderPane root = (BorderPane) SceneManager.getComponent(loader);
 
         primaryStage.setTitle("Youtube app");
-        primaryStage.setMinHeight(450);
-        primaryStage.setMinWidth(450);
+        primaryStage.setMinHeight(400);
+        primaryStage.setMinWidth(600);
         primaryStage.setScene(new Scene(root));
         primaryStage.sizeToScene();
         primaryStage.requestFocus();

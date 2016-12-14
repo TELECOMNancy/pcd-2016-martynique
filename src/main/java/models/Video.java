@@ -5,26 +5,25 @@ package models;
  */
 public class Video implements Identifiable {
 
-    private int id;
+    private ID id;
     private String title;
     private String thumbnail;
-    private String code;
     private boolean favorite;
 
     public Video(String title, String thumb, String code) {
+        this.id = new VarcharID(code);
         this.title = title;
         this.thumbnail = thumb;
-        this.code = code;
         this.favorite = false;
     }
 
     @Override
-    public int getID() {
-        return this.id;
+    public String getID() {
+        return this.id.getValue();
     }
 
     @Override
-    public void setID(int id) {
+    public void setID(ID id) {
         this.id = id;
     }
 
@@ -36,14 +35,9 @@ public class Video implements Identifiable {
         return this.thumbnail;
     }
 
-    public String getCode() {
-        return this.code;
-    }
-
     public String toString() {
-        return "[" + this.getID() + "#Video] " +
-                (this.title.length() > 10 ? this.title.substring(0, 10) : this.title.substring(0, this.title.length() - 1))
-                + " - " + this.code;
+        return "[" + this.getID() + "#Video] " + this.title
+                + " - " + (this.isFavorite() ? " FAV" :"");
     }
 
     public boolean isFavorite() {
@@ -53,12 +47,13 @@ public class Video implements Identifiable {
     public boolean equals(Object o) {
         if(o != null && o instanceof Video) {
             Video tmp = (Video) o;
-            return this.getCode().equals(tmp.getCode());
+            return this.getID().equals(tmp.getID());
         }
         return false;
     }
 
     public void setFavorite(boolean favorite) {
+        System.out.println(favorite);
         this.favorite = favorite;
     }
 }

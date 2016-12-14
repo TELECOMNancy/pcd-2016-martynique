@@ -17,38 +17,58 @@ import utils.Search;
  * @author MartyEz
  * @author Answermouth
  */
-@SuppressWarnings("restriction")
 public class SearchController extends Controller {
 
     @FXML private TextField searchField;
 
     @FXML private Button searchButton;
+    
+    @FXML private Button returnButton;
 
     @FXML
     private void initialize() {
-        this.searchButton.requestFocus();
+        setReturnVisible(false);
+        
+        this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                app.getAppController().showHome();
+                setReturnVisible(false);
+            }
+        });
+        
         this.searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if(event.getCode().equals(KeyCode.ENTER)){
                     System.out.println("#QUERY '" + searchField.getText() + "'");
+                    setReturnVisible(true);
                     search();
                 }
             }
         });
-
+        
+        this.searchButton.requestFocus();
         this.searchButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                setReturnVisible(true);
                 search();
             }
         });
+        
+        
     }
 
+    private void setReturnVisible(boolean bool) {
+        this.returnButton.setVisible(bool);
+        this.returnButton.setManaged(bool);
+    }
+    
     private void search() {
         Search search = new Search(searchField.getText());
         search.executeApiRequest();
-        search.printResult();
+        //search.printResult();
         app.getAppController().showResults(search.getVideoList());
     }
 

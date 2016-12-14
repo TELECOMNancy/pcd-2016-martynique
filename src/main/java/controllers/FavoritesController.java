@@ -5,25 +5,21 @@ import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import models.Favorite;
 import models.Video;
 import views.FavoriteListViewCell;
-import views.SearchResultListViewCell;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 public class FavoritesController extends Controller {
 
     @FXML
-    JFXListView<Favorite> results;
+    JFXListView<Video> results;
 
-    private final ObservableList<Favorite> favoritesObservableList;
-    private List<Favorite> favorites;
+    private final ObservableList<Video> favoritesObservableList;
+    private List<Video> favorites;
 
     public FavoritesController() {
-        this.results = new JFXListView<Favorite>();
+        this.results = new JFXListView<Video>();
         this.favoritesObservableList = FXCollections.observableArrayList();
     }
 

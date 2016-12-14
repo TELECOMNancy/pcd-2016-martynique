@@ -10,7 +10,6 @@ import controllers.*;
  *
  * @author Manindar
  */
-@SuppressWarnings("restriction")
 public class YTD {
 
     public static void download(String ID, String path) {
@@ -20,16 +19,6 @@ public class YTD {
             VGet v = new VGet(new URL(url), new File(path));
             v.download();
         } catch (Exception e) {
-            //ctrl.warning("Video couldn't donwload");
-            /*
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText("Look, an Information Dialog");
-            alert.setContentText("I have a great message for you!");
-
-            alert.showAndWait();
-            */
-            
             throw new RuntimeException(e);
         }
     }

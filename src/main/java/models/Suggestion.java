@@ -2,27 +2,22 @@ package models;
 
 public class Suggestion implements Identifiable {
 
-    private int id;
-    private String code;
+    private ID id;
     private int length;
 
     public Suggestion(String code, int length){
-        this.code = code;
+        this.id = new VarcharID(code);
         this.length = length;
     }
 
     @Override
-    public int getID() {
-        return this.id;
+    public String getID() {
+        return this.id.getValue();
     }
 
     @Override
-    public void setID(int id) {
+    public void setID(ID id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return this.code;
     }
 
     public int getLength() {

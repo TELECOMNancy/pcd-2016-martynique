@@ -1,6 +1,5 @@
 package db;
 
-import models.Favorite;
 import models.Video;
 
 import java.sql.*;
@@ -19,14 +18,11 @@ public class VideoDB {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(VideoDB.insertQuery(), Statement.RETURN_GENERATED_KEYS);
 
-            prep.setString(1, v.getCode());
+            prep.setString(1, v.getID());
             prep.setString(2, v.getTitle());
             prep.setString(3, v.getThumbnail());
             prep.setBoolean(4, v.isFavorite());
             prep.executeUpdate();
-            ResultSet tableKeys = prep.getGeneratedKeys();
-            tableKeys.next();
-            v.setID(tableKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -41,7 +37,7 @@ public class VideoDB {
             ResultSet rs = prep.executeQuery();
 
             if (rs.next())
-                v = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("code"));
+                v = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("id"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,7 +46,7 @@ public class VideoDB {
     }
 
     public static void setFavorite(Video v) {
-        if(VideoDB.findById(v.getCode()) == null)
+        if(VideoDB.findById(v.getID()) == null)
             VideoDB.create(v);
         else
             update(v);
@@ -63,7 +59,8 @@ public class VideoDB {
             prep.setString(1, v.getTitle());
             prep.setString(2, v.getThumbnail());
             prep.setBoolean(3, v.isFavorite());
-            prep.setString(4, v.getCode());
+            prep.setString(4, v.getID());
+            System.out.println(v.isFavorite());
             prep.executeUpdate();
 
         } catch (SQLException e) {
@@ -102,15 +99,17 @@ public class VideoDB {
         }
     }
 
-    public static List<Favorite> getFavorites() {
-        List<Favorite> list = new ArrayList<Favorite>();
+    public static List<Video> getFavorites() {
+        List<Video> list = new ArrayList<Video>();
         try {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(VideoDB.favoritesQuery());
             ResultSet rs = prep.executeQuery();
 
             while(rs.next()) {
-                list.add(new Favorite(new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("id"))));
+                Video v = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("id"));
+                v.setFavorite(true);
+                list.add(v);
             }
             rs.close();
         } catch (SQLException e) {
