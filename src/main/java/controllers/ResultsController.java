@@ -1,22 +1,18 @@
 package controllers;
 
-import com.google.api.services.youtube.model.SearchResult;
 import com.jfoenix.controls.JFXListView;
 //import javafx.scene.control.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import models.Video;
 import views.SearchResultListViewCell;
 
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 /**
  * Controller for results of request.
  */
-@SuppressWarnings("restriction")
 public class ResultsController extends Controller {
 
     @FXML

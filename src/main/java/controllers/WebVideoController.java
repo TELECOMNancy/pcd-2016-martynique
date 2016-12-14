@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 /**
  * Controller for playing web videos.
  */
-@SuppressWarnings("restriction")
 public class WebVideoController extends Controller {
     
     private String ID;

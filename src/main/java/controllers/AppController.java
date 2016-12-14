@@ -23,7 +23,6 @@ import utils.YTD;
 /**
  * The main Controller of the app
  */
-@SuppressWarnings("restriction")
 public class AppController {
 
     @FXML

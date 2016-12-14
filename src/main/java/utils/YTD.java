@@ -10,7 +10,6 @@ import controllers.*;
  *
  * @author Manindar
  */
-@SuppressWarnings("restriction")
 public class YTD {
 
     public static void download(String ID, String path) {
