@@ -8,7 +8,7 @@ public class SuggestionAnswerButton extends Button {
 	public SuggestionAnswerButton(Answer answer){
 		this.answer = answer;
 		this.setText(this.answer.getText());
-		// this.getStyleClass().add("formButton");
+		this.getStyleClass().add("suggestionButton");
 	}
 	
 	public Answer getAnswer(){

@@ -76,6 +76,10 @@ public class AppController {
     
     public void showSuggestion() {
     	FXMLLoader loader = SceneManager.getLoader("suggestion.fxml");
+    	SuggestionController ctrl = new SuggestionController();
+    	ctrl.injectAppController(this);
+        loader.setController(ctrl);
+        
         this.root.setCenter(SceneManager.getComponent(loader));
     }
     
