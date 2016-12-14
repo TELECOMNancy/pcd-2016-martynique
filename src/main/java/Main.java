@@ -28,7 +28,7 @@ public class Main extends Application {
 
     private void initUser() {
         this.user = new User();
-        List<Favorite> fav = new FavoriteDB(null).all();
+        List<Favorite> fav = new FavoriteDB().all();
         for(Favorite f: fav)
             this.user.addFavorite(f);
     }
