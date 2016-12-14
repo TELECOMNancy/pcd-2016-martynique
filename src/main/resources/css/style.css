@@ -67,9 +67,9 @@
 }
 
 .title:hover {
-        -fx-underline: true;
-        -fx-cursor: hand;
-    }
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
 
 
 /* The increment and decrement button CSS class of scrollbar */

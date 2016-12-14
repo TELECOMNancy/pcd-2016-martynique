@@ -1,20 +1,18 @@
 package views;
 
-import com.google.api.services.youtube.model.SearchResult;
 import com.jfoenix.controls.JFXListCell;
-
+import controllers.AppController;
 import javafx.event.EventHandler;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import models.Video;
 
-import javafx.scene.input.MouseEvent;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 /**
@@ -27,9 +25,18 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
     @FXML
     private ImageView thumbnail;
     @FXML
+    private Label addFavorite;
+
+    @FXML
     private Label title;
 
     private FXMLLoader loader;
+    private AppController ctrl;
+
+    public SearchResultListViewCell(AppController ctrl) {
+        this.ctrl = ctrl;
+
+    }
 
     public void updateItem(Video value, boolean empty) {
         super.updateItem(value, empty);
@@ -50,13 +57,35 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
             }
 
             if(value != null) {
-
                 this.title.setText(value.getTitle());
                 this.thumbnail.setImage(new Image(value.getThumbnail()));
             }
 
             this.setText(null);
             this.setGraphic(this.searchResult);
+
+            this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    ctrl.playWebVideo(value.getCode());
+                }
+            });
+
+            this.title.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    ctrl.playWebVideo(value.getCode());
+                }
+            });
+
+            this.addFavorite.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    ctrl.addFavorite(value);
+                }
+            });
+
+
         }
     }
 }
