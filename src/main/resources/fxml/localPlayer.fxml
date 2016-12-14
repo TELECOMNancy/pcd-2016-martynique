@@ -5,51 +5,61 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LocalVideoController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <BorderPane fx:id="Video" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/style.css">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin></BorderPane>
       <BorderPane fx:id="Overlay" prefHeight="200.0" prefWidth="600.0">
          <bottom>
-            <BorderPane prefHeight="44.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <right>
-                  <Button fx:id="FS" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="fs" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets right="4.0" />
-                     </BorderPane.margin>
-                  </Button>
-               </right>
+            <BorderPane fx:id="bottomLayout" prefHeight="44.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <left>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <right>
+                        <Slider fx:id="volume" prefHeight="14.0" prefWidth="140.0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <BorderPane.margin>
+                        <Insets left="8.0" />
+                     </BorderPane.margin>
                      <left>
-                        <Button fx:id="Play" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="play" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets left="4.0" />
-                           </BorderPane.margin>
-                        </Button>
+                        <HBox maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="playButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="play" textFill="TRANSPARENT" />
+                              <Button fx:id="pauseButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="pause" textFill="TRANSPARENT" />
+                           </children>
+                        </HBox>
                      </left>
                      <center>
-                        <Button fx:id="Mute" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="mute" BorderPane.alignment="CENTER" />
+                        <HBox maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="muteButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="mute" />
+                              <Button fx:id="unmuteButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="unmute" />
+                           </children>
+                        </HBox>
                      </center>
-                     <right>
-                        <Slider fx:id="Volume" BorderPane.alignment="CENTER" />
-                     </right>
                   </BorderPane>
                </left>
-               <top>
-                  <Slider fx:id="ProgressBar" BorderPane.alignment="CENTER">
+               <right>
+                  <HBox maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="fsButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="fs" textFill="TRANSPARENT" />
+                        <Button fx:id="smallButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="small" textFill="TRANSPARENT" />
+                     </children>
                      <BorderPane.margin>
-                        <Insets />
+                        <Insets right="8.0" />
                      </BorderPane.margin>
-                  </Slider>
-               </top>
+                  </HBox>
+               </right>
             </BorderPane>
          </bottom>
          <top>
             <BorderPane prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <left>
-                  <Button fx:id="Return" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Return" BorderPane.alignment="CENTER">
+                  <Button fx:id="returnButton" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets left="4.0" />
                      </BorderPane.margin>
@@ -62,16 +72,8 @@
                      </BorderPane.margin>
                   </Label>
                </center>
-               <right>
-                  <Button fx:id="ReDL" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="ReDL" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets right="4.0" />
-                     </BorderPane.margin>
-                  </Button>
-               </right>
             </BorderPane>
          </top>
       </BorderPane>
-      <BorderPane fx:id="Video" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </StackPane>

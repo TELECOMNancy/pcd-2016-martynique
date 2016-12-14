@@ -47,7 +47,7 @@
             </BorderPane>
          </graphic>
       </Tab>
-      <Tab fx:id="localVideos">
+      <Tab fx:id="localVideosTab">
          <graphic>
             <BorderPane prefHeight="50.0" prefWidth="50.0">
                <center>

@@ -42,6 +42,36 @@
 	-fx-background-size: 18px 18px;
 }
 
+#fsButton {
+	-fx-background-image: url("../assets/fullscreen.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
+#smallButton {
+	-fx-background-image: url("../assets/small.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
+#playButton {
+	-fx-background-image: url("../assets/play.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
+#pauseButton {
+	-fx-background-image: url("../assets/pause.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
+#muteButton {
+	-fx-background-image: url("../assets/volume.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
+#unmuteButton {
+	-fx-background-image: url("../assets/mute.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
 .content {
     -fx-background-color: rgb(50, 50, 50);
 }

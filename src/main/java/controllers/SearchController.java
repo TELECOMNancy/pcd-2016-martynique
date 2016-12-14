@@ -27,33 +27,44 @@ public class SearchController extends Controller {
 
     @FXML
     private void initialize() {
-        this.searchButton.requestFocus();
+        setReturnVisible(false);
+        
+        this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                appController.showHome();
+                setReturnVisible(false);
+            }
+        });
+        
         this.searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if(event.getCode().equals(KeyCode.ENTER)){
                     System.out.println("#QUERY '" + searchField.getText() + "'");
+                    setReturnVisible(true);
                     search();
                 }
             }
         });
-
+        
+        this.searchButton.requestFocus();
         this.searchButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                setReturnVisible(true);
                 search();
             }
         });
         
-        this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //search();
-                System.out.println("hello");
-            }
-        });
+        
     }
 
+    private void setReturnVisible(boolean bool) {
+        this.returnButton.setVisible(bool);
+        this.returnButton.setManaged(bool);
+    }
+    
     private void search() {
         Search search = new Search(searchField.getText());
         search.executeApiRequest();

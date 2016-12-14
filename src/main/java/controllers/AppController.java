@@ -42,6 +42,14 @@ public class AppController {
         wp = new WebPlayer();
     }
     
+    private void resetRoot() {
+        this.root.setCenter(null);
+        this.root.setTop(null);
+        this.root.setBottom(null);
+        this.root.setLeft(null);
+        this.root.setRight(null);
+    }
+    
     public void showHome() {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
         this.root.setTop(null);
@@ -82,25 +90,20 @@ public class AppController {
         
         bp.setCenter(wp);
         
-        this.root.setTop(null);
+        resetRoot();
         this.root.setCenter(bp);
     }
     
     public void playLocalVideo(String videoID) {
-        FXMLLoader loader = SceneManager.getLoader("localVideo.fxml");
+        videoID = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
+        FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
         
         LocalVideoController ctrl = new LocalVideoController(videoID);
         ctrl.injectAppController(this);
         loader.setController(ctrl);
-        
-        BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
-        
-        wp.play(videoID);
-        
-        bp.setCenter(wp);
-        
-        this.root.setTop(null);
-        this.root.setCenter(bp);
+
+        resetRoot();
+        this.root.setCenter(SceneManager.getComponent(loader));
     }
     
     public void stopWebVideo() {

@@ -28,15 +28,16 @@ public class LocalPlayer extends BorderPane implements VideoPlayer {
         }catch(Exception e){
             System.err.println(e.toString());
         }
-        
+                
         Media media = new Media(url);
+        
         
         // Create the player and set to play automatically.
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
 
         // Create the view and add it to the Scene.
-        MediaView player = new MediaView(mediaPlayer);
+        player = new MediaView(mediaPlayer);
         
         player.setFitHeight(this.getHeight());
         player.setFitWidth(this.getWidth());
@@ -76,6 +77,10 @@ public class LocalPlayer extends BorderPane implements VideoPlayer {
 
     public String getPlayerType() {
         return "LocalPlayer";
+    }
+    
+    public MediaPlayer getPlayer() {
+        return this.player.getMediaPlayer();
     }
     
     public String getMediaName() {
