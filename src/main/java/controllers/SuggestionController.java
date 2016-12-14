@@ -104,6 +104,8 @@ public class SuggestionController extends Controller {
     		
     		String selected = queryReturn.get(0);
     		
+    		System.out.println(selected);
+    		
     		appController.playWebVideo(selected);
     	}
     }
