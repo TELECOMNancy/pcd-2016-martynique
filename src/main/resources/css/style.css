@@ -66,6 +66,11 @@
     -fx-padding: 0 0 0 10px;
 }
 
+.title:hover {
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
 
 /* The increment and decrement button CSS class of scrollbar */
 .scroll-bar:vertical .increment-button ,
@@ -77,7 +82,7 @@
 
 .scroll-bar .increment-arrow,
 .scroll-bar .decrement-arrow, {
-	-fx-padding:0;
+	/*-fx-padding:0;*/
 }
 
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
@@ -90,4 +95,9 @@
 .youtube-tab-pane *.tab-header-background {
     /*-fx-background-color: red;*/
     -fx-background-color: #e52d27;
+}
+
+.add-favorite {
+	-fx-background-image: url("../assets/add.png") no-repeat;
+	-fx-background-size: 40px 40px;
 }

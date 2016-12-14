@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import models.Favorite;
 import models.User;
 import models.Video;
 import javafx.stage.Stage;
@@ -142,4 +143,7 @@ public class AppController {
         return this.user;
     }
 
+    public void addFavorite(Video value) {
+        this.user.addFavorite(new Favorite(value));
+    }
 }
