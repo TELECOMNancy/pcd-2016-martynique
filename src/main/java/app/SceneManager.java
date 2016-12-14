@@ -39,7 +39,7 @@ public class SceneManager {
         Parent component = null;
         try {
             component = loader.load();
-            System.out.println(component.toString());
+            //System.out.println(component.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -42,7 +42,7 @@ public class YoutubeTabPaneController extends Controller {
         this.suggestTab.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                if(favoritesTab.isSelected())
+                if(suggestTab.isSelected())
                     appController.showSuggestion();
             }
         });
