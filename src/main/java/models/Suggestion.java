@@ -1,19 +1,14 @@
 package models;
 
-/**
- * Represents a vidoo in our app.
- */
 public class Suggestion implements Identifiable {
 
     private int id;
-    private int idVideo;
+    private String code;
     private int length;
-    private String tag;
 
-    public Suggestion(int idVideo, int length, String tag){
-        this.idVideo = idVideo;
+    public Suggestion(String code, int length){
+        this.code = code;
         this.length = length;
-        this.tag = tag;
     }
 
     @Override
@@ -26,16 +21,11 @@ public class Suggestion implements Identifiable {
         this.id = id;
     }
 
-    public int getIDVideo() {
-        return this.idVideo;
+    public String getCode() {
+        return this.code;
     }
 
     public int getLength() {
         return this.length;
     }
-
-    public String getTag() {
-        return this.tag;
-    }
-
 }

@@ -23,6 +23,7 @@ public class Main extends Application {
     private void initDB() {
         VideoDB.createTable();
         FavoriteDB.createTable();
+        SuggestionDB.createTable();
     }
 
     private void initUser() {
