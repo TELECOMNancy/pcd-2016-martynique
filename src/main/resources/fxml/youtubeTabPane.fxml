@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="youtube-tab-pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <tabs>
+      <Tab>
+         <graphic>
+            <BorderPane prefHeight="50.0" prefWidth="50.0">
+               <center>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../assets/favorites.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </graphic>
+      </Tab>
+      <Tab>
+         <graphic>
+            <BorderPane prefHeight="50.0" prefWidth="50.0">
+               <center>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../assets/playlist.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </graphic>
+      </Tab>
+   </tabs>
+</JFXTabPane>
