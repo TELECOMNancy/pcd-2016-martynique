@@ -13,14 +13,14 @@ import controllers.*;
 @SuppressWarnings("restriction")
 public class YTD {
 
-    public static void download(String ID, String path, AppController ctrl) {
+    public static void download(String ID, String path) {
         System.out.println(ID + "   " + path);
         try {
             String url = "https://www.youtube.com/watch?v=" + ID;
             VGet v = new VGet(new URL(url), new File(path));
             v.download();
         } catch (Exception e) {
-            ctrl.warning("Video couldn't donwload");
+            //ctrl.warning("Video couldn't donwload");
             /*
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Information Dialog");
@@ -34,7 +34,7 @@ public class YTD {
         }
     }
     
-    public static void download(String ID, AppController ctrl) {
-        download(ID, System.getProperty("user.dir") + "\\savedVideos\\", ctrl);
+    public static void download(String ID) {
+        download(ID, System.getProperty("user.dir") + "\\savedVideos\\");
     }
 }
