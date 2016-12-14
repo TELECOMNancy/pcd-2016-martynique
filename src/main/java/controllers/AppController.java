@@ -71,8 +71,8 @@ public class AppController {
     }
     
     public void download(String ID) {
-        //YTD.download(ID);
-        System.out.println("Nope");
+        // might be interesting not to create a new thread each time
+        new Thread(() -> YTD.download(ID, this)).start();
     }
     
     public void goFullScreen() {
@@ -81,6 +81,10 @@ public class AppController {
     
     public void quitFullScreen() {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(false);
+    }
+    
+    public void warning(String text) {
+        System.out.println("hello");
     }
 
 }
