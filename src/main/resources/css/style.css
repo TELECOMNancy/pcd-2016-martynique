@@ -97,7 +97,21 @@
     -fx-background-color: #e52d27;
 }
 
-.add-favorite {
+.not-favorite {
+	-fx-background-image: url("../assets/not_favorite.png") no-repeat;
+	-fx-background-size: 40px 40px;
+}
+.not-favorite:hover {
+	-fx-background-image: url("../assets/favorite.png") no-repeat;
+	-fx-background-size: 40px 40px;
+}
+
+.favorite {
+	-fx-background-image: url("../assets/favorite.png") no-repeat;
+	-fx-background-size: 40px 40px;
+}
+
+.favorite:hover {
 	-fx-background-image: url("../assets/not_favorite.png") no-repeat;
 	-fx-background-size: 40px 40px;
 }

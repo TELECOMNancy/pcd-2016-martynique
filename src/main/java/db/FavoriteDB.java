@@ -107,8 +107,8 @@ public class FavoriteDB extends ModelDB<Favorite> {
     }
 
     @Override
-    public String deleteQuery() {
-        return super.deleteQuery() + " WHERE id_favorite = (?)";
+    public String deleteQuery(int id_video) {
+        return super.deleteQuery() + " WHERE id_video = (?)";
     }
 
     public static void createTable() {

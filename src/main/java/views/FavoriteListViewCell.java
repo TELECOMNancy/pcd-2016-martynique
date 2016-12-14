@@ -22,9 +22,6 @@ public class FavoriteListViewCell extends JFXListCell<Favorite> {
     @FXML
     private Label title;
 
-    @FXML
-    private ImageView star;
-
     private FXMLLoader loader;
 
     public void updateItem(Favorite value, boolean empty) {

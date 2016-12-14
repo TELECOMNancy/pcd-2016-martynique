@@ -133,6 +133,6 @@ public class SuggestionDB {
             e.printStackTrace();
         }
         
-        initializeTables();
+        //initializeTables();
     }
 }

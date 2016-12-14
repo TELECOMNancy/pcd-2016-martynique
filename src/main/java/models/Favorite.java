@@ -29,7 +29,7 @@ public class Favorite implements Identifiable {
     public boolean equals(Object o) {
         if(o != null && o instanceof Favorite) {
             Favorite tmp = (Favorite) o;
-            return this.getID() == tmp.getID();
+            return this.getFavorite().equals(tmp.getFavorite());
         }
         return false;
     }

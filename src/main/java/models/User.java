@@ -20,10 +20,19 @@ public class User extends Observable {
 
     public void addFavorite(Favorite f) {
         this.favorites.add(f);
+        System.out.println(this.favorites);
     }
 
     public List<Favorite> getFavorites() {
         return this.favorites;
+    }
+
+    public boolean hasFavorite(Video v) {
+        return this.getFavorites().contains(new Favorite(v));
+    }
+
+    public boolean hasFavorite(Favorite f) {
+        return this.getFavorites().contains(f);
     }
 
     public void removeFavorite(Favorite f) {

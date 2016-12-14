@@ -44,4 +44,12 @@ public class Video implements Identifiable {
                 + " - " + this.code;
     }
 
+    public boolean equals(Object o) {
+        if(o != null && o instanceof Video) {
+            Video tmp = (Video) o;
+            return this.getCode().equals(tmp.getCode());
+        }
+        return false;
+    }
+
 }

@@ -36,7 +36,7 @@
             <Font name="Roboto Regular" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="addFavorite" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="add-favorite" GridPane.columnIndex="2">
+      <Label fx:id="isFavorite" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="not-favorite" GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

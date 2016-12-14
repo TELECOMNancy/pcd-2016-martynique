@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import models.Favorite;
 import models.Video;
 
 import java.io.IOException;
@@ -25,13 +26,13 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
     @FXML
     private ImageView thumbnail;
     @FXML
-    private Label addFavorite;
-
-    @FXML
     private Label title;
+    @FXML
+    private Label isFavorite;
 
     private FXMLLoader loader;
     private AppController ctrl;
+    private Video v;
 
     public SearchResultListViewCell(AppController ctrl) {
         this.ctrl = ctrl;
@@ -60,6 +61,9 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
                 this.title.setText(value.getTitle());
                 this.thumbnail.setImage(new Image(value.getThumbnail()));
             }
+            if(ctrl.getUser().hasFavorite(value))
+                this.isFavorite.getStyleClass().add("favorite");
+
 
             this.setText(null);
             this.setGraphic(this.searchResult);
@@ -78,14 +82,16 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
                 }
             });
 
-            this.addFavorite.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            this.isFavorite.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    ctrl.addFavorite(value);
+                    if(ctrl.toggleFavorite(value))
+                        isFavorite.getStyleClass().add("favorite");
+                    else
+                        isFavorite.getStyleClass().remove("favorite");
                 }
             });
-
-
         }
     }
+
 }

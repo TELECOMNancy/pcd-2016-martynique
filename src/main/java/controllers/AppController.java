@@ -1,6 +1,7 @@
 package controllers;
 
 import app.SceneManager;
+import db.FavoriteDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -142,8 +143,16 @@ public class AppController {
         return this.user;
     }
 
-    public void addFavorite(Video value) {
-        System.out.println(value);
-        this.user.addFavorite(new Favorite(value));
+
+    public boolean toggleFavorite(Video value) {
+        Favorite f = new Favorite(value);
+        if(this.user.getFavorites().contains(f)) {
+            this.user.removeFavorite(f);
+            return false;
+        }
+        else {
+            this.user.addFavorite(f);
+            return true;
+        }
     }
 }
