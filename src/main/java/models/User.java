@@ -28,6 +28,8 @@ public class User extends Observable {
 
     public void removeFavorite(Favorite f) {
         this.favorites.remove(f);
+        this.setChanged();
+        this.notifyObservers();
     }
 
 }

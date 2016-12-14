@@ -35,23 +35,20 @@ public class AppController {
 
     @FXML
     private YoutubeTabPaneController youtubeTabPaneController;
-    
-    @FXML
-    private SuggestionController suggestController;
 
     private User user;
 
     private WebPlayer wp;
 
-    public AppController() {
-        this.user = new User();
+    public AppController(User user) {
+        this.user = user;
+        //this.user.addObserver();
     }
 
     @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
         this.youtubeTabPaneController.injectAppController(this);
-        this.suggestController.injectAppController(this);
         wp = new WebPlayer();
     }
     
@@ -140,6 +137,10 @@ public class AppController {
     
     public void quitFullScreen() {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(false);
+    }
+
+    public User getUser() {
+        return this.user;
     }
 
 }

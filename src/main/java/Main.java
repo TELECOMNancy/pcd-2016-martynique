@@ -1,4 +1,5 @@
 import app.SceneManager;
+import controllers.AppController;
 import db.FavoriteDB;
 import db.SuggestionDB;
 import db.VideoDB;
@@ -6,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import models.Favorite;
 import models.User;
@@ -37,7 +39,10 @@ public class Main extends Application {
         this.initUser();
 
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
-        Parent root = SceneManager.getComponent(loader);
+        AppController ctrl = new AppController(this.user);
+        loader.setController(ctrl);
+        BorderPane root = (BorderPane) SceneManager.getComponent(loader);
+
         primaryStage.setTitle("Youtube app");
         primaryStage.setMinHeight(450);
         primaryStage.setMinWidth(450);

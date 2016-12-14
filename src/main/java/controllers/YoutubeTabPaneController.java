@@ -39,6 +39,12 @@ public class YoutubeTabPaneController extends Controller {
             }
         });
 
+        FXMLLoader loader = SceneManager.getLoader("results.fxml");
+        FavoritesController ctrl = new FavoritesController();
+        ctrl.injectAppController(this.appController);
+        loader.setController(ctrl);
+        this.favoritesTab.setContent(SceneManager.getComponent(loader));
+
         this.suggestTab.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
@@ -49,15 +55,11 @@ public class YoutubeTabPaneController extends Controller {
     }
 
     private void showFavorites() {
-        List<Favorite> list = new ArrayList<Favorite>();
-        FavoriteDB db = new FavoriteDB(null);
-        list = db.all();
+        List<Favorite> list = this.appController.getUser().getFavorites();
 
-        FXMLLoader loader = SceneManager.getLoader("results.fxml");
-        FavoritesController ctrl = new FavoritesController(list);
-        ctrl.injectAppController(this.appController);
-        loader.setController(ctrl);
-        this.favoritesTab.setContent(SceneManager.getComponent(loader));
+        if(this.favoritesTab.getContent() == null) {
+
+        }
     }
 
 }
