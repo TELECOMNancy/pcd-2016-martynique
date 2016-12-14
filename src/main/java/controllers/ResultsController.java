@@ -4,17 +4,14 @@ import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import models.Video;
 import views.SearchResultListViewCell;
-
 import java.util.List;
-
-//import javafx.scene.control.JFXListView;
 
 /**
  * Controller for results of request.
  */
-@SuppressWarnings("restriction")
 public class ResultsController extends Controller {
 
     @FXML
@@ -41,4 +38,7 @@ public class ResultsController extends Controller {
         });*/
     }
 
+    public Node getScene() {
+        return results;
+    }
 }

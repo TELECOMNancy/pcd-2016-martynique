@@ -98,6 +98,6 @@
 }
 
 .add-favorite {
-	-fx-background-image: url("../assets/add.png") no-repeat;
+	-fx-background-image: url("../assets/not_favorite.png") no-repeat;
 	-fx-background-size: 40px 40px;
 }

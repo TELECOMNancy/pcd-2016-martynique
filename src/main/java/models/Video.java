@@ -39,7 +39,9 @@ public class Video implements Identifiable {
     }
 
     public String toString() {
-        return "[" + this.getID() + "#Video] " + this.title.substring(0, 10) + " - " + this.code;
+        return "[" + this.getID() + "#Video] " +
+                (this.title.length() > 10 ? this.title.substring(0, 10) : this.title.substring(0, this.title.length() - 1))
+                + " - " + this.code;
     }
 
 }

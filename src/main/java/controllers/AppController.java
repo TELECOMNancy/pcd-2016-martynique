@@ -3,6 +3,8 @@ package controllers;
 import app.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -28,22 +30,17 @@ import utils.YTD;
 @SuppressWarnings("restriction")
 public class AppController {
 
-    @FXML
-    private BorderPane root;
+    @FXML private BorderPane root;
+    @FXML private SearchController searchController;
+    @FXML private YoutubeTabPaneController youtubeTabPaneController;
+    @FXML private ResultsController resultsController;
 
-    @FXML
-    private SearchController searchController;
-
-    @FXML
-    private YoutubeTabPaneController youtubeTabPaneController;
 
     private User user;
-
     private WebPlayer wp;
 
     public AppController(User user) {
         this.user = user;
-        //this.user.addObserver();
     }
 
     @FXML
@@ -63,12 +60,14 @@ public class AppController {
     }
 
     public void showResults(List<Video> results) {
-        FXMLLoader loader = SceneManager.getLoader("results.fxml");
-        ResultsController ctrl = new ResultsController(results);
-        ctrl.injectAppController(this);
-        loader.setController(ctrl);
-        
-        this.root.setCenter(SceneManager.getComponent(loader));
+        if(this.resultsController == null) {
+            FXMLLoader loader = SceneManager.getLoader("results.fxml");
+            this.resultsController = new ResultsController(results);
+            this.resultsController.injectAppController(this);
+            loader.setController(this.resultsController);
+            SceneManager.getComponent(loader);
+        }
+        this.root.setCenter(this.resultsController.getScene());
     }
     
     public void showSuggestion() {
@@ -144,6 +143,7 @@ public class AppController {
     }
 
     public void addFavorite(Video value) {
+        System.out.println(value);
         this.user.addFavorite(new Favorite(value));
     }
 }
