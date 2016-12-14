@@ -32,7 +32,7 @@ public class SearchController extends Controller {
         this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                appController.showHome();
+                app.getAppController().showHome();
                 setReturnVisible(false);
             }
         });
@@ -68,8 +68,7 @@ public class SearchController extends Controller {
     private void search() {
         Search search = new Search(searchField.getText());
         search.executeApiRequest();
-        search.printResult();
-        this.appController.showResults(search.getVideoList());
+        app.getAppController().showResults(search.getVideoList());
     }
 
 

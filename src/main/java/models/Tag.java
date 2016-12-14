@@ -2,11 +2,12 @@ package models;
 
 public class Tag implements Identifiable {
 
-    private int id;
+    private ID id;
     private int idVideo;
     private String tag;
 
     public Tag(int idVideo, String tag){
+        this.id = new IntegerID();
     	this.idVideo = idVideo;
     	this.tag = tag;
     }
@@ -20,12 +21,13 @@ public class Tag implements Identifiable {
     }
 
     @Override
-    public int getID() {
-        return this.id;
+    public String getID() {
+        return this.tag;
     }
 
     @Override
-    public void setID(int id) {
+    public void setID(ID id) {
         this.id = id;
     }
+
 }

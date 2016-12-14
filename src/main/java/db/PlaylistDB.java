@@ -11,32 +11,23 @@ import models.Playlist;
 import models.Video;
 
 public class PlaylistDB{
-	
 
     private static final String TABLE = "Playlist";
-    
 
-
-
-    
     public void create(Playlist playlist) {
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(ModelDB.insertQuery(TABLE), Statement.RETURN_GENERATED_KEYS);
-
-            prep.setString(1, playlist.getName());
-
+            prep.setString(1, playlist.getID());
             prep.executeUpdate();
-            ResultSet tableKeys = prep.getGeneratedKeys();
-            tableKeys.next();
-            playlist.setID(tableKeys.getInt(1));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-   public static Playlist importVideo(int id_playlist){
+   /*public static Playlist importVideo(int id_playlist){
        	   List<Video> listVideo = new ArrayList<Video>();
        
     	   Playlist playlist = getPlaylist(id_playlist);
@@ -58,27 +49,8 @@ public class PlaylistDB{
            
  
        return playlist;
-   }
-   
-   public static Playlist getPlaylist(int id_playlist){
-       PreparedStatement prep;
-       Playlist playlist=null;
-	try {
-		prep = ConnectionDB.getInstance().prepareStatement(whereQuery());
-		prep.setInt(1, id_playlist);
-        ResultSet rs = prep.executeQuery();
+   }*/
 
-        playlist = new Playlist(rs.getString("title"));
-        playlist.setID(rs.getInt("id_playlist"));
-        
-        rs.close();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-       return playlist;
-   }
-	
     public static String whereQuery() {
         return "SELECT * FROM " + TABLE + " WHERE id_playlist = ?"; 
     }
@@ -86,8 +58,7 @@ public class PlaylistDB{
 	
     public static void createTable() {
         String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "title varchar(255) NOT NULL)";
+                "title varchar(255) PRIMARY KEY)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             st.executeUpdate(createString);

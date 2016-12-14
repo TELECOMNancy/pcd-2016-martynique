@@ -1,15 +1,13 @@
 package db;
 
-import java.sql.Connection;
+import models.Playlist;
+import models.Video;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
-import models.Playlist;
-import models.Video;
 
 public class PlaylistLinkDB {
 	
@@ -23,8 +21,8 @@ public class PlaylistLinkDB {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(insertQuery(), Statement.RETURN_GENERATED_KEYS);
 
-            prep.setString(1, Integer.toString(play.getID()));
-            prep.setString(2, Integer.toString(vid.getID()));
+            prep.setString(1, (play.getID()));
+            prep.setString(2, vid.getID());
             
             prep.executeUpdate();
 

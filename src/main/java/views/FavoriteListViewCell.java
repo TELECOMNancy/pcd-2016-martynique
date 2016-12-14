@@ -1,19 +1,22 @@
 package views;
 
 import com.jfoenix.controls.JFXListCell;
+import controllers.AppController;
+import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import models.Favorite;
 import models.Video;
 
 import java.io.IOException;
 
 
-public class FavoriteListViewCell extends JFXListCell<Favorite> {
+public class FavoriteListViewCell extends JFXListCell<Video> {
 
     @FXML
     private GridPane favorite;
@@ -22,9 +25,15 @@ public class FavoriteListViewCell extends JFXListCell<Favorite> {
     @FXML
     private Label title;
 
+    private AppController ctrl;
+
     private FXMLLoader loader;
 
-    public void updateItem(Favorite value, boolean empty) {
+    public FavoriteListViewCell(AppController c) {
+        this.ctrl = c;
+    }
+
+    public void updateItem(Video value, boolean empty) {
         super.updateItem(value, empty);
 
         if(empty || value == null) {
@@ -43,9 +52,23 @@ public class FavoriteListViewCell extends JFXListCell<Favorite> {
             }
 
             if(value != null) {
-                this.title.setText(value.getFavorite().getTitle());
-                this.thumbnail.setImage(new Image(value.getFavorite().getThumbnail()));
+                this.title.setText(value.getTitle());
+                this.thumbnail.setImage(new Image(value.getThumbnail()));
             }
+
+            this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    ctrl.playWebVideo(value.getID());
+                }
+            });
+
+            this.title.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    ctrl.playWebVideo(value.getID());
+                }
+            });
 
             this.setText(null);
             this.setGraphic(this.favorite);

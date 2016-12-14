@@ -12,30 +12,26 @@ import java.util.Observable;
  */
 public class User extends Observable {
 
-    private List<Favorite> favorites;
+    private List<Video> favorites;
 
     public User() {
-        this.favorites = new ArrayList<Favorite>();
+        this.favorites = new ArrayList<Video>();
     }
 
-    public void addFavorite(Favorite f) {
-        this.favorites.add(f);
-        System.out.println(this.favorites);
+    public void addFavorite(Video v) {
+        if(!this.hasFavorite(v))
+            this.favorites.add(v);
     }
 
-    public List<Favorite> getFavorites() {
+    public List<Video> getFavorites() {
         return this.favorites;
     }
 
     public boolean hasFavorite(Video v) {
-        return this.getFavorites().contains(new Favorite(v));
+        return this.getFavorites().contains(v);
     }
 
-    public boolean hasFavorite(Favorite f) {
-        return this.getFavorites().contains(f);
-    }
-
-    public void removeFavorite(Favorite f) {
+    public void removeFavorite(Video f) {
         this.favorites.remove(f);
         this.setChanged();
         this.notifyObservers();

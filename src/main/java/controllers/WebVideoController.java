@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import models.User;
 
 /**
  * Controller for playing web videos.
@@ -20,6 +21,7 @@ public class WebVideoController extends Controller implements VideoController{
     @FXML private BorderPane TopBar;
 
     public WebVideoController(String videoID) {
+        super();
         ID = videoID;
         this.fsButton = new Button();
         this.returnButton = new Button();
@@ -32,7 +34,10 @@ public class WebVideoController extends Controller implements VideoController{
         this.fsButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                goFullScreen();
+                TopBar.setVisible(false);
+                TopBar.setManaged(false);
+                System.out.println("FS");
+                app.getAppController().goFullScreen(WebVideoController.this);
             }
         });
         
@@ -40,16 +45,19 @@ public class WebVideoController extends Controller implements VideoController{
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("Hello");
-                appController.download(ID);
+                app.getAppController().download(ID);
             }
         });
         
         this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                System.out.println("Return");
+                app.getAppController().showHome();
+
                 System.out.println("returnButton");
-                appController.stopWebVideo();
-                appController.showHome();
+                app.getAppController().stopWebVideo();
+                app.getAppController().showHome();
             }
         });
     }
@@ -58,7 +66,7 @@ public class WebVideoController extends Controller implements VideoController{
     public void goFullScreen() {
         TopBar.setVisible(false);
         TopBar.setManaged(false);
-        appController.goFullScreen(WebVideoController.this);
+        this.app.getAppController().goFullScreen(WebVideoController.this);
     }
     
     @Override

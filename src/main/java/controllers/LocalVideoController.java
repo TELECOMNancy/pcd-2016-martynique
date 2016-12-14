@@ -3,6 +3,9 @@ package controllers;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -44,7 +47,7 @@ public class LocalVideoController extends Controller implements VideoController{
     @FXML private BorderPane bottomLayout;
 
     public LocalVideoController(String path) {
-        this.savedVolume = 0;
+        this.savedVolume = -1;
         lp = new LocalPlayer(path);
         
         this.fsButton = new Button();
@@ -69,13 +72,27 @@ public class LocalVideoController extends Controller implements VideoController{
         this.bottomLayout.setTop(this.progressBar);
         
         this.volume.setValue(100);
+        /*
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                hideOverlay();
+            }
+        };
+        Timer timer = new Timer();
         
         this.Overlay.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                showOverlay();
+                timer.cancel();
+                timer.purge();
+                timer = new Timer();
+                timer.schedule(task, 5000);
                 System.out.println("moved");
             }
         });
+        */
         
         this.lp.getPlayer().currentTimeProperty().addListener(new ChangeListener<Duration>() {
             @Override
@@ -106,6 +123,8 @@ public class LocalVideoController extends Controller implements VideoController{
                     lp.setVolume(volume.getValue());
                     if (volume.getValue() == 0)
                         mute();
+                    else
+                        unmute();
                 }
                 
             }
@@ -129,7 +148,7 @@ public class LocalVideoController extends Controller implements VideoController{
             @Override
             public void handle(MouseEvent event) {
                 pause();
-                appController.showHome();
+                app.getAppController().showHome();
             }
         });
         
@@ -189,12 +208,17 @@ public class LocalVideoController extends Controller implements VideoController{
     }
     
     public void unmute() {
-        this.unmuteButton.setVisible(false);
-        this.unmuteButton.setManaged(false);
-        this.muteButton.setVisible(true);
-        this.muteButton.setManaged(true);
-        this.volume.setValue(savedVolume);
-        lp.unmute();
+        
+            this.unmuteButton.setVisible(false);
+            this.unmuteButton.setManaged(false);
+            this.muteButton.setVisible(true);
+            this.muteButton.setManaged(true);
+        
+        if (savedVolume != -1) {
+            this.volume.setValue(savedVolume);
+            savedVolume = -1;
+            lp.unmute();
+        }
     }
     
     
@@ -214,7 +238,7 @@ public class LocalVideoController extends Controller implements VideoController{
         this.fsButton.setManaged(false);
         this.smallButton.setVisible(true);
         this.smallButton.setManaged(true);
-        appController.goFullScreen(LocalVideoController.this);
+        app.getAppController().goFullScreen(LocalVideoController.this);
     }
     
     @Override
@@ -223,7 +247,7 @@ public class LocalVideoController extends Controller implements VideoController{
         this.smallButton.setManaged(false);
         this.fsButton.setVisible(true);
         this.fsButton.setManaged(true);
-        appController.quitFullScreen();
+        app.getAppController().quitFullScreen();
     }
     
     private class SliderBar extends StackPane {

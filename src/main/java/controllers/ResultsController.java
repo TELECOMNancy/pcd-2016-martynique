@@ -20,22 +20,19 @@ public class ResultsController extends Controller {
     private ObservableList<Video> searchResultsObservableList;
 
     public ResultsController(List<Video> results) {
+        for(Video v: results) {
+            if(this.app.getUser().hasFavorite(v))
+                v.setFavorite(true);
+        }
         this.results = new JFXListView<Video>();
         this.searchResultsObservableList = FXCollections.observableArrayList();
-        if(searchResultsObservableList == null)
-        	System.out.println("YYOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         this.searchResultsObservableList.addAll(results);
     }
     
     @FXML
     private void initialize() {
         this.results.setItems(this.searchResultsObservableList);
-        this.results.setCellFactory(param -> new SearchResultListViewCell(this.appController));
-
-        /*this.results.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            //System.out.println("JFXListView Selection Changed (selected: " + newValue.getCode() + ")");
-            this.appController.playWebVideo(newValue.getCode());
-        });*/
+        this.results.setCellFactory(param -> new SearchResultListViewCell(app.getAppController()));
     }
 
     public Node getScene() {

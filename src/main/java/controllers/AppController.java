@@ -1,25 +1,19 @@
 package controllers;
 
-import app.LocalPlayer;
 import app.SceneManager;
 import app.WebPlayer;
-import db.FavoriteDB;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import models.Favorite;
-import models.User;
-import models.Video;
-import javafx.stage.Stage;
-
-import javafx.scene.input.KeyEvent;
-
+import db.VideoDB;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import models.User;
+import models.Video;
 
 import java.util.List;
 
@@ -35,7 +29,6 @@ public class AppController {
     @FXML private YoutubeTabPaneController youtubeTabPaneController;
     @FXML private ResultsController resultsController;
 
-
     private User user;
     private WebPlayer wp;
 
@@ -47,8 +40,6 @@ public class AppController {
 
     @FXML
     private void initialize() {
-        this.searchController.injectAppController(this);
-        this.youtubeTabPaneController.injectAppController(this);
         wp = new WebPlayer();
     }
     
@@ -74,17 +65,16 @@ public class AppController {
         if(this.resultsController == null) {
             FXMLLoader loader = SceneManager.getLoader("results.fxml");
             this.resultsController = new ResultsController(results);
-            this.resultsController.injectAppController(this);
             loader.setController(this.resultsController);
             SceneManager.getComponent(loader);
         }
+
         this.root.setCenter(this.resultsController.getScene());
     }
     
     public void showSuggestion() {
     	FXMLLoader loader = SceneManager.getLoader("suggestion.fxml");
     	SuggestionController ctrl = new SuggestionController();
-    	ctrl.injectAppController(this);
         loader.setController(ctrl);
 
         this.root.setCenter(SceneManager.getComponent(loader));
@@ -94,9 +84,7 @@ public class AppController {
         FXMLLoader loader = SceneManager.getLoader("WebVideoPage.fxml");
         
         WebVideoController ctrl = new WebVideoController(videoID);
-        ctrl.injectAppController(this);
         loader.setController(ctrl);
-        
         BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
         
         wp.play(videoID);
@@ -110,11 +98,8 @@ public class AppController {
     public void playLocalVideo(String videoID) {
         videoID = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
         FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
-        
         LocalVideoController ctrl = new LocalVideoController(videoID);
-        ctrl.injectAppController(this);
         loader.setController(ctrl);
-
         resetRoot();
         this.root.setCenter(SceneManager.getComponent(loader));
     }
@@ -164,16 +149,9 @@ public class AppController {
         return this.user;
     }
 
-
     public boolean toggleFavorite(Video value) {
-        Favorite f = new Favorite(value);
-        if(this.user.getFavorites().contains(f)) {
-            this.user.removeFavorite(f);
-            return false;
-        }
-        else {
-            this.user.addFavorite(f);
-            return true;
-        }
+        value.setFavorite(!value.isFavorite());
+        VideoDB.setFavorite(value);
+        return value.isFavorite();
     }
 }

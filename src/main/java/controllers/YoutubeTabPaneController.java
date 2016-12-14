@@ -1,17 +1,11 @@
 package controllers;
 
 import app.SceneManager;
-import db.FavoriteDB;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import models.Favorite;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Controller managing all tabs on application
@@ -24,7 +18,6 @@ public class YoutubeTabPaneController extends Controller {
     @FXML private Tab localVideosTab;
 
     public YoutubeTabPaneController() {
-        super();
     }
 
     @FXML
@@ -39,7 +32,6 @@ public class YoutubeTabPaneController extends Controller {
 
         FXMLLoader loader = SceneManager.getLoader("results.fxml");
         FavoritesController ctrl = new FavoritesController();
-        ctrl.injectAppController(this.appController);
         loader.setController(ctrl);
         this.favoritesTab.setContent(SceneManager.getComponent(loader));
 
@@ -47,7 +39,7 @@ public class YoutubeTabPaneController extends Controller {
             @Override
             public void handle(Event event) {
                 if(suggestTab.isSelected())
-                    appController.showSuggestion();
+                    app.getAppController().showSuggestion();
             }
         });
         
@@ -56,17 +48,11 @@ public class YoutubeTabPaneController extends Controller {
             public void handle(Event event) {
                 if(localVideosTab.isSelected())
                     //a remplacer par un file chooser
-                    appController.playLocalVideo("");
+                    app.getAppController().playLocalVideo("");
             }
         });
     }
 
     private void showFavorites() {
-        List<Favorite> list = this.appController.getUser().getFavorites();
-
-        if(this.favoritesTab.getContent() == null) {
-
-        }
     }
-
 }
