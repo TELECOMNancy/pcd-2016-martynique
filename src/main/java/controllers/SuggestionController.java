@@ -53,9 +53,9 @@ public class SuggestionController extends Controller {
 		q3.addAnswer(a3_1);
 		q3.addAnswer(a3_2);
 		
-		Answer a4_1 = new Answer("5 minutes", "Suggestions.length < 6");
-		Answer a4_2 = new Answer("10 minutes", "Suggestions.length >= 6 AND Suggestions.length < 11");
-		Answer a4_3 = new Answer("30 minutes", "Suggestions.length >= 11");
+		Answer a4_1 = new Answer("5 minutes", SuggestionDB.TABLE_SUGGESTIONS+".length < 6");
+		Answer a4_2 = new Answer("10 minutes", SuggestionDB.TABLE_SUGGESTIONS+".length >= 6 AND "+SuggestionDB.TABLE_SUGGESTIONS+".length < 11");
+		Answer a4_3 = new Answer("30 minutes", SuggestionDB.TABLE_SUGGESTIONS+".length >= 11");
 		q4.addAnswer(a4_1);
 		q4.addAnswer(a4_2);
 		q4.addAnswer(a4_3);
@@ -94,16 +94,11 @@ public class SuggestionController extends Controller {
 	    	}
     	}
     	else{
-    		SuggestionDB suggestionDB = new SuggestionDB();
-    		List<String> queryReturn = suggestionDB.runSuggestionQuery(flags);
-    		System.out.println(queryReturn.toString());
-    		
+    		List<String> queryReturn = SuggestionDB.runSuggestionQuery(flags);
+
     		if(queryReturn.size() != 0){
 	    		Random rand = new Random();
 	    		String selected = queryReturn.get(rand.nextInt(queryReturn.size()));
-	    		
-	    		System.out.println(this.flags.toString());
-	    		System.out.println(selected);
 	    		
 	    		appController.playWebVideo(selected);
     		}
@@ -111,7 +106,7 @@ public class SuggestionController extends Controller {
     			Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("No results");
                 alert.setHeaderText("No results");
-                alert.setContentText("There are no videos corresponding to your request.");
+                alert.setContentText("There is no video corresponding to your request.");
 
                 alert.showAndWait();
                 
