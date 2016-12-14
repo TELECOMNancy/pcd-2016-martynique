@@ -1,5 +1,6 @@
 import app.SceneManager;
 import db.FavoriteDB;
+import db.SuggestionDB;
 import db.VideoDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

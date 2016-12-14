@@ -1,7 +1,9 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.List;
 
+import db.SuggestionDB;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import utils.Answer;
-import utils.MyFormButton;
+import utils.SuggestionAnswerButton;
 import utils.Question;
 
-public class FormController extends Controller {
+public class SuggestionController extends Controller {
     @FXML
     private Label questionLabel;
 
@@ -29,9 +31,9 @@ public class FormController extends Controller {
     	//       PRESETS       //
     	/////////////////////////
     	Question q1 = new Question("Que voulez-vous faire ?");
-    	Question q2 = new Question("Quel genre ?", Flag.TYPE);
-    	Question q3 = new Question("Quel domaine ?", Flag.TYPE);
-    	Question q4 = new Question("Combien de temps avez-vous ?", Flag.TEMPS);
+    	Question q2 = new Question("Quel genre ?", Flag.TAG);
+    	Question q3 = new Question("Quel domaine ?", Flag.TAG);
+    	Question q4 = new Question("Combien de temps avez-vous ?", Flag.LENGTH);
 
     	Answer a1_1 = new Answer("Me divertir", q2);
     	Answer a1_2 = new Answer("M'instruire", q3);
@@ -48,9 +50,9 @@ public class FormController extends Controller {
     	q3.addAnswer(a3_1);
     	q3.addAnswer(a3_2);
     	
-    	Answer a4_1 = new Answer("5 minutes", "temps < 6");
-    	Answer a4_2 = new Answer("10 minutes", "temps >= 6 && temps < 11");
-    	Answer a4_3 = new Answer("30 minutes", "temps >= 11");
+    	Answer a4_1 = new Answer("5 minutes", "length < 6");
+    	Answer a4_2 = new Answer("10 minutes", "length >= 6 AND length < 11");
+    	Answer a4_3 = new Answer("30 minutes", "length >= 11");
     	q4.addAnswer(a4_1);
     	q4.addAnswer(a4_2);
     	q4.addAnswer(a4_3);
@@ -72,31 +74,12 @@ public class FormController extends Controller {
         */
     }
     
-    private void generateRequest(){
-    	String Request = "";
-    	String WHERE = "";
-    	for(Flag s : this.flags.keySet()){
-    		if(!WHERE.equals(""))
-        		WHERE += "&& ";
-		
-			if(s == Flag.TYPE)
-				WHERE += "type == " + this.flags.get(s)+" ";
-			if(s == Flag.TEMPS)
-    			WHERE += this.flags.get(s)+" ";
-    	}
-    	
-    	Request += "SELECT * IN VIDEO_SUGGESTION ";
-    	Request += "WHERE " + WHERE;
-    	
-    	System.out.println(Request);
-    }
-    
     private void update(){
     	if(this.curQuestion != null){
 	    	this.questionLabel.setText(this.curQuestion.getText());
 	    	for(int i=0;i<this.curQuestion.getAnswers().size();i++){
 	    		Answer curAnswer = this.curQuestion.getAnswers().get(i);
-	    		MyFormButton curButton = new MyFormButton(curAnswer);
+	    		SuggestionAnswerButton curButton = new SuggestionAnswerButton(curAnswer);
 	    		curButton.setOnMousePressed(new EventHandler<MouseEvent>() {
 	                @Override
 	                public void handle(MouseEvent event) {
@@ -114,12 +97,15 @@ public class FormController extends Controller {
     	else{
     		this.questionLabel.setText("DONE");
     		System.out.println(this.flags.toString());
-        	generateRequest();
+    		
+    		SuggestionDB suggestionDB = new SuggestionDB();
+    		List<String> queryReturn = suggestionDB.runSuggestionQuery(flags);
+    		System.out.println(queryReturn.toString());
     	}
     }
     
     public enum Flag{
-    	TYPE,
-    	TEMPS;
+    	TAG,
+    	LENGTH;
     }
 }

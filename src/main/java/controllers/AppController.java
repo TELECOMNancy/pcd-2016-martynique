@@ -1,13 +1,15 @@
 package controllers;
 
 import app.SceneManager;
-import com.google.api.services.youtube.model.SearchResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import models.Video;
 import javafx.stage.Stage;
+
+import javafx.concurrent.Task;
 
 import java.util.List;
 
@@ -75,8 +77,25 @@ public class AppController {
     }
     
     public void download(String ID) {
-        //YTD.download(ID);
-        System.out.println("Nope");
+        // might be interesting not to create a new thread each time
+        Task<Void> task = new Task<Void>(){
+            //@Overrride
+            public Void call() throws Exception {
+                YTD.download(ID);
+                return null;
+            }
+        };
+        
+        task.setOnFailed(e -> {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Download Error");
+            alert.setHeaderText("Download failed!");
+            alert.setContentText("It is possible the video is protected.");
+
+            alert.showAndWait();
+        });
+        
+        new Thread(task).start();
     }
     
     public void goFullScreen() {

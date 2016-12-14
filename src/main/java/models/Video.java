@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Represents a vidoo in our app.
+ * Represents a video in our app.
  */
 public class Video implements Identifiable {
 
