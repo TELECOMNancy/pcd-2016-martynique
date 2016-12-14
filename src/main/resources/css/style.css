@@ -85,5 +85,6 @@
 }
 
 .youtube-tab-pane *.tab-header-background {
-    -fx-background-color: red;
+    /*-fx-background-color: red;*/
+    -fx-background-color: #e52d27;
 }
