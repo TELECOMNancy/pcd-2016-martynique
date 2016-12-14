@@ -67,7 +67,6 @@ public class AppController {
         ctrl.injectAppController(this);
         loader.setController(ctrl);
         
-        
         this.root.setCenter(SceneManager.getComponent(loader));
     }
     
