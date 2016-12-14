@@ -16,4 +16,6 @@ public interface CRUD<T> {
     public void update();
 
     public void delete(Identifiable i);
+
+    public T findById(int id);
 }

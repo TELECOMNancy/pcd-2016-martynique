@@ -39,6 +39,7 @@ public class YoutubeTabPaneController extends Controller {
 
     private void showFavorites() {
         List<Favorite> list = new ArrayList<Favorite>();
+        System.out.println(list);
         FavoriteDB db = new FavoriteDB(null);
         list = db.all();
 

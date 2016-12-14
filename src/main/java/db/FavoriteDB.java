@@ -53,6 +53,31 @@ public class FavoriteDB extends ModelDB<Favorite> {
     }
 
     @Override
+    public Favorite findById(int id) {
+        try {
+            Favorite f = null;
+            Statement st  = this.connection.createStatement();
+            PreparedStatement prep = this.connection.prepareStatement(this.findByIdQuery());
+
+            prep.setInt(1, id);
+            ResultSet rs = prep.executeQuery();
+
+            /*rs.next()){
+                System.out.println(rs.getInt("id"));
+                f new Favorite(rs.getInt("id_video"))
+                f = new Favorite(null);
+                tmp.setID(rs.getInt("id"));
+                list.add(tmp);
+            }*/
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<Favorite> all() {
         List<Favorite> list = new ArrayList<Favorite>();
         try {
@@ -60,10 +85,11 @@ public class FavoriteDB extends ModelDB<Favorite> {
             ResultSet rs = st.executeQuery(allQuery());
 
             while(rs.next()){
-                //Favorite tmp = new Favorite(rs.getInt("id_video"))
+                System.out.println(rs.getInt("id"));
+                /*Favorite tmp = new Favorite(rs.getInt("id_video"))
                 Favorite tmp = new Favorite(null);
                 tmp.setID(rs.getInt("id"));
-                list.add(tmp);
+                list.add(tmp);*/
             }
             rs.close();
         } catch (SQLException e) {

@@ -74,6 +74,11 @@ public class VideoDB extends ModelDB<Video> {
 
     }
 
+    @Override
+    public Video findById(int id) {
+        return null;
+    }
+
 
     @Override
     public String insertQuery() {
