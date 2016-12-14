@@ -11,41 +11,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FavoriteDB extends ModelDB<Favorite> {
+public class FavoriteDB{
 
-    private Favorite f;
+;
     private static final String TABLE = "Favorites";
 
 
-    public FavoriteDB(Favorite f) {
-        super(TABLE);
-        this.f = f;
-    }
 
-    @Override
-    public void create() {
+
+
+    public static void create(Favorite f) {
         try {
-            Statement st = this.connection.createStatement();
+            Statement st = ConnectionDB.getInstance().createStatement();
             PreparedStatement prep;
-            prep = this.connection.prepareStatement(this.insertQuery(), Statement.RETURN_GENERATED_KEYS);
-            prep.setInt(1, this.f.getFavorite().getID());
+            prep = ConnectionDB.getInstance().prepareStatement(insertQuery(), Statement.RETURN_GENERATED_KEYS);
+            prep.setInt(1, f.getFavorite().getID());
             prep.executeUpdate();
             ResultSet tableKeys = prep.getGeneratedKeys();
             tableKeys.next();
-            this.f.setID(tableKeys.getInt(1));
+            f.setID(tableKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void update() {
+
+    public static void update(Favorite f) {
         try {
-            Statement st = this.connection.createStatement();
+            Statement st = ConnectionDB.getInstance().createStatement();
             PreparedStatement prep;
-            prep = this.connection.prepareStatement(this.updateQuery());
-            prep.setInt(1, this.f.getFavorite().getID());
-            prep.setInt(2, this.f.getID());
+            prep = ConnectionDB.getInstance().prepareStatement(updateQuery());
+            prep.setInt(1, f.getFavorite().getID());
+            prep.setInt(2, f.getID());
             prep.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,7 +52,7 @@ public class FavoriteDB extends ModelDB<Favorite> {
     public static Favorite findById(int id) {
         Favorite f = null;
         try {
-            PreparedStatement prep = ConnectionDB.getInstance().prepareStatement(FavoriteDB.findByIdQuery(TABLE));
+            PreparedStatement prep = ConnectionDB.getInstance().prepareStatement(ModelDB.findByIdQuery(TABLE));
             prep.setInt(1, id);
             ResultSet rs = prep.executeQuery();
 
@@ -69,11 +66,11 @@ public class FavoriteDB extends ModelDB<Favorite> {
         return f;
     }
 
-    @Override
+ 
     public List<Favorite> all() {
         List<Favorite> list = new ArrayList<Favorite>();
         try {
-            Statement st  = this.connection.createStatement();
+            Statement st  = ConnectionDB.getInstance().createStatement();
             ResultSet rs = st.executeQuery(allQuery());
 
             while(rs.next()){
@@ -90,30 +87,30 @@ public class FavoriteDB extends ModelDB<Favorite> {
         return list;
     }
 
-    @Override
-    public String allQuery() {
-        return super.allQuery() + " NATURAL JOIN Videos";
+ 
+    public static String allQuery() {
+        return ModelDB.allQuery(TABLE) + " NATURAL JOIN Videos";
     }
 
-    @Override
-    public String insertQuery() {
-        return super.insertQuery() + "(id_video) VALUES(?)";
+  
+    public static String insertQuery() {
+        return ModelDB.insertQuery(TABLE) + "(id_video) VALUES(?)";
 
     }
 
-    @Override
-    public String updateQuery() {
-        return super.updateQuery() + " SET id_video  = (?) WHERE id_favorite = (?)";
+
+    public static String updateQuery() {
+        return ModelDB.updateQuery(TABLE) + " SET id_video  = (?) WHERE id_favorite = (?)";
     }
 
-    @Override
-    public String deleteQuery(int id_video) {
-        return super.deleteQuery() + " WHERE id_video = (?)";
+
+    public static String deleteQuery() {
+        return ModelDB.deleteQuery(TABLE) + " WHERE id_favorite = (?)";
     }
 
     public static void createTable() {
         String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "id INTEGER PRIMARY KEY, " +
                 "id_video INTEGER NOT NULL, " +
                 "FOREIGN KEY (id_video) REFERENCES Videos(id))";
 

@@ -7,86 +7,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class VideoDB extends ModelDB<Video> {
+public class VideoDB {
 
-    private Video v;
+    
     private static final String TABLE = "Videos";
 
-    public VideoDB(Video v) {
-        super(TABLE);
-        this.v = v;
-    }
 
-    @Override
-    public void create() {
+
+   
+    public static void create(Video v) {
         try {
-            Statement st = this.connection.createStatement();
+            Statement st = ConnectionDB.getInstance().createStatement();
             PreparedStatement prep;
-            prep = this.connection.prepareStatement(this.insertQuery(), Statement.RETURN_GENERATED_KEYS);
+            prep = ConnectionDB.getInstance().prepareStatement(ModelDB.insertQuery(TABLE), Statement.RETURN_GENERATED_KEYS);
 
-            prep.setString(1, this.v.getTitle());
-            prep.setString(2, this.v.getThumbnail());
-            prep.setString(3, this.v.getCode());
+            prep.setString(1, v.getCode());
+            prep.setString(2, v.getTitle());
+            prep.setString(3, v.getThumbnail());
             prep.executeUpdate();
             ResultSet tableKeys = prep.getGeneratedKeys();
             tableKeys.next();
-            this.v.setID(tableKeys.getInt(1));
+            v.setID(tableKeys.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public List<Video> all() {
-        List<Video> list = new ArrayList<Video>();
-        try {
-            Statement st  = this.connection.createStatement();
-            ResultSet rs = st.executeQuery(allQuery());
-
-            while(rs.next()){
-                //Favorite tmp = new Favorite(rs.getInt("id_video"))
-                Video tmp = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("code"));
-                tmp.setID(rs.getInt("id_video"));
-                list.add(tmp);
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
-
-    @Override
-    public void update() {
-        try {
-            Statement st = this.connection.createStatement();
-            PreparedStatement prep;
-            prep = this.connection.prepareStatement(this.updateQuery());
-            prep.setString(1, this.v.getTitle());
-            prep.setString(2, this.v.getThumbnail());
-            prep.setString(3, this.v.getCode());
-            prep.setInt(4, this.v.getID());
-            prep.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     public static Video findById(int id) {
         Video v = null;
         try {
             PreparedStatement prep;
-            prep = ConnectionDB.getInstance().prepareStatement(VideoDB.findByIdQuery(TABLE));
+            prep = ConnectionDB.getInstance().prepareStatement(ModelDB.findByIdQuery(TABLE));
             prep.setInt(1, id);
             ResultSet rs = prep.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next())
                 v = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("code"));
-                v.setID(rs.getInt("id"));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -95,28 +51,26 @@ public class VideoDB extends ModelDB<Video> {
     }
 
 
-    @Override
     public String insertQuery() {
-        return super.insertQuery() + "(title, thumbnail, code) VALUES(?,?,?)";
+        return ModelDB.insertQuery(TABLE) + "(id, title, thumbnail) VALUES(?,?,?)";
     }
 
-    @Override
+    
     public String updateQuery() {
-        return super.updateQuery() + "title = (?), thumbnail  = (?), code = (?) WHERE id_video = (?)";
+        return ModelDB.updateQuery(TABLE) + "title = (?), thumbnail  = (?) WHERE id = (?)";
     }
 
-    @Override
+    
     public String deleteQuery() {
-        return super.deleteQuery() + " WHERE id_video = (?)";
+        return ModelDB.deleteQuery(TABLE) + " WHERE id = (?)";
     }
 
     public static void createTable() {
         String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "id varchar(255) PRIMARY KEY, " +
                 "title varchar(255) NOT NULL, " +
                 //"url varchar(255) NOT NULL, " +
-                "thumbnail varchar(255), " +
-                "code varchar(255) NOT NULL)";
+                "thumbnail varchar(255))";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             st.executeUpdate(createString);
