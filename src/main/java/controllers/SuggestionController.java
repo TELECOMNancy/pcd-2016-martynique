@@ -8,7 +8,9 @@ import db.SuggestionDB;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import utils.Answer;
@@ -23,6 +25,7 @@ public class SuggestionController extends Controller {
     private HBox buttonsContainer;
 
     private Question curQuestion;
+    private final Question firstQuestion;
     private HashMap<Flag, String> flags;
     private String request;
     
@@ -56,8 +59,10 @@ public class SuggestionController extends Controller {
 		q4.addAnswer(a4_1);
 		q4.addAnswer(a4_2);
 		q4.addAnswer(a4_3);
+
 		
-		this.curQuestion = q1;
+		this.firstQuestion = q1;
+		this.curQuestion = this.firstQuestion;
 		/////////////////////////////
 		
 		flags = new HashMap<Flag, String>();
@@ -93,13 +98,27 @@ public class SuggestionController extends Controller {
     		List<String> queryReturn = suggestionDB.runSuggestionQuery(flags);
     		System.out.println(queryReturn.toString());
     		
-    		Random rand = new Random();
-    		String selected = queryReturn.get(rand.nextInt(queryReturn.size()));
-    		
-    		System.out.println(this.flags.toString());
-    		System.out.println(selected);
-    		
-    		appController.playWebVideo(selected);
+    		if(queryReturn.size() != 0){
+	    		Random rand = new Random();
+	    		String selected = queryReturn.get(rand.nextInt(queryReturn.size()));
+	    		
+	    		System.out.println(this.flags.toString());
+	    		System.out.println(selected);
+	    		
+	    		appController.playWebVideo(selected);
+    		}
+    		else{
+    			Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("No results");
+                alert.setHeaderText("No results");
+                alert.setContentText("There are no videos corresponding to your request.");
+
+                alert.showAndWait();
+                
+                this.curQuestion = this.firstQuestion;
+                this.flags.clear();
+                update();
+    		}
     	}
     }
     
