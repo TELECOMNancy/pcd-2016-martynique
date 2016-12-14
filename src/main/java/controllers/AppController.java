@@ -40,7 +40,6 @@ public class AppController {
     @FXML
     private void initialize() {
         wp = new WebPlayer();
-        System.out.println(this.root);
     }
     
 
@@ -149,12 +148,9 @@ public class AppController {
         return this.user;
     }
 
-
     public boolean toggleFavorite(Video value) {
-        System.out.println(value);
         value.setFavorite(!value.isFavorite());
-        System.out.println(value);
         VideoDB.setFavorite(value);
-        return false;
+        return value.isFavorite();
     }
 }

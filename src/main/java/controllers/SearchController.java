@@ -68,7 +68,6 @@ public class SearchController extends Controller {
     private void search() {
         Search search = new Search(searchField.getText());
         search.executeApiRequest();
-        //search.printResult();
         app.getAppController().showResults(search.getVideoList());
     }
 

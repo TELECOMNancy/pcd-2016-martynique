@@ -53,7 +53,6 @@ public class Video implements Identifiable {
     }
 
     public void setFavorite(boolean favorite) {
-        System.out.println(favorite);
         this.favorite = favorite;
     }
 }

@@ -116,7 +116,6 @@ public class Search {
             // non-authenticated requests. See:
             // {{ https://cloud.google.com/console }}
             String apiKey = properties.getProperty("youtube.apikey");
-            System.out.println(apiKey);
             search.setKey(apiKey);
             search.setQ(queryTerm);
 

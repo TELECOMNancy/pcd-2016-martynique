@@ -7,8 +7,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import models.User;
 
-import views.WebPlayer;
-
 /**
  * Controller for playing web videos.
  */
@@ -16,24 +14,24 @@ public class WebVideoController extends Controller implements VideoController{
     
     private String ID;
     
-    @FXML private Button Return;
-    @FXML private Button FS;
-    @FXML private Button Download;
+    @FXML private Button returnButton;
+    @FXML private Button fsButton;
+    @FXML private Button dlButton;
     @FXML private BorderPane Player;
     @FXML private BorderPane TopBar;
 
     public WebVideoController(String videoID) {
         super();
         ID = videoID;
-        this.FS = new Button();
-        this.Return = new Button();
-        this.Download = new Button();
+        this.fsButton = new Button();
+        this.returnButton = new Button();
+        this.dlButton = new Button();
     }
     
     @FXML
     private void initialize() {
         
-        this.FS.setOnMouseReleased(new EventHandler<MouseEvent>() {
+        this.fsButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 TopBar.setVisible(false);
@@ -43,7 +41,7 @@ public class WebVideoController extends Controller implements VideoController{
             }
         });
         
-        this.Download.setOnMouseReleased(new EventHandler<MouseEvent>() {
+        this.dlButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("Hello");
@@ -51,10 +49,14 @@ public class WebVideoController extends Controller implements VideoController{
             }
         });
         
-        this.Return.setOnMouseReleased(new EventHandler<MouseEvent>() {
+        this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("Return");
+                app.getAppController().showHome();
+
+                System.out.println("returnButton");
+                app.getAppController().stopWebVideo();
                 app.getAppController().showHome();
             }
         });

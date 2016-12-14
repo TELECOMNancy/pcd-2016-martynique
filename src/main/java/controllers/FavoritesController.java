@@ -27,6 +27,6 @@ public class FavoritesController extends Controller {
     public void initialize() {
         this.favoritesObservableList.addAll(app.getUser().getFavorites());
         this.results.setItems(this.favoritesObservableList);
-        this.results.setCellFactory(param -> new FavoriteListViewCell());
+        this.results.setCellFactory(param -> new FavoriteListViewCell(app.getAppController()));
     }
 }

@@ -37,6 +37,11 @@
 	-fx-background-size: 18px 18px;
 }
 
+#dlButton {
+	-fx-background-image: url("../assets/download.png") no-repeat;
+	-fx-background-size: 18px 18px;
+}
+
 #returnButton {
 	-fx-background-image: url("../assets/return.png") no-repeat;
 	-fx-background-size: 18px 18px;

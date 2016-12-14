@@ -60,7 +60,6 @@ public class VideoDB {
             prep.setString(2, v.getThumbnail());
             prep.setBoolean(3, v.isFavorite());
             prep.setString(4, v.getID());
-            System.out.println(v.isFavorite());
             prep.executeUpdate();
 
         } catch (SQLException e) {
