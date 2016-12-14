@@ -74,9 +74,24 @@ public class VideoDB extends ModelDB<Video> {
 
     }
 
-    @Override
-    public Video findById(int id) {
-        return null;
+
+    public static Video findById(int id) {
+        Video v = null;
+        try {
+            PreparedStatement prep;
+            prep = ConnectionDB.getInstance().prepareStatement(VideoDB.findByIdQuery(TABLE));
+            prep.setInt(1, id);
+            ResultSet rs = prep.executeQuery();
+
+            if (rs.next()) {
+                v = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("code"));
+                v.setID(rs.getInt("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return v;
     }
 
 

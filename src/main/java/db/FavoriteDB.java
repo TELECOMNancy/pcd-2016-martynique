@@ -52,29 +52,21 @@ public class FavoriteDB extends ModelDB<Favorite> {
         }
     }
 
-    @Override
-    public Favorite findById(int id) {
+    public static Favorite findById(int id) {
+        Favorite f = null;
         try {
-            Favorite f = null;
-            Statement st  = this.connection.createStatement();
-            PreparedStatement prep = this.connection.prepareStatement(this.findByIdQuery());
-
+            PreparedStatement prep = ConnectionDB.getInstance().prepareStatement(FavoriteDB.findByIdQuery(TABLE));
             prep.setInt(1, id);
             ResultSet rs = prep.executeQuery();
 
-            /*rs.next()){
-                System.out.println(rs.getInt("id"));
-                f new Favorite(rs.getInt("id_video"))
-                f = new Favorite(null);
-                tmp.setID(rs.getInt("id"));
-                list.add(tmp);
-            }*/
-
-
+            if(rs.next()) {
+                f = new Favorite(VideoDB.findById(rs.getInt("id_video")));
+                f.setID(rs.getInt("id"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return f;
     }
 
     @Override
@@ -85,11 +77,9 @@ public class FavoriteDB extends ModelDB<Favorite> {
             ResultSet rs = st.executeQuery(allQuery());
 
             while(rs.next()){
-                System.out.println(rs.getInt("id"));
-                /*Favorite tmp = new Favorite(rs.getInt("id_video"))
-                Favorite tmp = new Favorite(null);
+                Favorite tmp = new Favorite(VideoDB.findById(rs.getInt("id_video")));
                 tmp.setID(rs.getInt("id"));
-                list.add(tmp);*/
+                list.add(tmp);
             }
             rs.close();
         } catch (SQLException e) {

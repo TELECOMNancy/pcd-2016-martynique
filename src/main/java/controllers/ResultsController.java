@@ -39,7 +39,7 @@ public class ResultsController extends Controller {
         
      // Handle JFXListView selection changes.
         this.results.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("JFXListView Selection Changed (selected: " + newValue.getCode() + ")");
+            //System.out.println("JFXListView Selection Changed (selected: " + newValue.getCode() + ")");
             this.appController.playWebVideo(newValue.getCode());
         });
     }

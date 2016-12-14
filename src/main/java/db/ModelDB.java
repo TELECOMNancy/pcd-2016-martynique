@@ -31,7 +31,7 @@ public abstract class ModelDB<T> implements CRUD<T> {
 
     public String insertQuery() {  return "INSERT INTO " + table; }
 
-    public String findByIdQuery() {  return "SELECT * FROM " + table + " WHERE id = ?"; }
+    public static String findByIdQuery(String table) {  return "SELECT * FROM " + table + " WHERE id = ?"; }
 
     public String updateQuery() {
         return "UPDATE  " + table;
