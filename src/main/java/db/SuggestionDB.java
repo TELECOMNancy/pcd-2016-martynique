@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import controllers.FormController.Flag;
+import controllers.SuggestionController.Flag;
 
 
 public class SuggestionDB extends ModelDB<Suggestion> {

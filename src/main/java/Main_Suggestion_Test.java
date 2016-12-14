@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main_Form_Test extends Application {
+public class Main_Suggestion_Test extends Application {
 
     private void initDB() {
         SuggestionDB.createTable();

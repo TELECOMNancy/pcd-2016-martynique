@@ -1,7 +1,7 @@
 package utils;
 import java.util.ArrayList;
 
-import controllers.FormController.Flag;
+import controllers.SuggestionController.Flag;
 
 public class Question {
 	private ArrayList<Answer> answers;

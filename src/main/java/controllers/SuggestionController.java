@@ -11,10 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import utils.Answer;
-import utils.MyFormButton;
+import utils.SuggestionAnswerButton;
 import utils.Question;
 
-public class FormController extends Controller {
+public class SuggestionController extends Controller {
     @FXML
     private Label questionLabel;
 
@@ -79,7 +79,7 @@ public class FormController extends Controller {
 	    	this.questionLabel.setText(this.curQuestion.getText());
 	    	for(int i=0;i<this.curQuestion.getAnswers().size();i++){
 	    		Answer curAnswer = this.curQuestion.getAnswers().get(i);
-	    		MyFormButton curButton = new MyFormButton(curAnswer);
+	    		SuggestionAnswerButton curButton = new SuggestionAnswerButton(curAnswer);
 	    		curButton.setOnMousePressed(new EventHandler<MouseEvent>() {
 	                @Override
 	                public void handle(MouseEvent event) {
