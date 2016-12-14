@@ -7,11 +7,12 @@ import java.util.List;
 /**
  * CRUD is awesome!
  */
-public interface CRUD<T> {
+public interface ManagerDB{
 
     public void create();
+    
 
-    public List<T> all();
+    public List all();
 
     public void update();
 
