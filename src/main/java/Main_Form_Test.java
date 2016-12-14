@@ -1,16 +1,23 @@
 import app.SceneManager;
+import db.FavoriteDB;
+import db.SuggestionDB;
+import db.VideoDB;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main_Form_Test extends Application {
 
+    private void initDB() {
+        SuggestionDB.createTable();
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+    	this.initDB();
+    	
         FXMLLoader loader = SceneManager.getLoader("form.fxml");
         Parent root = SceneManager.getComponent(loader);
         primaryStage.setTitle("Youtube app");
