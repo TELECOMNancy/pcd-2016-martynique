@@ -68,7 +68,7 @@ public class AppController {
     }
     
     public void showSuggestion() {
-    	FXMLLoader loader = SceneManager.getLoader("form.fxml");
+    	FXMLLoader loader = SceneManager.getLoader("suggestion.fxml");
         this.root.setCenter(SceneManager.getComponent(loader));
     }
     
