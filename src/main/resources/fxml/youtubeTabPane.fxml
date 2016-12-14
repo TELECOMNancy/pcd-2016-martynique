@@ -47,5 +47,18 @@
             </BorderPane>
          </graphic>
       </Tab>
+      <Tab fx:id="localVideosTab">
+         <graphic>
+            <BorderPane prefHeight="50.0" prefWidth="50.0">
+               <center>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../assets/saved.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </graphic>
+      </Tab>
    </tabs>
 </JFXTabPane>

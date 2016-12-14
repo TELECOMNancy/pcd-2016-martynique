@@ -18,12 +18,10 @@ import java.util.List;
  */
 public class YoutubeTabPaneController extends Controller {
 
-    @FXML
-    private Tab favoritesTab;
-    @FXML
-    private Tab playlistTab;
-    @FXML
-    private Tab suggestTab;
+    @FXML private Tab favoritesTab;
+    @FXML private Tab playlistTab;
+    @FXML private Tab suggestTab;
+    @FXML private Tab localVideosTab;
 
     public YoutubeTabPaneController() {
         super();
@@ -50,6 +48,15 @@ public class YoutubeTabPaneController extends Controller {
             public void handle(Event event) {
                 if(suggestTab.isSelected())
                     appController.showSuggestion();
+            }
+        });
+        
+        this.localVideosTab.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if(localVideosTab.isSelected())
+                    //a remplacer par un file chooser
+                    appController.playLocalVideo("");
             }
         });
     }

@@ -21,6 +21,7 @@ import javafx.event.EventHandler;
 
 import java.util.List;
 
+import views.LocalPlayer;
 import views.WebPlayer;
 
 import utils.YTD;
@@ -28,7 +29,6 @@ import utils.YTD;
 /**
  * The main Controller of the app
  */
-@SuppressWarnings("restriction")
 public class AppController {
 
     @FXML private BorderPane root;
@@ -40,15 +40,26 @@ public class AppController {
     private User user;
     private WebPlayer wp;
 
+    private String savePath = System.getProperty("user.dir") + "\\savedVideos\\";
+    
     public AppController(User user) {
         this.user = user;
-    }
+    }   
 
     @FXML
     private void initialize() {
         this.searchController.injectAppController(this);
         this.youtubeTabPaneController.injectAppController(this);
         wp = new WebPlayer();
+    }
+    
+
+    private void resetRoot() {
+        this.root.setCenter(null);
+        this.root.setTop(null);
+        this.root.setBottom(null);
+        this.root.setLeft(null);
+        this.root.setRight(null);
     }
     
     public void showHome() {
@@ -93,8 +104,20 @@ public class AppController {
         
         bp.setCenter(wp);
         
-        this.root.setTop(null);
+        resetRoot();
         this.root.setCenter(bp);
+    }
+    
+    public void playLocalVideo(String videoID) {
+        videoID = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
+        FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
+        
+        LocalVideoController ctrl = new LocalVideoController(videoID);
+        ctrl.injectAppController(this);
+        loader.setController(ctrl);
+
+        resetRoot();
+        this.root.setCenter(SceneManager.getComponent(loader));
     }
     
     public void stopWebVideo() {
@@ -106,7 +129,7 @@ public class AppController {
         Task<Void> task = new Task<Void>(){
             //@Overrride
             public Void call() throws Exception {
-                YTD.download(ID);
+                YTD.download(ID, savePath);
                 return null;
             }
         };
@@ -124,12 +147,11 @@ public class AppController {
     }
     
     // a adapter quand on ajoutera le lecteur offline
-    public void goFullScreen(WebVideoController ctrl) {
+    public void goFullScreen(VideoController ctrl) {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(true);
         this.root.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             //@Override
             public void handle(KeyEvent event) {
-                System.out.println("key pressed");
                 ctrl.quitFullScreen();
             }
         });

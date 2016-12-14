@@ -45,8 +45,8 @@ public class Main extends Application {
         BorderPane root = (BorderPane) SceneManager.getComponent(loader);
 
         primaryStage.setTitle("Youtube app");
-        primaryStage.setMinHeight(450);
-        primaryStage.setMinWidth(450);
+        primaryStage.setMinHeight(400);
+        primaryStage.setMinWidth(600);
         primaryStage.setScene(new Scene(root));
         primaryStage.sizeToScene();
         primaryStage.requestFocus();

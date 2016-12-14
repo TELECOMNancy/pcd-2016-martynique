@@ -6,28 +6,20 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
+import views.WebPlayer;
+
 /**
  * Controller for playing web videos.
  */
-@SuppressWarnings("restriction")
-public class WebVideoController extends Controller {
+public class WebVideoController extends Controller implements VideoController{
     
     private String ID;
     
-    @FXML
-    private Button Return;
-    
-    @FXML
-    private Button FS;
-    
-    @FXML
-    private Button Download;
-    
-    @FXML
-    private BorderPane Player;
-    
-    @FXML
-    private BorderPane TopBar;
+    @FXML private Button Return;
+    @FXML private Button FS;
+    @FXML private Button Download;
+    @FXML private BorderPane Player;
+    @FXML private BorderPane TopBar;
 
     public WebVideoController(String videoID) {
         ID = videoID;
@@ -36,21 +28,13 @@ public class WebVideoController extends Controller {
         this.Download = new Button();
     }
     
-    public void quitFullScreen() {
-        TopBar.setVisible(true);
-        TopBar.setManaged(true);
-    }
-    
     @FXML
     private void initialize() {
         
         this.FS.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                TopBar.setVisible(false);
-                TopBar.setManaged(false);
-                System.out.println("FS");
-                appController.goFullScreen(WebVideoController.this);
+                goFullScreen();
             }
         });
         
@@ -70,6 +54,19 @@ public class WebVideoController extends Controller {
                 appController.showHome();
             }
         });
+    }
+    
+    @Override
+    public void goFullScreen() {
+        TopBar.setVisible(false);
+        TopBar.setManaged(false);
+        appController.goFullScreen(WebVideoController.this);
+    }
+    
+    @Override
+    public void quitFullScreen() {
+        TopBar.setVisible(true);
+        TopBar.setManaged(true);
     }
 
 }
