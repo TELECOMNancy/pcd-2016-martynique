@@ -20,13 +20,16 @@
     -fx-background-radius: 0 0 0 0, 0, 0, 0;
 }
 
+.suggestionQuestion {
+	-fx-font-size: 21;
+    -fx-text-fill: white;
+	-fx-background-color: transparent;
+}
+
 .suggestionButton {
-	-fx-padding: 5px 20px;
-	-fx-border-color: transparent;
-	-fx-cursor: hand;
-	-fx-background-color: rgb(0, 0, 0);
-	-fx-background-insets: 0 0 0 0, 0, 0, 0;
-    -fx-background-radius: 0 0 0 0, 0, 0, 0;
+	-fx-font-size: 16;
+    -fx-text-fill: white;
+	-fx-background-color: transparent;
 }
 
 #searchButton {
