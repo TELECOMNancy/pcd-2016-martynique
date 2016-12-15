@@ -30,8 +30,7 @@ public class LocalPlayer extends BorderPane implements VideoPlayer {
         }
                 
         Media media = new Media(url);
-        
-        
+               
         // Create the player and set to play automatically.
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(false);
@@ -39,8 +38,8 @@ public class LocalPlayer extends BorderPane implements VideoPlayer {
         // Create the view and add it to the Scene.
         player = new MediaView(mediaPlayer);
         
-        player.setFitHeight(this.getHeight());
-        player.setFitWidth(this.getWidth());
+        player.fitHeightProperty().bind(this.heightProperty());
+        player.fitWidthProperty().bind(this.widthProperty());
         
         this.setCenter(player);
     }

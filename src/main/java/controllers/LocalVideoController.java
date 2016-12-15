@@ -41,6 +41,7 @@ public class LocalVideoController extends Controller implements VideoController{
     @FXML private BorderPane Video;
     @FXML private BorderPane Overlay;
     @FXML private BorderPane bottomLayout;
+    @FXML private StackPane stackPane;
 
     public LocalVideoController(String path) {
         this.savedVolume = -1;
@@ -69,8 +70,14 @@ public class LocalVideoController extends Controller implements VideoController{
         
         this.volume.setValue(100);
         
+        this.Video.prefWidthProperty().bind(this.stackPane.widthProperty());
+        this.Video.prefHeightProperty().bind(this.stackPane.heightProperty());
+        
+        this.lp.prefWidthProperty().bind(this.Video.widthProperty());
+        this.lp.prefHeightProperty().bind(this.Video.heightProperty());
+        
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(3000),
+                Duration.millis(5000),
                 ae-> hideOverlay()));
         
         this.Overlay.setOnMouseMoved(new EventHandler<MouseEvent>() {

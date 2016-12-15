@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import models.Video;
-import sun.security.krb5.Config;
 
 import java.util.List;
 
