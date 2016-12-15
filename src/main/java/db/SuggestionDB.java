@@ -98,7 +98,6 @@ public class SuggestionDB {
 		try {
 			tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/sug1.json").openStream());
 			JSONObject root = new JSONObject(tokener);
-			System.out.println(root);
 	    	JSONArray sug = root.getJSONArray("sug");
 	    	for(int i=0;i<sug.length();i++){
 	    		String code = sug.getJSONObject(i).getString("code");

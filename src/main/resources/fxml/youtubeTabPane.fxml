@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -20,6 +21,9 @@
                </center>
             </BorderPane>
          </graphic>
+         <tooltip>
+            <Tooltip text="Favoris" />
+         </tooltip>
       </Tab>
       <Tab fx:id="playlistTab">
          <graphic>
@@ -33,6 +37,9 @@
                </center>
             </BorderPane>
          </graphic>
+         <tooltip>
+            <Tooltip text="Playlists" />
+         </tooltip>
       </Tab>
       <Tab fx:id="suggestTab">
          <graphic>
@@ -46,6 +53,9 @@
                </center>
             </BorderPane>
          </graphic>
+         <tooltip>
+            <Tooltip text="Suggestions" />
+         </tooltip>
       </Tab>
       <Tab fx:id="localVideosTab">
          <graphic>
@@ -59,6 +69,9 @@
                </center>
             </BorderPane>
          </graphic>
+         <tooltip>
+            <Tooltip text="Téléchargements" />
+         </tooltip>
       </Tab>
    </tabs>
 </JFXTabPane>
