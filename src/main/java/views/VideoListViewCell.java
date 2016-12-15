@@ -15,25 +15,21 @@ import models.Video;
 import java.io.IOException;
 
 /**
- * Created by mcdostone on 12/12/16.
+ * Main listCell of the app (for favorites and searchResults
  */
-public class SearchResultListViewCell extends JFXListCell<Video> {
+public class VideoListViewCell extends JFXListCell<Video> {
 
-    @FXML
-    private GridPane searchResult;
-    @FXML
-    private ImageView thumbnail;
-    @FXML
-    private Label title;
-    @FXML
-    private Label isFavorite;
-
-    private FXMLLoader loader;
+    @FXML private GridPane searchResult;
+    @FXML private ImageView thumbnail;
+    @FXML private Label title;
+    @FXML private Label isFavorite;
     private AppController ctrl;
 
-    public SearchResultListViewCell(AppController ctrl) {
+
+    public VideoListViewCell(AppController ctrl) {
         this.ctrl = ctrl;
     }
+
 
     public void updateItem(Video value, boolean empty) {
         super.updateItem(value, empty);
@@ -42,28 +38,20 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
             setText(null);
             setGraphic(null);
         } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/videoCell.fxml"));
+            loader.setController(this);
 
-            if (this.loader == null) {
-                this.loader = new FXMLLoader(getClass().getResource("/fxml/searchResult.fxml"));
-                loader.setController(this);
-
-                try {
-                    loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            if(value != null) {
-                this.title.setText(value.getTitle());
-                this.thumbnail.setImage(new Image(value.getThumbnail()));
-            }
+            this.title.setText(value.getTitle());
+            this.thumbnail.setImage(new Image(value.getThumbnail()));
             if(ctrl.getUser().hasFavorite(value))
                 this.isFavorite.getStyleClass().add("favorite");
 
-
-            this.setText(null);
-            this.setGraphic(this.searchResult);
 
             this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
@@ -81,7 +69,6 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
             this.isFavorite.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-
                     if(ctrl.toggleFavorite(value))
                         isFavorite.getStyleClass().add("favorite");
                     else
@@ -89,6 +76,9 @@ public class SearchResultListViewCell extends JFXListCell<Video> {
                 }
             });
         }
-    }
 
+        this.setText(null);
+        this.setGraphic(this.searchResult);
+    }
 }
+

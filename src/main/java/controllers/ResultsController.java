@@ -6,7 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import models.Video;
-import views.SearchResultListViewCell;
+import views.VideoListViewCell;
+
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class ResultsController extends Controller {
     @FXML
     private void initialize() {
         this.results.setItems(this.searchResultsObservableList);
-        this.results.setCellFactory(param -> new SearchResultListViewCell(app.getAppController()));
+        this.results.setCellFactory(param -> new VideoListViewCell(app.getAppController()));
     }
 
     public Node getScene() {
