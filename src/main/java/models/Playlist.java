@@ -15,6 +15,11 @@ public class Playlist implements Identifiable {
 		this.videoList = new ArrayList<Video>();
 	}
 	
+	public Playlist(String newname, List<Video> liste){
+		this.name = newname;
+		this.videoList = liste;
+	}
+	
 	public String getName(){
 		return this.name;
 	}
