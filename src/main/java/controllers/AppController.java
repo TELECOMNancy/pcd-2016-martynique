@@ -90,7 +90,7 @@ public class AppController {
     }
     
     public void playLocalVideo(String videoID) {
-        videoID = Configuration.getInstance().getSavePath() + "test.mp4";
+        videoID = Configuration.getInstance().getSavePath() + videoID;
         FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
         LocalVideoController ctrl = new LocalVideoController(videoID);
         loader.setController(ctrl);
@@ -156,6 +156,7 @@ public class AppController {
             this.user.removeFavorite(value);
 
         VideoDB.setFavorite(value);
+
         return value.isFavorite();
     }
     

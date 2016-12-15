@@ -47,7 +47,6 @@ public class User extends Observable {
 
     public void removeFavorite(Video f) {
         this.favorites.remove(f);
-        System.out.println(this.favorites);
         this.setChanged();
         this.notifyObservers("remove-favorite");
     }

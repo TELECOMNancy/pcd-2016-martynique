@@ -24,6 +24,7 @@ public class YoutubeTabPaneController extends Controller {
     public void initialize() {
         loadFavorites();
         loadSuggestion();
+        loadPlaylists();
 
         this.suggestTab.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
@@ -48,6 +49,13 @@ public class YoutubeTabPaneController extends Controller {
         FavoritesController ctrl = new FavoritesController();
         loader.setController(ctrl);
         this.favoritesTab.setContent(SceneManager.getComponent(loader));
+    }
+
+    private void loadPlaylists() {
+        FXMLLoader loader = SceneManager.getLoader("listView.fxml");
+        PlaylistController ctrl = new PlaylistController();
+        loader.setController(ctrl);
+        this.playlistTab.setContent(SceneManager.getComponent(loader));
     }
     
     public void loadSuggestion() {
