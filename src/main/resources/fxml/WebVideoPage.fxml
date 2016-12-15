@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane fx:id="Player" prefHeight="272.0" prefWidth="279.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
@@ -11,16 +12,25 @@
             <Button fx:id="returnButton" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" stylesheets="@../css/style.css" text="returnButton" textFill="TRANSPARENT" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="8.0" />
-               </BorderPane.margin></Button>
+               </BorderPane.margin>
+               <tooltip>
+                  <Tooltip text="Retour" />
+               </tooltip></Button>
          </left>
          <right>
             <Button fx:id="fsButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="FS" textFill="TRANSPARENT" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets right="8.0" />
-               </BorderPane.margin></Button>
+               </BorderPane.margin>
+               <tooltip>
+                  <Tooltip text="Plein écran" />
+               </tooltip></Button>
          </right>
          <center>
-            <Button fx:id="dlButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" stylesheets="@../css/style.css" text="Download" textAlignment="CENTER" textFill="TRANSPARENT" BorderPane.alignment="CENTER" />
+            <Button fx:id="dlButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" stylesheets="@../css/style.css" text="Download" textAlignment="CENTER" textFill="TRANSPARENT" BorderPane.alignment="CENTER">
+               <tooltip>
+                  <Tooltip text="Télécharger" />
+               </tooltip></Button>
          </center>
       </BorderPane>
    </top>

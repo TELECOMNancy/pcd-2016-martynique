@@ -1,5 +1,7 @@
 package db;
 
+import app.Configuration;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -13,8 +15,9 @@ public class ConnectionDB {
     public static Connection getInstance() {
         if(ConnectionDB.connection == null) {
             try {
+                System.out.println("-- " + Configuration.getInstance().getDbPath());
                 Class.forName("org.sqlite.JDBC");
-                ConnectionDB.connection = DriverManager.getConnection("jdbc:sqlite:"+app.Configuration.getInstance().getDbPath());
+                ConnectionDB.connection = DriverManager.getConnection("jdbc:sqlite:" + Configuration.getInstance().getDbPath());
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
