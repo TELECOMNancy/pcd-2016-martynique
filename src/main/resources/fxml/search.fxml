@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
@@ -29,6 +30,9 @@
          <BorderPane.margin>
             <Insets bottom="5.0" />
          </BorderPane.margin>
+         <tooltip>
+            <Tooltip text="Rechercher" />
+         </tooltip>
       </Button>
    </right>
    <left>

@@ -96,6 +96,8 @@ public class SuggestionController extends Controller {
     	}
     	else{
     		List<String> queryReturn = SuggestionDB.runSuggestionQuery(flags);
+    		
+    		System.out.println("nb of corresponding videos : "+queryReturn.size());
 
     		if(queryReturn.size() != 0){
 	    		Random rand = new Random();
