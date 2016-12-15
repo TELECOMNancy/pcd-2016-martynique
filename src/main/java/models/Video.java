@@ -24,7 +24,7 @@ public class Video implements Identifiable {
 
     @Override
     public void setID(ID id) {
-        this.id = id;
+        // nothing to do
     }
 
     public String getTitle() {
@@ -44,15 +44,15 @@ public class Video implements Identifiable {
         return this.favorite;
     }
 
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+    
     public boolean equals(Object o) {
         if(o != null && o instanceof Video) {
             Video tmp = (Video) o;
             return this.getID().equals(tmp.getID());
         }
         return false;
-    }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
     }
 }
