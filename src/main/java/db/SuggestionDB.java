@@ -2,6 +2,8 @@ package db;
 
 import models.*;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,7 +43,6 @@ public class SuggestionDB {
     	request += JOIN;
     	request += "WHERE " + WHERE;
 
-    	System.out.println(request);
     	return request;
     }
 
@@ -94,26 +95,35 @@ public class SuggestionDB {
     }
     
     private static void initializeTables(){
-    	JSONTokener tokener;
-		try {
-			tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/sug1.json").openStream());
-			JSONObject root = new JSONObject(tokener);
-	    	JSONArray sug = root.getJSONArray("sug");
-	    	for(int i=0;i<sug.length();i++){
-	    		String code = sug.getJSONObject(i).getString("code");
-	    		int length = sug.getJSONObject(i).getInt("length");
-	    		JSONArray tags = sug.getJSONObject(i).getJSONArray("tags");
-	    		Suggestion curVideo = new Suggestion(code, length);
-	    		insertSuggestion(curVideo);
-	    		for(int j=0;j<tags.length();j++){
-	    			String curTagValue = tags.getString(j);
-	    			Tag curTag = new Tag(new IntegerID(Integer.parseInt(curVideo.getID())), curTagValue);
-	    			insertTag(curTag);
-	    		}
-	    	}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    	File f = new File(SuggestionDB.class.getResource("/suggestions/").getFile());
+    	File[] matchingFiles = f.listFiles(new FilenameFilter(){
+    		public boolean accept(File dir, String name){
+    			return name.startsWith("sug") && name.endsWith(".json");
+    		}
+    	});
+    	
+    	for(int i=0;i<matchingFiles.length;i++){
+	    	JSONTokener tokener;
+			try {
+				tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/"+matchingFiles[i].getName()).openStream());
+				JSONObject root = new JSONObject(tokener);
+		    	JSONArray sug = root.getJSONArray("sug");
+		    	for(int j=0;j<sug.length();j++){
+		    		String code = sug.getJSONObject(j).getString("code");
+		    		int length = sug.getJSONObject(j).getInt("length");
+		    		JSONArray tags = sug.getJSONObject(j).getJSONArray("tags");
+		    		Suggestion curVideo = new Suggestion(code, length);
+		    		insertSuggestion(curVideo);
+		    		for(int k=0;k<tags.length();k++){
+		    			String curTagValue = tags.getString(k);
+		    			Tag curTag = new Tag(new IntegerID(Integer.parseInt(curVideo.getID())), curTagValue);
+		    			insertTag(curTag);
+		    		}
+		    	}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
     }
     	
     public static void createTable() {
@@ -141,7 +151,7 @@ public class SuggestionDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         initializeTables();
     }
 }
