@@ -14,20 +14,18 @@ public class YoutubeTabPaneController extends Controller {
     @FXML private Tab playlistTab;
     @FXML private Tab suggestTab;
     @FXML private Tab localVideosTab;
+    @FXML private Tab settingsTab;
 
     public YoutubeTabPaneController() {
-        favoritesTab = new Tab();
-        playlistTab = new Tab();
-        suggestTab = new Tab();
-        localVideosTab = new Tab();
     }
 
     @FXML
     public void initialize() {
         loadFavorites();
+        loadPlaylists();
         loadSuggestion();
         loadLocalVideos();
-        loadPlaylists();
+        loadSettings();
     }
 
     private void loadFavorites() {
@@ -56,5 +54,12 @@ public class YoutubeTabPaneController extends Controller {
         LocalListController ctrl = new LocalListController();
         loader.setController(ctrl);
         //this.localVideosTab.setContent(SceneManager.getComponent(loader));
+    }
+    
+    public void loadSettings() {
+        FXMLLoader loader = SceneManager.getLoader("settings.fxml");
+        SettingsController ctrl = new SettingsController();
+        loader.setController(ctrl);
+        this.settingsTab.setContent(SceneManager.getComponent(loader));
     }
 }
