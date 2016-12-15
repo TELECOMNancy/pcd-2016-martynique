@@ -10,6 +10,9 @@
     -fx-text-alignment: center;
 }
 
+.text-input {
+	-fx-text-inner-color: white;
+}
 
 .button {
 	-fx-padding: 5px 20px;
@@ -74,6 +77,26 @@
 
 #unmuteButton {
 	-fx-background-image: url("../assets/mute.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
+#dbLocButton {
+	-fx-background-image: url("../assets/folder.png") no-repeat;
+	-fx-background-size: 28px 28px;
+}
+
+#saveLocButton {
+	-fx-background-image: url("../assets/folder.png") no-repeat;
+	-fx-background-size: 28px 28px;
+}
+
+#resetButton {
+	-fx-background-image: url("../assets/reset.png") no-repeat;
+	-fx-background-size: 25px 25px;
+}
+
+#saveButton {
+	-fx-background-image: url("../assets/saveIcon.png") no-repeat;
 	-fx-background-size: 25px 25px;
 }
 

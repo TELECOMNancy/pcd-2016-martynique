@@ -23,7 +23,8 @@ public class Configuration {
 
     private Properties props;
 
-
+    private String defaultDbPath = Paths.get(dir, CONFIG_DIR).toString();
+    private String defaultSavePath = Paths.get(dir, CONFIG_DIR,"videos").toString();
 
     private Configuration() {
         this.props = new Properties();
@@ -59,7 +60,7 @@ public class Configuration {
     }
     
     public void setSavePath(String sp) {
-        this.props.setProperty(this.DB_PATH_KEY, sp);
+        this.props.setProperty(this.DOWNLOADS_KEY, sp);
         updateSettings();
     }
     
@@ -67,13 +68,20 @@ public class Configuration {
         return this.props.getProperty(this.DOWNLOADS_KEY);
     }
     
-    public void setDbPath(String dbp) {  this.props.setProperty(this.DB_PATH_KEY, dbp);  }
+    public void setDbPath(String dbp) {
+        this.props.setProperty(this.DB_PATH_KEY, dbp);
+        updateSettings();
+    }
+    
+    public String getDbLoc() {
+        return Paths.get(this.props.getProperty(this.DB_PATH_KEY)).toString();
+    }
     
     public String getDbPath() {
         return Paths.get(this.props.getProperty(this.DB_PATH_KEY), this.DB_FILENAME).toString();
     }
-
-    private void updateSettings() {
+    
+    public void updateSettings() {
         try {
             this.props.store(new FileOutputStream(this.SETTINGS_FILEPATH), HEADER);
         } catch (IOException e) {
@@ -82,17 +90,21 @@ public class Configuration {
     }
 
     public void defaultValues() throws IOException {
-        this.props.setProperty(DB_PATH_KEY, this.getPath());
-        this.props.setProperty(DOWNLOADS_KEY, this.getPath("videos").toString());
+        this.props.setProperty(DB_PATH_KEY, this.defaultDbPath);
+        this.props.setProperty(DOWNLOADS_KEY, this.defaultSavePath);
         new File(this.props.getProperty(DOWNLOADS_KEY)).mkdirs();
-    }
-
-    private String getPath() {
-        return getPath("");
+        updateSettings();
     }
 
     private String getPath(String entry) {
         return Paths.get(dir, CONFIG_DIR, entry).toString();
+    }
+    
+    public void purgeVideoDirectory() {
+        File dir = new File(this.props.getProperty(DOWNLOADS_KEY));
+        for (File file: dir.listFiles()) {
+            file.delete();
+        }
     }
 
 }

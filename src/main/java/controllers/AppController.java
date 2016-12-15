@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.User;
 import models.Video;
@@ -115,7 +116,6 @@ public class AppController {
                 boolean ok = YTD.download(v, app.Configuration.getInstance().getSavePath());
                 if(ok)
                     user.addDownloaded(v);
-
                 return null;
             }
         };
@@ -128,6 +128,7 @@ public class AppController {
 
             alert.showAndWait();
         });
+        
         new Thread(task).start();
     }
     
@@ -169,6 +170,10 @@ public class AppController {
     
     public void showCursor() {
         this.root.getScene().setCursor(Cursor.DEFAULT);
+    }
+    
+    public Scene getScene() {
+        return this.root.getScene();
     }
 
 
