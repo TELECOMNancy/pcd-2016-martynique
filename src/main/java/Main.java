@@ -46,7 +46,7 @@ public class Main extends Application {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
         loader.setController(this.app.getAppController());
         BorderPane root = (BorderPane) SceneManager.getComponent(loader);
-
+        
         primaryStage.setTitle("Youtube app");
         primaryStage.setMinHeight(400);
         primaryStage.setMinWidth(600);
