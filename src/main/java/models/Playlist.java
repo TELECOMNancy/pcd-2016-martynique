@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Playlist implements Identifiable {
 
@@ -33,6 +34,17 @@ public class Playlist implements Identifiable {
 	public Playlist(String newname,ArrayList<Video> newvideoList){
 		this.name = newname;
 		this.videoList = newvideoList;
+	}
+
+	public String getRandomThumbnail() {
+		if(this.videoList.size() == 0)
+			return null;
+		else {
+			Random rand = new Random();
+			int x = rand.nextInt(this.videoList.size()) + this.videoList.size() - 1;
+			return this.videoList.get(x).getThumbnail();
+		}
+
 	}
 	
 	public void addVideo(Video vid){

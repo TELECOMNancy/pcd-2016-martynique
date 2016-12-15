@@ -67,13 +67,11 @@ public class VideoDB {
         try {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(VideoDB.updateQuery());
-            prep.setString(2, v.getTitle());
-            prep.setString(3, v.getThumbnail());
-            prep.setBoolean(4, v.isFavorite());
-            prep.setString(1, v.getID());
+            prep.setString(1, v.getTitle());
+            prep.setString(2, v.getThumbnail());
+            prep.setBoolean(3, v.isFavorite());
+            prep.setString(4, v.getID());
             prep.executeUpdate();
-            
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,7 +84,7 @@ public class VideoDB {
     }
     
     public static String updateQuery() {
-        return ModelDB.updateQuery(TABLE) + "title = ?, thumbnail  = ?, favorite = ? WHERE ido = ?";
+        return ModelDB.updateQuery(TABLE) + "title = ?, thumbnail  = ?, favorite = ? WHERE id = ?";
     }
 
     public String deleteQuery() {
@@ -128,6 +126,7 @@ public class VideoDB {
             e.printStackTrace();
         }
 
+        System.out.println("##L## " + list);
         return list;
     }
 }

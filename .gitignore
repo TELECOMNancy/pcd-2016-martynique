@@ -128,3 +128,5 @@ target/maven-archiver
 
 savedVideos/
 /target/
+
+settings.properties

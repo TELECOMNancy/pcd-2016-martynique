@@ -1,8 +1,6 @@
 package controllers;
 
 import app.SceneManager;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
@@ -25,23 +23,21 @@ public class YoutubeTabPaneController extends Controller {
         loadFavorites();
         loadSuggestion();
         loadLocalVideos();
-        
-        this.localVideosTab.setOnSelectionChanged(new EventHandler<Event>() {
-            @Override
-            public void handle(Event event) {
-                if(localVideosTab.isSelected())
-                    System.out.println("hello");
-                    //a remplacer par un file chooser
-                    //app.getAppController().playLocalVideo("");
-            }
-        });
+        loadPlaylists();
     }
 
     private void loadFavorites() {
-        FXMLLoader loader = SceneManager.getLoader("videosListView.fxml");
+        FXMLLoader loader = SceneManager.getLoader("listView.fxml");
         FavoritesController ctrl = new FavoritesController();
         loader.setController(ctrl);
         this.favoritesTab.setContent(SceneManager.getComponent(loader));
+    }
+
+    private void loadPlaylists() {
+        FXMLLoader loader = SceneManager.getLoader("listView.fxml");
+        PlaylistController ctrl = new PlaylistController();
+        loader.setController(ctrl);
+        this.playlistTab.setContent(SceneManager.getComponent(loader));
     }
     
     public void loadSuggestion() {

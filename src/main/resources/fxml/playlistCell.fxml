@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +14,6 @@
   <columnConstraints>
       <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
-      <ColumnConstraints hgrow="ALWAYS" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="100.0" minHeight="80.0" prefHeight="100.0" />
@@ -31,18 +29,10 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <Label fx:id="title" nodeOrientation="LEFT_TO_RIGHT" styleClass="title" stylesheets="@../css/style.css" text="Label" GridPane.columnIndex="1">
+      <Label fx:id="playlist" nodeOrientation="LEFT_TO_RIGHT" styleClass="title" stylesheets="@../css/style.css" text="Label" GridPane.columnIndex="1">
          <font>
             <Font name="Roboto Regular" size="16.0" />
          </font>
-      </Label>
-      <Label fx:id="isFavorite" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="not-favorite" GridPane.columnIndex="2">
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </Label>
    </children>
 </GridPane>

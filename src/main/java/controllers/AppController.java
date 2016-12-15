@@ -64,7 +64,7 @@ public class AppController {
 
     public void showResults(List<Video> results) {
         if(this.resultsController == null) {
-            FXMLLoader loader = SceneManager.getLoader("videosListView.fxml");
+            FXMLLoader loader = SceneManager.getLoader("listView.fxml");
             this.resultsController = new ResultsController(results);
             loader.setController(this.resultsController);
             SceneManager.getComponent(loader);
@@ -90,7 +90,7 @@ public class AppController {
     }
     
     public void playLocalVideo(String videoID) {
-        videoID = Configuration.getInstance().getSavePath() + "test.mp4";
+        videoID = Configuration.getInstance().getSavePath() + videoID;
         FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
         LocalVideoController ctrl = new LocalVideoController(videoID);
         loader.setController(ctrl);
@@ -140,6 +140,8 @@ public class AppController {
     
     public void quitFullScreen() {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(false);
+        // the cursor would hide sometimes after full screen
+        this.root.getScene().setCursor(Cursor.DEFAULT);
     }
 
     public User getUser() {
@@ -154,6 +156,7 @@ public class AppController {
             this.user.removeFavorite(value);
 
         VideoDB.setFavorite(value);
+
         return value.isFavorite();
     }
     
