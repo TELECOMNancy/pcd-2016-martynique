@@ -27,6 +27,11 @@ public class LocalVideoController extends Controller implements VideoController{
     
     private LocalPlayer lp;
     private double savedVolume;
+    private String state;
+    
+    Timeline timeline = new Timeline(new KeyFrame(
+            Duration.millis(5000),
+            ae-> hideOverlay()));
     
     @FXML private Button returnButton;
     @FXML private Button fsButton;
@@ -46,6 +51,8 @@ public class LocalVideoController extends Controller implements VideoController{
     public LocalVideoController(String path) {
         this.savedVolume = -1;
         lp = new LocalPlayer(path);
+        
+        state = "pause";
         
         this.fsButton = new Button();
         this.smallButton = new Button();
@@ -76,16 +83,16 @@ public class LocalVideoController extends Controller implements VideoController{
         this.lp.prefWidthProperty().bind(this.Video.widthProperty());
         this.lp.prefHeightProperty().bind(this.Video.heightProperty());
         
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(5000),
-                ae-> hideOverlay()));
+        
         
         this.Overlay.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 showOverlay();
                 timeline.stop();
-                timeline.play();
+                if (state.equals("play")) {
+                    timeline.play();
+                }
             }
         });
         
@@ -147,6 +154,7 @@ public class LocalVideoController extends Controller implements VideoController{
             public void handle(MouseEvent event) {
                 pause();
                 showOverlay();
+                timeline.stop();
                 app.getAppController().showHome();
             }
         });
@@ -181,6 +189,7 @@ public class LocalVideoController extends Controller implements VideoController{
     }
     
     public void play() {
+        this.state = "play";
         this.playButton.setVisible(false);
         this.playButton.setManaged(false);
         this.pauseButton.setVisible(true);
@@ -189,6 +198,7 @@ public class LocalVideoController extends Controller implements VideoController{
     }
     
     public void pause() {
+        this.state = "pause";
         this.pauseButton.setVisible(false);
         this.pauseButton.setManaged(false);
         this.playButton.setVisible(true);

@@ -140,8 +140,6 @@ public class AppController {
     
     public void quitFullScreen() {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(false);
-        // the cursor would hide sometimes after full screen
-        this.root.getScene().setCursor(Cursor.DEFAULT);
     }
 
     public User getUser() {
