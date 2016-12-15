@@ -22,7 +22,7 @@ public class Tag implements Identifiable {
 
     @Override
     public String getID() {
-        return this.tag;
+        return this.id.getValue();
     }
 
     @Override
