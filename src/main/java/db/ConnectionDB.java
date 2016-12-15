@@ -14,7 +14,7 @@ public class ConnectionDB {
         if(ConnectionDB.connection == null) {
             try {
                 Class.forName("org.sqlite.JDBC");
-                ConnectionDB.connection = DriverManager.getConnection("jdbc:sqlite:"+app.Configuration.getInstance().getDbPath()+"martynique.db");
+                ConnectionDB.connection = DriverManager.getConnection("jdbc:sqlite:"+app.Configuration.getInstance().getDbPath());
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
