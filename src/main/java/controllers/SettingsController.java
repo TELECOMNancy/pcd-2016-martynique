@@ -67,7 +67,7 @@ public class SettingsController extends Controller{
             public void handle(MouseEvent e) {
                 try {
                     Configuration.getInstance().defaultValues();
-                    dbPathField.setText(Configuration.getInstance().getDbPath());
+                    dbPathField.setText(Configuration.getInstance().getDbLoc());
                     savePathField.setText(Configuration.getInstance().getSavePath());
                 } catch (Exception excep) {
                     excep.printStackTrace();

@@ -147,7 +147,10 @@
     -fx-underline: true;
     -fx-cursor: hand;
 }
-
+.playlist {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(200, 200, 200, 0.4);
+}
 
 /* The increment and decrement button CSS class of scrollbar */
 .scroll-bar:vertical .increment-button ,
