@@ -23,9 +23,7 @@ public class Video implements Identifiable {
     }
 
     @Override
-    public void setID(ID id) {
-        // nothing to do
-    }
+    public void setID(ID id) {}
 
     public String getTitle() {
         return this.title;
@@ -37,7 +35,7 @@ public class Video implements Identifiable {
 
     public String toString() {
         return "[" + this.getID() + "#Video] " + this.title
-                + " - " + (this.isFavorite() ? " FAV" :"");
+                + " - " + (this.isFavorite() ? "FAV" :"");
     }
 
     public boolean isFavorite() {
