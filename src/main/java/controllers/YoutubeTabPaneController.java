@@ -48,7 +48,7 @@ public class YoutubeTabPaneController extends Controller {
     }
     
     private void loadLocalVideos() {
-        FXMLLoader loader = SceneManager.getLoader("videosListView.fxml");
+        FXMLLoader loader = SceneManager.getLoader("listView.fxml");
         LocalListController ctrl = new LocalListController();
         loader.setController(ctrl);
         this.localVideosTab.setContent(SceneManager.getComponent(loader));

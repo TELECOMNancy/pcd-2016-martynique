@@ -35,10 +35,6 @@ public class LocalListController extends Controller implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(arg.equals("add-favorite") || arg.equals("remove-favorite")) {
-            this.localVideosObservableList.clear();
-            this.localVideosObservableList.addAll(app.getUser().getFavorites());
-        }
     }
 
 }

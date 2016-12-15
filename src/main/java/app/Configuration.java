@@ -1,45 +1,48 @@
 package app;
 
-import java.io.File;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Properties;
 
 import com.google.common.io.Files;
 
 public class Configuration {
 
     private static Configuration config;
-    
-    private String savePath;
-    private String dbPath;
-    private String dir = System.getProperty("user.dir").replaceAll("\\\\", "/");
-    private CharSequence defaultSettings = "dbpath="+ dir + "/db/\nsavepath="+ dir +"/savedVideos/";
-    
+
+    private final String HEADER = " -- MARTYNIQUE APP --";
+    private final String CONFIG_DIR = ".martynique";
+    private final String CONFIG_FILE = "config.martynique";
+    private final String DB_PATH_KEY = "dbpath";
+    private final String DOWNLOADS_KEY = "savepath";
+    private final String DB_FILENAME = "martynique.db";
+    private final String dir = System.getProperty("user.home");
+    private final String SETTINGS_FILEPATH = this.getPath(CONFIG_FILE);
+
+    private Properties props;
+
     private Configuration() {
-        File settings = new File(dir + "/settings.properties");
-        if (! settings.exists()) {
+        this.props = new Properties();
+        File settings = new File(this.SETTINGS_FILEPATH);
+
+        if (!settings.exists()) {
             try {
-                settings.createNewFile();
-                Files.write(defaultSettings, settings, Charset.forName("UTF-8"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                Files.createParentDirs(settings);
+                this.defaultValues();
+                OutputStream out = new FileOutputStream(settings);
+                props.store(out, HEADER);
+
+            } catch (Exception e) {  e.printStackTrace();  }
         }
-        
+
         try {
-            // gets directories
-            dbPath=Files.readLines(settings, Charset.forName("UTF-8")).get(0).replaceAll("dbpath=", "");
-            savePath=Files.readLines(settings, Charset.forName("UTF-8")).get(1).replaceAll("savepath=", "");
-            
-            // creates directories if they don't exist
-            File dbDir = new File(dbPath);
-            File saveDir = new File(savePath);
-            dbDir.mkdirs();
-            saveDir.mkdirs();
-            
+            this.props.load(new FileInputStream(settings));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
     
     public static Configuration getInstance() {
@@ -49,44 +52,41 @@ public class Configuration {
     }
     
     public void setSavePath(String sp) {
-        Configuration.config.savePath = sp;
+        this.props.setProperty(this.DB_PATH_KEY, sp);
         updateSettings();
     }
     
     public String getSavePath() {
-        return savePath;
+        return this.props.getProperty(this.DOWNLOADS_KEY);
     }
     
-    public void setDbPath(String dbp) {
-        Configuration.config.dbPath = dbp;
-        updateSettings();
-    }
+    public void setDbPath(String dbp) {  this.props.setProperty(this.DB_PATH_KEY, dbp);  }
     
     public String getDbPath() {
-        return dbPath + "martynique.db";
+        return Paths.get(this.props.getProperty(this.DB_PATH_KEY), this.DB_FILENAME).toString();
     }
-    
+
     private void updateSettings() {
-        File settings = new File(dir + "/settings.properties");
-        
-        CharSequence newSettings = "dbpath="+ dbPath +"\nsavepath="+ savePath;
-        
         try {
-            settings.createNewFile();
-            Files.write(newSettings, settings, Charset.forName("UTF-8"));
-        } catch (Exception e) {
+            this.props.store(new FileOutputStream(this.SETTINGS_FILEPATH), HEADER);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    public void resetSettings() {
-        File settings = new File(dir + "/settings.properties");
-        try {
-            settings.createNewFile();
-            Files.write(defaultSettings, settings, Charset.forName("UTF-8"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
+    public void defaultValues() {
+        this.props.setProperty(DB_PATH_KEY, this.getPath());
+        this.props.setProperty(DOWNLOADS_KEY, this.getPath("videos").toString());
+    }
+
+
+    private String getPath() {
+        return getPath("");
+    }
+
+    private String getPath(String entry) {
+        return Paths.get(dir, CONFIG_DIR, entry).toString();
     }
 
 }
