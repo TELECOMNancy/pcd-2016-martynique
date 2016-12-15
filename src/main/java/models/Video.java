@@ -47,6 +47,7 @@ public class Video implements Identifiable {
     public boolean equals(Object o) {
         if(o != null && o instanceof Video) {
             Video tmp = (Video) o;
+            //System.out.println(this.getID().equals(tmp.getID()));
             return this.getID().equals(tmp.getID());
         }
         return false;

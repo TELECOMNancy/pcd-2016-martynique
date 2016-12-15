@@ -30,7 +30,7 @@ public class YoutubeTabPaneController extends Controller {
             }
         });
 
-        FXMLLoader loader = SceneManager.getLoader("results.fxml");
+        FXMLLoader loader = SceneManager.getLoader("videosListView.fxml");
         FavoritesController ctrl = new FavoritesController();
         loader.setController(ctrl);
         this.favoritesTab.setContent(SceneManager.getComponent(loader));

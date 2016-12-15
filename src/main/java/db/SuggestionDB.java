@@ -75,7 +75,7 @@ public class SuggestionDB {
             // Statement st = this.connection.createStatement();
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            prep.setInt(1, tag.getIDVideo());
+            prep.setString(1, tag.getIDVideo());
             prep.setString(2, tag.getTag());
             prep.executeUpdate();
             ResultSet tableKeys = prep.getGeneratedKeys();
@@ -93,10 +93,10 @@ public class SuggestionDB {
     	insertSuggestion(video1);
     	insertSuggestion(video2);
     	insertSuggestion(video3);
-    	Tag tag1 = new Tag(Integer.parseInt(video1.getID()), "sciences");
-    	Tag tag2 = new Tag(Integer.parseInt(video2.getID()), "sciences");
-    	Tag tag3 = new Tag(Integer.parseInt(video3.getID()), "histoire");
-    	Tag tag4 = new Tag(Integer.parseInt(video3.getID()), "mathematiques");
+    	Tag tag1 = new Tag(video1.getID(), "sciences");
+    	Tag tag2 = new Tag(video2.getID(), "sciences");
+    	Tag tag3 = new Tag(video3.getID(), "histoire");
+    	Tag tag4 = new Tag(video3.getID(), "mathematiques");
     	insertTag(tag1);
     	insertTag(tag2);
     	insertTag(tag3);
@@ -110,7 +110,7 @@ public class SuggestionDB {
                 "length INTEGER NOT NULL)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
-            st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_SUGGESTIONS);
+            //st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_SUGGESTIONS);
             st.executeUpdate(createString1);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,12 +122,12 @@ public class SuggestionDB {
                 "tag varchar(255) NOT NULL)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
-            st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_TAGS);
+            //st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_TAGS);
             st.executeUpdate(createString2);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        //initializeTables();
+        initializeTables();
     }
 }

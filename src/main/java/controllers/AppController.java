@@ -62,7 +62,7 @@ public class AppController {
 
     public void showResults(List<Video> results) {
         if(this.resultsController == null) {
-            FXMLLoader loader = SceneManager.getLoader("results.fxml");
+            FXMLLoader loader = SceneManager.getLoader("videosListView.fxml");
             this.resultsController = new ResultsController(results);
             loader.setController(this.resultsController);
             SceneManager.getComponent(loader);
@@ -148,6 +148,11 @@ public class AppController {
 
     public boolean toggleFavorite(Video value) {
         value.setFavorite(!value.isFavorite());
+        if(value.isFavorite())
+            this.user.addFavorite(value);
+        else
+            this.user.removeFavorite(value);
+
         VideoDB.setFavorite(value);
         return value.isFavorite();
     }
