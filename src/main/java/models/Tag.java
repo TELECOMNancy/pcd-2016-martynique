@@ -3,16 +3,16 @@ package models;
 public class Tag implements Identifiable {
 
     private ID id;
-    private int idVideo;
+    private String idVideo;
     private String tag;
 
-    public Tag(int idVideo, String tag){
+    public Tag(String idVideo, String tag){
         this.id = new IntegerID();
     	this.idVideo = idVideo;
     	this.tag = tag;
     }
     
-    public int getIDVideo(){
+    public String getIDVideo(){
     	return this.idVideo;
     }
     

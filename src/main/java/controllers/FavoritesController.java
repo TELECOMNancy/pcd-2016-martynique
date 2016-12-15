@@ -9,8 +9,10 @@ import models.Video;
 import views.FavoriteListViewCell;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class FavoritesController extends Controller {
+public class FavoritesController extends Controller implements Observer {
 
     @FXML
     JFXListView<Video> results;
@@ -19,6 +21,7 @@ public class FavoritesController extends Controller {
     private List<Video> favorites;
 
     public FavoritesController() {
+        this.app.getUser().addObserver(this);
         this.results = new JFXListView<Video>();
         this.favoritesObservableList = FXCollections.observableArrayList();
     }
@@ -28,5 +31,15 @@ public class FavoritesController extends Controller {
         this.favoritesObservableList.addAll(app.getUser().getFavorites());
         this.results.setItems(this.favoritesObservableList);
         this.results.setCellFactory(param -> new FavoriteListViewCell(app.getAppController()));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(arg.equals("add-favorite")) {
+            this.favoritesObservableList.removeAll();
+            this.favoritesObservableList.addAll(app.getUser().getFavorites());
+            this.results.setItems(this.favoritesObservableList);
+            this.results.setCellFactory(param -> new FavoriteListViewCell(app.getAppController()));
+        }
     }
 }

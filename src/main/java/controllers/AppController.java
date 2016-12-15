@@ -152,6 +152,7 @@ public class AppController {
     public boolean toggleFavorite(Video value) {
         value.setFavorite(!value.isFavorite());
         VideoDB.setFavorite(value);
+        this.user.addFavorite(value);
         return value.isFavorite();
     }
 }

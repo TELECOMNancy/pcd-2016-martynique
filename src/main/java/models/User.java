@@ -19,8 +19,11 @@ public class User extends Observable {
     }
 
     public void addFavorite(Video v) {
-        if(!this.hasFavorite(v))
+        if(!this.hasFavorite(v) && v.isFavorite()) {
             this.favorites.add(v);
+            this.setChanged();
+            this.notifyObservers("add-favorite");
+        }
     }
 
     public List<Video> getFavorites() {
@@ -34,7 +37,7 @@ public class User extends Observable {
     public void removeFavorite(Video f) {
         this.favorites.remove(f);
         this.setChanged();
-        this.notifyObservers();
+        this.notifyObservers("remove-favorite");
     }
 
 }

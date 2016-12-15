@@ -1,5 +1,6 @@
 import app.App;
 import app.SceneManager;
+import db.SuggestionDB;
 import db.VideoDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +18,7 @@ public class Main extends Application {
 
     private void initDB() {
         VideoDB.createTable();
-        //FavoriteDB.createTable();
-        //SuggestionDB.createTable();
+        SuggestionDB.createTable();
     }
 
     private void initUser() {
