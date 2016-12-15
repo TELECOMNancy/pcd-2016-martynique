@@ -94,7 +94,7 @@ public class PlaylistDB{
     public static void createTable() {
         String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
         		"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-        		"title varchar(255) NOT NULL)";
+        		"title varchar(255) NOT NULL UNIQUE)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             st.executeUpdate(createString);
