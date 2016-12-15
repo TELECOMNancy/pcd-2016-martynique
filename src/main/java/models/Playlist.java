@@ -69,13 +69,16 @@ public class Playlist implements Identifiable {
 
 	@Override
 	public String getID() {
-
 		return this.id.getValue();
 	}
 
 	@Override
 	public void setID(ID id) {
 		this.id = id;
+	}
+
+	public String toString() {
+		return this.getName() + ": " + this.videoList.toString();
 	}
 
 }

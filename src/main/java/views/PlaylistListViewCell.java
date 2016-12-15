@@ -2,11 +2,13 @@ package views;
 
 import com.jfoenix.controls.JFXListCell;
 import controllers.AppController;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import models.Playlist;
 
@@ -47,28 +49,19 @@ public class PlaylistListViewCell extends JFXListCell<Playlist> {
             this.playlist.setText(value.getName());
             this.thumbnail.setImage(new Image(value.getRandomThumbnail()));
 
-            /*this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    ctrl.playWebVideo(value.getID());
+                    ctrl.showPlayList(value);
                 }
             });
 
-            this.title.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            this.playlist.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    ctrl.playWebVideo(value.getID());
+                    ctrl.showPlayList(value);
                 }
             });
-            this.isFavorite.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    if(ctrl.toggleFavorite(value))
-                        isFavorite.getStyleClass().add("favorite");
-                    else
-                        isFavorite.getStyleClass().remove("favorite");
-                }
-            });*/
         }
 
         this.setText(null);

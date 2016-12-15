@@ -15,15 +15,15 @@ import java.util.Observer;
 /**
  * Controller for results of request.
  */
-public class ResultsController extends Controller implements Observer {
+public class SetListController extends Controller {
 
     @FXML
     JFXListView<Video> list;
 
     private ObservableList<Video> searchResultsObservableList;
 
-    public ResultsController(List<Video> results) {
-        this.app.getUser().addObserver(this);
+    public SetListController(List<Video> results) {
+        //this.app.getUser().addObserver(this);
         for(Video v: results) {
             if(this.app.getUser().hasFavorite(v))
                 v.setFavorite(true);
@@ -51,7 +51,4 @@ public class ResultsController extends Controller implements Observer {
         return list;
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-    }
 }

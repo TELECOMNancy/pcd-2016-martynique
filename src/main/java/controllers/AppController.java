@@ -2,6 +2,7 @@ package controllers;
 
 import app.Configuration;
 import app.SceneManager;
+import models.Playlist;
 import views.WebPlayer;
 import db.VideoDB;
 import javafx.concurrent.Task;
@@ -174,6 +175,10 @@ public class AppController {
     
     public Scene getScene() {
         return this.root.getScene();
+    }
+
+    public void showPlayList(Playlist p) {
+        this.youtubeTabPaneController.showPlaylist(p);
     }
 
 

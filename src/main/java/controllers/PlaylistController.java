@@ -1,29 +1,29 @@
 package controllers;
 
-import com.jfoenix.controls.JFXListView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import app.SceneManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import models.Playlist;
-import views.PlaylistListViewCell;
-
-import java.util.List;
 
 
 public class PlaylistController extends Controller {
 
-    @FXML JFXListView<Playlist> list;
-    private ObservableList<Playlist> playlistObservableList;
-    private List<Playlist> playlists;
+    @FXML BorderPane playlistPane;
+    @FXML Label namePlaylist;
+    private Playlist playlist;
 
-    public PlaylistController() {
-        this.list = new JFXListView<Playlist>();
-        this.playlistObservableList = FXCollections.observableArrayList(this.app.getUser().getPlaylists());
+    public PlaylistController(Playlist p) {
+        this.playlist = p;
     }
 
     @FXML
     public void initialize() {
-        this.list.setItems(this.playlistObservableList);
-        this.list.setCellFactory(param -> new PlaylistListViewCell(app.getAppController()));
+        this.namePlaylist.setText(this.playlist.getName());
+        FXMLLoader loader = SceneManager.getLoader("listView.fxml");
+        SetListController rc = new SetListController(this.playlist.getVideoList());
+        loader.setController(rc);
+        this.playlistPane.setCenter(SceneManager.getComponent(loader));
     }
 }

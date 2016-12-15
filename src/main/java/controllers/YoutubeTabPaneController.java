@@ -4,6 +4,7 @@ import app.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
+import models.Playlist;
 
 /**
  * Controller managing all tabs on application
@@ -37,7 +38,7 @@ public class YoutubeTabPaneController extends Controller {
 
     private void loadPlaylists() {
         FXMLLoader loader = SceneManager.getLoader("listView.fxml");
-        PlaylistController ctrl = new PlaylistController();
+        PlaylistsController ctrl = new PlaylistsController();
         loader.setController(ctrl);
         this.playlistTab.setContent(SceneManager.getComponent(loader));
     }
@@ -61,5 +62,13 @@ public class YoutubeTabPaneController extends Controller {
         SettingsController ctrl = new SettingsController();
         loader.setController(ctrl);
         this.settingsTab.setContent(SceneManager.getComponent(loader));
+    }
+
+    public void showPlaylist(Playlist p) {
+        FXMLLoader loader = SceneManager.getLoader("playlistView.fxml");
+        PlaylistController ctrl = new PlaylistController(p);
+        loader.setController(ctrl);
+        //this.playlistTab.setContent(null);
+        this.playlistTab.setContent(SceneManager.getComponent(loader));
     }
 }
