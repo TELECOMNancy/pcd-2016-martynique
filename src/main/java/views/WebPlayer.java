@@ -1,27 +1,24 @@
-package app;
+package views;
+import app.VideoPlayer;
 import javafx.scene.web.WebView;
 
 import javafx.scene.layout.BorderPane;
- 
-public class WebPlayer extends BorderPane implements VideoPlayer{
+import models.Video;
+
+public class WebPlayer extends BorderPane implements VideoPlayer {
     private WebView player;
     
-    private String videoID;
+    private Video video;
     
     public WebPlayer() {
         super();
-        
         this.player = new WebView();
-        
-        //this.player.set
-        
         this.setCenter(this.player);
-        
     }
     
-    public void play(String videoID) {
-        this.videoID = videoID;
-        player.getEngine().load( "https://www.youtube.com/embed/"+videoID);
+    public void play(Video video) {
+        this.video = video;
+        player.getEngine().load( "https://www.youtube.com/embed/"+ video.getID());
     }
     
     public void stop() {

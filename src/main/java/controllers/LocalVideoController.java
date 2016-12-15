@@ -12,7 +12,7 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 
 import javafx.beans.value.ChangeListener;
-import app.LocalPlayer;
+import views.LocalPlayer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ObservableValue;
 

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import models.Video;
 import utils.Answer;
 import utils.SuggestionAnswerButton;
 import utils.Question;
@@ -99,8 +100,7 @@ public class SuggestionController extends Controller {
     		if(queryReturn.size() != 0){
 	    		Random rand = new Random();
 	    		String selected = queryReturn.get(rand.nextInt(queryReturn.size()));
-
-				app.getAppController().playWebVideo(selected);
+				//app.getAppController().playWebVideo(selected);
     		}
     		else{
     			Alert alert = new Alert(AlertType.WARNING);

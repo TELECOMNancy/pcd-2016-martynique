@@ -56,14 +56,14 @@ public class LocalVideoListViewCell extends JFXListCell<Video> {
             this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    ctrl.playWebVideo(value.getID());
+                    ctrl.playWebVideo(value);
                 }
             });
 
             this.title.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    ctrl.playWebVideo(value.getID());
+                    ctrl.playWebVideo(value);
                 }
             });
             this.isFavorite.setOnMouseReleased(new EventHandler<MouseEvent>() {

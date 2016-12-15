@@ -2,7 +2,7 @@ package controllers;
 
 import app.Configuration;
 import app.SceneManager;
-import app.WebPlayer;
+import views.WebPlayer;
 import db.VideoDB;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
@@ -74,21 +74,21 @@ public class AppController {
         this.root.setCenter(this.resultsController.getScene());
     }
     
-    public void playWebVideo(String videoID) {
+    public void playWebVideo(Video v) {
         FXMLLoader loader = SceneManager.getLoader("WebVideoPage.fxml");
         
-        WebVideoController ctrl = new WebVideoController(videoID);
+        WebVideoController ctrl = new WebVideoController(v);
         loader.setController(ctrl);
         BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
         
-        wp.play(videoID);
+        wp.play(v);
         
         bp.setCenter(wp);
         
         resetRoot();
         this.root.setCenter(bp);
     }
-    
+
     public void playLocalVideo(String videoID) {
         videoID = Configuration.getInstance().getSavePath() + videoID;
         FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
@@ -107,12 +107,15 @@ public class AppController {
         ((WebPlayer) ((BorderPane) this.root.getCenter()).getCenter()).stop();
     }
     
-    public void download(String ID) {
+    public void download(Video v) {
         // might be interesting not to create a new thread each time
         Task<Void> task = new Task<Void>(){
             //@Overrride
             public Void call() throws Exception {
-                YTD.download(ID, app.Configuration.getInstance().getSavePath());
+                boolean ok = YTD.download(v, app.Configuration.getInstance().getSavePath());
+                if(ok)
+                    user.addDownloaded(v);
+
                 return null;
             }
         };
@@ -167,4 +170,6 @@ public class AppController {
     public void showCursor() {
         this.root.getScene().setCursor(Cursor.DEFAULT);
     }
+
+
 }

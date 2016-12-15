@@ -33,6 +33,26 @@ public class VideoDB {
         }
     }
 
+    public static List<Video> getDownloadedVideo() {
+        List<Video> list = new ArrayList<Video>();
+        try {
+            PreparedStatement prep;
+            prep = ConnectionDB.getInstance().prepareStatement(VideoDB.downloadedQuery());
+            ResultSet rs = prep.executeQuery();
+
+            while(rs.next()) {
+                Video v = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("id"));
+                list.add(v);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
     public static Video findById(String id) {
         Video v = null;
         try {
@@ -88,11 +108,15 @@ public class VideoDB {
     }
 
     public String deleteQuery() {
-        return ModelDB.deleteQuery(TABLE) + " WHERE ido = (?)";
+        return ModelDB.deleteQuery(TABLE) + " WHERE id = (?)";
     }
 
     private static String favoritesQuery() {
         return ModelDB.whereQuery(TABLE) + "favorite = 1";
+    }
+
+    private static String downloadedQuery() {
+        return ModelDB.whereQuery(TABLE) + "downloaded = 1";
     }
 
     public static void createTable() {
@@ -100,6 +124,7 @@ public class VideoDB {
                 "id varchar(255) PRIMARY KEY, " +
                 "title varchar(255) NOT NULL, " +
                 "favorite INTEGER NOT NULL DEFAULT 0 CHECK(favorite == 1 OR favorite == 0), " +
+                "downloaded INTEGER NOT NULL DEFAULT 0 CHECK(downloaded == 1 OR downloaded == 0), " +
                 "thumbnail varchar(255))";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
@@ -126,7 +151,19 @@ public class VideoDB {
             e.printStackTrace();
         }
 
-        System.out.println("##L## " + list);
         return list;
+    }
+
+    public static void setDownloaded(Video v, boolean b) {
+        try {
+            PreparedStatement prep;
+            prep = ConnectionDB.getInstance().prepareStatement(ModelDB.updateQuery(TABLE) + "downloaded = ? WHERE id = ?");
+            prep.setBoolean(1, b);
+            prep.setString(2, v.getID());
+            prep.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
