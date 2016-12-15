@@ -9,15 +9,15 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="Video" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/style.css">
+      <BorderPane fx:id="Video" minHeight="300.0" minWidth="400.0" style="-fx-background-color: black;" stylesheets="@../css/style.css">
          <StackPane.margin>
             <Insets />
          </StackPane.margin></BorderPane>
-      <BorderPane fx:id="Overlay" prefHeight="200.0" prefWidth="600.0">
+      <BorderPane fx:id="Overlay">
          <bottom>
-            <BorderPane fx:id="bottomLayout" prefHeight="44.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <BorderPane fx:id="bottomLayout" prefHeight="44.0" BorderPane.alignment="CENTER">
                <left>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
@@ -58,7 +58,7 @@
             </BorderPane>
          </bottom>
          <top>
-            <BorderPane prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="30.0" BorderPane.alignment="CENTER">
                <left>
                   <Button fx:id="returnButton" maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
                      <BorderPane.margin>

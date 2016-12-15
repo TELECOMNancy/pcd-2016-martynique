@@ -11,11 +11,14 @@ public class Configuration {
     
     private String savePath;
     private String dbPath;
-    private String dir = System.getProperty("user.dir").replaceAll("\\\\", "/");
-    private CharSequence defaultSettings = "dbpath="+ dir + "/db/\nsavepath="+ dir +"/savedVideos/";
+    private String localDir = System.getProperty("user.dir").replaceAll("\\\\", "/") + "/";
+    private String homeDir = System.getProperty("user.home").replaceAll("\\\\", "/") + "/";
+    private String configFileName = ".martyniqueconfig";
+    private CharSequence defaultSettings = "dbpath="+ localDir + "db/\nsavepath="+ localDir +"savedVideos/";
     
     private Configuration() {
-        File settings = new File(dir + "/settings.properties");
+        File settings = new File(homeDir + configFileName);
+        
         if (! settings.exists()) {
             try {
                 settings.createNewFile();
@@ -67,7 +70,7 @@ public class Configuration {
     }
     
     private void updateSettings() {
-        File settings = new File(dir + "/settings.properties");
+        File settings = new File(homeDir + configFileName);
         
         CharSequence newSettings = "dbpath="+ dbPath +"\nsavepath="+ savePath;
         
@@ -80,7 +83,7 @@ public class Configuration {
     }
     
     public void resetSettings() {
-        File settings = new File(dir + "/settings.properties");
+        File settings = new File(homeDir + configFileName);
         try {
             settings.createNewFile();
             Files.write(defaultSettings, settings, Charset.forName("UTF-8"));

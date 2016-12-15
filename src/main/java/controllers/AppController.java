@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import models.User;
 import models.Video;
@@ -54,12 +55,8 @@ public class AppController {
     
     public void showHome() {
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
-        this.root.setTop(null);
-        this.root.setBottom(null);
-        this.root.setRight(null);
-        this.root.setLeft(null);
+        resetRoot();
         
-        //this.root.getChildren().setAll(SceneManager.getComponent(loader));
         BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
         this.root.setTop(bp.getTop());
         this.root.setCenter(bp.getCenter());
@@ -98,7 +95,12 @@ public class AppController {
         LocalVideoController ctrl = new LocalVideoController(videoID);
         loader.setController(ctrl);
         resetRoot();
-        this.root.setCenter(SceneManager.getComponent(loader));
+        
+        StackPane sp = (StackPane) SceneManager.getComponent(loader);
+        sp.prefHeightProperty().bind(this.root.heightProperty());
+        sp.prefWidthProperty().bind(this.root.widthProperty());
+        
+        this.root.setCenter(sp);
     }
     
     public void stopWebVideo() {
@@ -138,8 +140,6 @@ public class AppController {
     
     public void quitFullScreen() {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(false);
-        // the cursor would hide sometimes after full screen
-        this.root.getScene().setCursor(Cursor.DEFAULT);
     }
 
     public User getUser() {

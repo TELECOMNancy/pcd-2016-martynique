@@ -1,10 +1,8 @@
 package app;
 import javafx.scene.web.WebView;
-import javafx.scene.web.WebEngine;
 
 import javafx.scene.layout.BorderPane;
  
-@SuppressWarnings("restriction")
 public class WebPlayer extends BorderPane implements VideoPlayer{
     private WebView player;
     
