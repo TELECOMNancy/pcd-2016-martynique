@@ -9,12 +9,12 @@ import java.sql.DriverManager;
 public class ConnectionDB {
 
     private static Connection connection;
-
+    
     public static Connection getInstance() {
         if(ConnectionDB.connection == null) {
             try {
                 Class.forName("org.sqlite.JDBC");
-                ConnectionDB.connection = DriverManager.getConnection("jdbc:sqlite:martynique.db");
+                ConnectionDB.connection = DriverManager.getConnection("jdbc:sqlite:"+app.Configuration.getInstance().getDbPath()+"martynique.db");
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);

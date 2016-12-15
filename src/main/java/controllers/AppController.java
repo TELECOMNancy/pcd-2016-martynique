@@ -7,6 +7,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
@@ -32,8 +33,6 @@ public class AppController {
     private User user;
     private WebPlayer wp;
 
-    private String savePath = System.getProperty("user.dir") + "\\savedVideos\\";
-    
     public AppController(User user) {
         this.user = user;
     }   
@@ -113,7 +112,7 @@ public class AppController {
         Task<Void> task = new Task<Void>(){
             //@Overrride
             public Void call() throws Exception {
-                YTD.download(ID, savePath);
+                YTD.download(ID, app.Configuration.getInstance().getSavePath());
                 return null;
             }
         };
@@ -126,11 +125,9 @@ public class AppController {
 
             alert.showAndWait();
         });
-        
         new Thread(task).start();
     }
     
-    // a adapter quand on ajoutera le lecteur offline
     public void goFullScreen(VideoController ctrl) {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(true);
         this.root.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -153,5 +150,13 @@ public class AppController {
         value.setFavorite(!value.isFavorite());
         VideoDB.setFavorite(value);
         return value.isFavorite();
+    }
+    
+    public void hideCursor() {
+        this.root.getScene().setCursor(Cursor.NONE);
+    }
+    
+    public void showCursor() {
+        this.root.getScene().setCursor(Cursor.DEFAULT);
     }
 }
