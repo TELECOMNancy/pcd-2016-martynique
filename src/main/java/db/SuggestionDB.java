@@ -2,11 +2,15 @@ package db;
 
 import models.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.*;
+
+import app.SceneManager;
 import controllers.SuggestionController.Flag;
 
 
@@ -14,6 +18,8 @@ public class SuggestionDB {
 
     public static final String TABLE_SUGGESTIONS = "Suggestions";
     public static final String TABLE_TAGS = "Tags";
+
+    public static final String PATH_JSON = "/json/";
 
     private static String generateRequest(HashMap<Flag, String> flags){
     	String WHERE = "";
@@ -81,12 +87,14 @@ public class SuggestionDB {
             ResultSet tableKeys = prep.getGeneratedKeys();
             tableKeys.next();
             tag.setID(new IntegerID(tableKeys.getInt(1)));
+			System.out.println(tag.getID());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
     private static void initializeTables(){
+    	/*
     	Suggestion video1 = new Suggestion("_yEHa6dIKgg", 14);
     	Suggestion video2 = new Suggestion("-X49VQgi86E", 12);
     	Suggestion video3 = new Suggestion("8RFKi7JcuFA", 10);
@@ -96,14 +104,39 @@ public class SuggestionDB {
     	Tag tag1 = new Tag(video1.getID(), "sciences");
     	Tag tag2 = new Tag(video2.getID(), "sciences");
     	Tag tag3 = new Tag(video3.getID(), "histoire");
-    	Tag tag4 = new Tag(video3.getID(), "mathematiques");
+    	Tag tag4 = new Tag(video2.getID(), "mathematiques");
     	insertTag(tag1);
     	insertTag(tag2);
     	insertTag(tag3);
     	insertTag(tag4);
-    }
+    	*/
 
+    	JSONTokener tokener;
+		try {
+			tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/sug1.json").openStream());
+			JSONObject root = new JSONObject(tokener);
+			System.out.println(root);
+	    	JSONArray sug = root.getJSONArray("sug");
+	    	for(int i=0;i<sug.length();i++){
+	    		String code = sug.getJSONObject(i).getString("code");
+	    		int length = sug.getJSONObject(i).getInt("length");
+	    		JSONArray tags = sug.getJSONObject(i).getJSONArray("tags");
+	    		Suggestion curVideo = new Suggestion(code, length);
+	    		insertSuggestion(curVideo);
+	    		for(int j=0;j<tags.length();j++){
+	    			String curTagValue = tags.getString(j);
+	    			Tag curTag = new Tag(curVideo.getID(), curTagValue);
+	    			insertTag(curTag);
+	    		}
+	    	}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    	
     public static void createTable() {
+    	
     	String createString1 = "CREATE TABLE IF NOT EXISTS " + TABLE_SUGGESTIONS +  " ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "code varchar(255) NOT NULL, " +
@@ -111,6 +144,7 @@ public class SuggestionDB {
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             //st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_SUGGESTIONS);
+            st.executeUpdate("DROP TABLE "+TABLE_SUGGESTIONS);
             st.executeUpdate(createString1);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,6 +157,7 @@ public class SuggestionDB {
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             //st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_TAGS);
+            st.executeUpdate("DROP TABLE "+TABLE_TAGS);
             st.executeUpdate(createString2);
         } catch (SQLException e) {
             e.printStackTrace();

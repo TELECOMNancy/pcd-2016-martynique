@@ -1,5 +1,6 @@
 package controllers;
 
+import app.Configuration;
 import app.SceneManager;
 import app.WebPlayer;
 import db.VideoDB;
@@ -7,6 +8,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
@@ -32,8 +34,6 @@ public class AppController {
     private User user;
     private WebPlayer wp;
 
-    private String savePath = System.getProperty("user.dir") + "\\savedVideos\\";
-    
     public AppController(User user) {
         this.user = user;
     }   
@@ -58,7 +58,11 @@ public class AppController {
         this.root.setBottom(null);
         this.root.setRight(null);
         this.root.setLeft(null);
-        this.root.setCenter(SceneManager.getComponent(loader));
+        
+        //this.root.getChildren().setAll(SceneManager.getComponent(loader));
+        BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
+        this.root.setTop(bp.getTop());
+        this.root.setCenter(bp.getCenter());
     }
 
     public void showResults(List<Video> results) {
@@ -67,17 +71,10 @@ public class AppController {
             this.resultsController = new ResultsController(results);
             loader.setController(this.resultsController);
             SceneManager.getComponent(loader);
-        }
-
+        } else
+            this.resultsController.updateResults(results);
+        
         this.root.setCenter(this.resultsController.getScene());
-    }
-    
-    public void showSuggestion() {
-    	FXMLLoader loader = SceneManager.getLoader("suggestion.fxml");
-    	SuggestionController ctrl = new SuggestionController();
-        loader.setController(ctrl);
-
-        this.root.setCenter(SceneManager.getComponent(loader));
     }
     
     public void playWebVideo(String videoID) {
@@ -96,7 +93,7 @@ public class AppController {
     }
     
     public void playLocalVideo(String videoID) {
-        videoID = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
+        videoID = Configuration.getInstance().getSavePath() + "test.mp4";
         FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
         LocalVideoController ctrl = new LocalVideoController(videoID);
         loader.setController(ctrl);
@@ -113,7 +110,7 @@ public class AppController {
         Task<Void> task = new Task<Void>(){
             //@Overrride
             public Void call() throws Exception {
-                YTD.download(ID, savePath);
+                YTD.download(ID, app.Configuration.getInstance().getSavePath());
                 return null;
             }
         };
@@ -126,11 +123,9 @@ public class AppController {
 
             alert.showAndWait();
         });
-        
         new Thread(task).start();
     }
     
-    // a adapter quand on ajoutera le lecteur offline
     public void goFullScreen(VideoController ctrl) {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(true);
         this.root.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -143,6 +138,8 @@ public class AppController {
     
     public void quitFullScreen() {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(false);
+        // the cursor would hide sometimes after full screen
+        this.root.getScene().setCursor(Cursor.DEFAULT);
     }
 
     public User getUser() {
@@ -158,5 +155,13 @@ public class AppController {
 
         VideoDB.setFavorite(value);
         return value.isFavorite();
+    }
+    
+    public void hideCursor() {
+        this.root.getScene().setCursor(Cursor.NONE);
+    }
+    
+    public void showCursor() {
+        this.root.getScene().setCursor(Cursor.DEFAULT);
     }
 }

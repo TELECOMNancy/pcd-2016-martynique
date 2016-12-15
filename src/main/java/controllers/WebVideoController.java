@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import models.User;
 
 /**
  * Controller for playing web videos.
@@ -52,10 +51,6 @@ public class WebVideoController extends Controller implements VideoController{
         this.returnButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("Return");
-                app.getAppController().showHome();
-
-                System.out.println("returnButton");
                 app.getAppController().stopWebVideo();
                 app.getAppController().showHome();
             }

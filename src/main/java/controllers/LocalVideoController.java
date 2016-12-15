@@ -3,17 +3,13 @@ package controllers;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Label;
-
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
 
 import javafx.beans.value.ChangeListener;
 import app.LocalPlayer;
@@ -72,44 +68,39 @@ public class LocalVideoController extends Controller implements VideoController{
         this.bottomLayout.setTop(this.progressBar);
         
         this.volume.setValue(100);
-        /*
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                hideOverlay();
-            }
-        };
-        Timer timer = new Timer();
+        
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(3000),
+                ae-> hideOverlay()));
         
         this.Overlay.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 showOverlay();
-                timer.cancel();
-                timer.purge();
-                timer = new Timer();
-                timer.schedule(task, 5000);
-                System.out.println("moved");
+                timeline.stop();
+                timeline.play();
             }
         });
-        */
+        
+        this.Video.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                showOverlay();
+            }
+        });
+        
         
         this.lp.getPlayer().currentTimeProperty().addListener(new ChangeListener<Duration>() {
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-                progressBar
-                        .sliderValueProperty()
-                        .setValue(lp.getProgress() * 100.0);
+                progressBar.sliderValueProperty().setValue(lp.getProgress() * 100.0);
             }
         });
         
         this.progressBar.sliderValueProperty().addListener((ov) -> {
             if (progressBar.isTheValueChanging()) {
                 if (null != lp.getPlayer()) {
-                    // multiply duration by percentage calculated by
-                    // slider position
-                    lp.setProgress(progressBar
-                            .sliderValueProperty().getValue() / 100.0);
+                    lp.setProgress(progressBar.sliderValueProperty().getValue() / 100.0);
                 } else {
                     System.out.println("else");
                     progressBar.sliderValueProperty().setValue(0);
@@ -148,6 +139,7 @@ public class LocalVideoController extends Controller implements VideoController{
             @Override
             public void handle(MouseEvent event) {
                 pause();
+                showOverlay();
                 app.getAppController().showHome();
             }
         });
@@ -223,13 +215,13 @@ public class LocalVideoController extends Controller implements VideoController{
     
     
     public void hideOverlay() {
+        app.getAppController().hideCursor();
         this.Overlay.setVisible(false);
-        //this.Overlay.setManaged(false);
     }
     
     public void showOverlay() {
+        app.getAppController().showCursor();
         this.Overlay.setVisible(true);
-        //this.Overlay.setManaged(true);
     }
     
     @Override

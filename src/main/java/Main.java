@@ -11,8 +11,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import models.Playlist;
 import models.Video;
+import sun.security.krb5.Config;
 
 import java.util.List;
+
+import app.Configuration;
 
 
 public class Main extends Application {
@@ -27,7 +30,7 @@ public class Main extends Application {
     }
 
     private void initUser() {
-        List<Video> fav = new VideoDB().getFavorites();
+        List<Video> fav = VideoDB.getFavorites();
         for(Video f: fav)
             this.app.getUser().addFavorite(f);
     }
@@ -35,8 +38,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Configuration.getInstance();
+        Configuration.getInstance().resetSettings();
         this.initDB();
         this.initUser();
+        
 
         FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
         loader.setController(this.app.getAppController());
