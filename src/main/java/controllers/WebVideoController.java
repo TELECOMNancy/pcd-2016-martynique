@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import models.Video;
 
 /**
  * Controller for playing web videos.
@@ -19,14 +20,17 @@ public class WebVideoController extends Controller implements VideoController{
     @FXML private BorderPane Player;
     @FXML private BorderPane TopBar;
 
-    public WebVideoController(String videoID) {
+    private Video v;
+
+    public WebVideoController(Video v) {
         super();
-        ID = videoID;
+        this.v = v;
         this.fsButton = new Button();
         this.returnButton = new Button();
         this.dlButton = new Button();
     }
-    
+
+
     @FXML
     private void initialize() {
         
@@ -43,8 +47,7 @@ public class WebVideoController extends Controller implements VideoController{
         this.dlButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("Hello");
-                app.getAppController().download(ID);
+                app.getAppController().download(v);
             }
         });
         

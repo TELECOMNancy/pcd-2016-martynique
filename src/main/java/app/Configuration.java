@@ -23,6 +23,8 @@ public class Configuration {
 
     private Properties props;
 
+
+
     private Configuration() {
         this.props = new Properties();
         File settings = new File(this.SETTINGS_FILEPATH);
@@ -43,6 +45,11 @@ public class Configuration {
             e.printStackTrace();
         }
 
+        this.init();
+    }
+
+    private void init() {
+        new File(this.props.getProperty(DOWNLOADS_KEY)).mkdirs();
     }
     
     public static Configuration getInstance() {
@@ -74,12 +81,11 @@ public class Configuration {
         }
     }
 
-
-    public void defaultValues() {
+    public void defaultValues() throws IOException {
         this.props.setProperty(DB_PATH_KEY, this.getPath());
         this.props.setProperty(DOWNLOADS_KEY, this.getPath("videos").toString());
+        new File(this.props.getProperty(DOWNLOADS_KEY)).mkdirs();
     }
-
 
     private String getPath() {
         return getPath("");

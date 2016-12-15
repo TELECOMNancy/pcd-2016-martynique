@@ -1,8 +1,6 @@
-import app.LocalPlayer;
+import views.LocalPlayer;
 import app.VideoPlayer;
-import app.WebPlayer;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;

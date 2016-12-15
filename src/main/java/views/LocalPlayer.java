@@ -1,7 +1,8 @@
-package app;
+package views;
 import java.io.File;
 //import java.time.Duration;
 
+import app.VideoPlayer;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.media.MediaPlayer;
@@ -10,16 +11,12 @@ import javafx.scene.media.Media;
 
 import javafx.util.Duration;
  
-public class LocalPlayer extends BorderPane implements VideoPlayer {  
+public class LocalPlayer extends BorderPane implements VideoPlayer {
     private MediaView player;
     
     public LocalPlayer(String source) {
         super();
 
-        //String source = getParameters().getRaw().get(0);
-        //String source = "E:/workspace/pcd-2016-martynique/savedVideos/test.mp4";
-        //String source = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
-        
         String url = "";
         try{
             File video = new File(source);
