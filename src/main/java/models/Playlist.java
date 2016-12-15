@@ -52,7 +52,8 @@ public class Playlist implements Identifiable {
 
 	@Override
 	public String getID() {
-		return this.name;
+
+		return this.id.getValue();
 	}
 
 	@Override

@@ -9,19 +9,30 @@ import java.util.List;
 
 import models.IntegerID;
 import models.Playlist;
+import models.VarcharID;
 import models.Video;
 
 public class PlaylistDB{
 
     private static final String TABLE = "Playlist";
 
-    public void create(Playlist playlist) {
+    public static void create(Playlist playlist) {
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             PreparedStatement prep;
-            prep = ConnectionDB.getInstance().prepareStatement(ModelDB.insertQuery(TABLE), Statement.RETURN_GENERATED_KEYS);
-            prep.setString(1, playlist.getID());
+            prep = ConnectionDB.getInstance().prepareStatement(insertQuery(), Statement.RETURN_GENERATED_KEYS);
+            //prep.setString(1, playlist.getID());
+            prep.setString(1, playlist.getName());
             prep.executeUpdate();
+            
+            /*if(playlist.getVideoList().size() != 0){
+            	for(Video i : playlist.getVideoList()){
+            		VideoDB.create(i);
+            	}
+            }*/
+            ResultSet tableKeys = prep.getGeneratedKeys();
+            tableKeys.next();
+            playlist.setID(new IntegerID(tableKeys.getInt(1)));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,7 +72,7 @@ public class PlaylistDB{
          ResultSet rs = prep.executeQuery();
 
          playlist = new Playlist(rs.getString("title"));
-         playlist.setID(new IntegerID(rs.getInt("id_playlist")));
+         playlist.setID(new IntegerID(rs.getInt("id")));
          
          rs.close();
  	} catch (SQLException e) {
@@ -72,13 +83,18 @@ public class PlaylistDB{
     }
 
     public static String whereQuery() {
-        return "SELECT * FROM " + TABLE + " WHERE id_playlist = ?"; 
+        return "SELECT * FROM " + TABLE + " WHERE id = ?"; 
+    }
+    
+    public static String insertQuery() {
+        return ModelDB.insertQuery(TABLE) + "(title) VALUES(?)";
     }
 
 	
     public static void createTable() {
         String createString = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
-                "title varchar(255) PRIMARY KEY)";
+        		"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        		"title varchar(255) NOT NULL UNIQUE)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
             st.executeUpdate(createString);

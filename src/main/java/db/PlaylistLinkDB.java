@@ -21,7 +21,7 @@ public class PlaylistLinkDB {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(insertQuery(), Statement.RETURN_GENERATED_KEYS);
 
-            prep.setString(1, (play.getID()));
+            prep.setString(1, play.getID());
             prep.setString(2, vid.getID());
             
             prep.executeUpdate();
@@ -37,10 +37,10 @@ public class PlaylistLinkDB {
     public static void createTable(){
         String junction_table = "CREATE TABLE IF NOT EXISTS " + TABLE +  " ( " +
                 "id_playlist INTEGER , " +
-                "id_video INTEGER, " +
+                "id_video varchar(255), " +
                 "CONSTRAINT id_link PRIMARY KEY (id_playlist, id_video)," +
-                "CONSTRAINT FK_video FOREIGN KEY (id_video) REFERENCES Videos (id),"+
-                "CONSTRAINT FK_playlist FOREIGN KEY (id_playlist) REFERENCES PlaylistLink (id)"+
+                "CONSTRAINT FK_video FOREIGN KEY (id_video) REFERENCES Videos (id_video),"+
+                "CONSTRAINT FK_playlist FOREIGN KEY (id_playlist) REFERENCES PlaylistLink (id_playlist)"+
                 ")";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();

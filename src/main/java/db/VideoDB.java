@@ -1,5 +1,7 @@
 package db;
 
+import models.IntegerID;
+import models.VarcharID;
 import models.Video;
 
 import java.sql.*;
@@ -23,6 +25,9 @@ public class VideoDB {
             prep.setString(3, v.getThumbnail());
             prep.setBoolean(4, v.isFavorite());
             prep.executeUpdate();
+            
+
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,8 +41,14 @@ public class VideoDB {
             prep.setString(1, id);
             ResultSet rs = prep.executeQuery();
 
-            if (rs.next())
+            if (rs.next()){
                 v = new Video(rs.getString("title"), rs.getString("thumbnail"), rs.getString("id"));
+                if(rs.getInt("favorite") == 1)
+                	v.setFavorite(true);
+                else
+                	v.setFavorite(false);
+                
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,11 +67,13 @@ public class VideoDB {
         try {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(VideoDB.updateQuery());
-            prep.setString(1, v.getTitle());
-            prep.setString(2, v.getThumbnail());
-            prep.setBoolean(3, v.isFavorite());
-            prep.setString(4, v.getID());
+            prep.setString(2, v.getTitle());
+            prep.setString(3, v.getThumbnail());
+            prep.setBoolean(4, v.isFavorite());
+            prep.setString(1, v.getID());
             prep.executeUpdate();
+            
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,15 +82,15 @@ public class VideoDB {
     }
 
     public static String insertQuery() {
-        return ModelDB.insertQuery(TABLE) + "(id, title, thumbnail, favorite) VALUES(?,?,?,?)";
+        return ModelDB.insertQuery(TABLE) + "(id ,title, thumbnail, favorite) VALUES(?,?,?,?)";
     }
     
     public static String updateQuery() {
-        return ModelDB.updateQuery(TABLE) + "title = ?, thumbnail  = ?, favorite = ? WHERE id = ?";
+        return ModelDB.updateQuery(TABLE) + "title = ?, thumbnail  = ?, favorite = ? WHERE ido = ?";
     }
 
     public String deleteQuery() {
-        return ModelDB.deleteQuery(TABLE) + " WHERE id = (?)";
+        return ModelDB.deleteQuery(TABLE) + " WHERE ido = (?)";
     }
 
     private static String favoritesQuery() {

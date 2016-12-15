@@ -62,55 +62,38 @@ public class SuggestionDB {
     }
     
     public static void insertSuggestion(Suggestion suggestion){
-    	String query = "INSERT INTO "+SuggestionDB.TABLE_SUGGESTIONS+" (code, length) VALUES ((?), (?));";
+    	String query = "INSERT INTO "+SuggestionDB.TABLE_SUGGESTIONS+" (code, length) VALUES (?, ?);";
         try {
-            // Statement st = this.connection.createStatement();
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            prep.setString(1, suggestion.getID());
+            prep.setString(1, suggestion.getCode());
             prep.setInt(2, suggestion.getLength());
             prep.executeUpdate();
+            ResultSet tableKeys = prep.getGeneratedKeys();
+            tableKeys.next();
+            suggestion.setID(new IntegerID(tableKeys.getInt(1)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
     public static void insertTag(Tag tag){
-    	String query = "INSERT INTO "+SuggestionDB.TABLE_TAGS+" (id_video, tag) VALUES ((?), (?));";
+    	String query = "INSERT INTO "+SuggestionDB.TABLE_TAGS+" (id_video, tag) VALUES (?, ?);";
         try {
-            // Statement st = this.connection.createStatement();
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            prep.setString(1, tag.getIDVideo());
+            prep.setInt(1, Integer.parseInt(tag.getIDVideo()));
             prep.setString(2, tag.getTag());
             prep.executeUpdate();
             ResultSet tableKeys = prep.getGeneratedKeys();
             tableKeys.next();
             tag.setID(new IntegerID(tableKeys.getInt(1)));
-			System.out.println(tag.getID());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
     private static void initializeTables(){
-    	/*
-    	Suggestion video1 = new Suggestion("_yEHa6dIKgg", 14);
-    	Suggestion video2 = new Suggestion("-X49VQgi86E", 12);
-    	Suggestion video3 = new Suggestion("8RFKi7JcuFA", 10);
-    	insertSuggestion(video1);
-    	insertSuggestion(video2);
-    	insertSuggestion(video3);
-    	Tag tag1 = new Tag(video1.getID(), "sciences");
-    	Tag tag2 = new Tag(video2.getID(), "sciences");
-    	Tag tag3 = new Tag(video3.getID(), "histoire");
-    	Tag tag4 = new Tag(video2.getID(), "mathematiques");
-    	insertTag(tag1);
-    	insertTag(tag2);
-    	insertTag(tag3);
-    	insertTag(tag4);
-    	*/
-
     	JSONTokener tokener;
 		try {
 			tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/sug1.json").openStream());
@@ -125,12 +108,11 @@ public class SuggestionDB {
 	    		insertSuggestion(curVideo);
 	    		for(int j=0;j<tags.length();j++){
 	    			String curTagValue = tags.getString(j);
-	    			Tag curTag = new Tag(curVideo.getID(), curTagValue);
+	    			Tag curTag = new Tag(new IntegerID(Integer.parseInt(curVideo.getID())), curTagValue);
 	    			insertTag(curTag);
 	    		}
 	    	}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -143,8 +125,7 @@ public class SuggestionDB {
                 "length INTEGER NOT NULL)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
-            //st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_SUGGESTIONS);
-            st.executeUpdate("DROP TABLE "+TABLE_SUGGESTIONS);
+            st.executeUpdate("DROP TABLE IF EXISTS " + SuggestionDB.TABLE_SUGGESTIONS);
             st.executeUpdate(createString1);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -156,8 +137,7 @@ public class SuggestionDB {
                 "tag varchar(255) NOT NULL)";
         try {
             Statement st = ConnectionDB.getInstance().createStatement();
-            //st.executeUpdate("DROP TABLE " + SuggestionDB.TABLE_TAGS);
-            st.executeUpdate("DROP TABLE "+TABLE_TAGS);
+            st.executeUpdate("DROP TABLE IF EXISTS "+SuggestionDB.TABLE_TAGS);
             st.executeUpdate(createString2);
         } catch (SQLException e) {
             e.printStackTrace();

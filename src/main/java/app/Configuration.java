@@ -63,7 +63,7 @@ public class Configuration {
     }
     
     public String getDbPath() {
-        return dbPath;
+        return dbPath + "martynique.db";
     }
     
     private void updateSettings() {
