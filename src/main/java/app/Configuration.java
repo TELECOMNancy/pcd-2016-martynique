@@ -26,11 +26,20 @@ public class Configuration {
         }
         
         try {
+            // gets directories
             dbPath=Files.readLines(settings, Charset.forName("UTF-8")).get(0).replaceAll("dbpath=", "");
             savePath=Files.readLines(settings, Charset.forName("UTF-8")).get(1).replaceAll("savepath=", "");
+            
+            // creates directories if they don't exist
+            File dbDir = new File(dbPath);
+            File saveDir = new File(savePath);
+            dbDir.mkdirs();
+            saveDir.mkdirs();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
     
     public static Configuration getInstance() {

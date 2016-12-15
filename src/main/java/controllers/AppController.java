@@ -1,5 +1,6 @@
 package controllers;
 
+import app.Configuration;
 import app.SceneManager;
 import app.WebPlayer;
 import db.VideoDB;
@@ -57,7 +58,11 @@ public class AppController {
         this.root.setBottom(null);
         this.root.setRight(null);
         this.root.setLeft(null);
-        this.root.setCenter(SceneManager.getComponent(loader));
+        
+        //this.root.getChildren().setAll(SceneManager.getComponent(loader));
+        BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
+        this.root.setTop(bp.getTop());
+        this.root.setCenter(bp.getCenter());
     }
 
     public void showResults(List<Video> results) {
@@ -66,17 +71,10 @@ public class AppController {
             this.resultsController = new ResultsController(results);
             loader.setController(this.resultsController);
             SceneManager.getComponent(loader);
-        }
-
+        } else
+            this.resultsController.updateResults(results);
+        
         this.root.setCenter(this.resultsController.getScene());
-    }
-    
-    public void showSuggestion() {
-    	FXMLLoader loader = SceneManager.getLoader("suggestion.fxml");
-    	SuggestionController ctrl = new SuggestionController();
-        loader.setController(ctrl);
-
-        this.root.setCenter(SceneManager.getComponent(loader));
     }
     
     public void playWebVideo(String videoID) {
@@ -95,7 +93,7 @@ public class AppController {
     }
     
     public void playLocalVideo(String videoID) {
-        videoID = "E:/workspace/pcd-2016-martynique/savedVideos/Westworld.mp4";
+        videoID = Configuration.getInstance().getSavePath() + "test.mp4";
         FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
         LocalVideoController ctrl = new LocalVideoController(videoID);
         loader.setController(ctrl);
@@ -140,6 +138,8 @@ public class AppController {
     
     public void quitFullScreen() {
         ((Stage) this.root.getScene().getWindow()).setFullScreen(false);
+        // the cursor would hide sometimes after full screen
+        this.root.getScene().setCursor(Cursor.DEFAULT);
     }
 
     public User getUser() {

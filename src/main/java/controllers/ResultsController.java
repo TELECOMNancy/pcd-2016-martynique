@@ -27,7 +27,15 @@ public class ResultsController extends Controller {
         }
         this.results = new JFXListView<Video>();
         this.searchResultsObservableList = FXCollections.observableArrayList();
-        this.searchResultsObservableList.addAll(results);
+        this.searchResultsObservableList.setAll(results);
+    }
+    
+    public void updateResults(List<Video> results) {
+        for(Video v: results) {
+            if(this.app.getUser().hasFavorite(v))
+                v.setFavorite(true);
+        }
+        this.searchResultsObservableList.setAll(results);
     }
     
     @FXML

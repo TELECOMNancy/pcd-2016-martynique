@@ -139,6 +139,7 @@ public class LocalVideoController extends Controller implements VideoController{
             @Override
             public void handle(MouseEvent event) {
                 pause();
+                showOverlay();
                 app.getAppController().showHome();
             }
         });
@@ -214,13 +215,13 @@ public class LocalVideoController extends Controller implements VideoController{
     
     
     public void hideOverlay() {
-        this.Overlay.setVisible(false);
         app.getAppController().hideCursor();
+        this.Overlay.setVisible(false);
     }
     
     public void showOverlay() {
-        this.Overlay.setVisible(true);
         app.getAppController().showCursor();
+        this.Overlay.setVisible(true);
     }
     
     @Override
