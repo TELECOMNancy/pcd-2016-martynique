@@ -133,6 +133,16 @@ public class VideoDB {
             e.printStackTrace();
         }
     }
+    
+    public static void dropTable(){
+        String createString = "DROP TABLE IF EXISTS "+TABLE;
+        try {
+            Statement st = ConnectionDB.getInstance().createStatement();
+            st.executeUpdate(createString);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static List<Video> getFavorites() {
         List<Video> list = new ArrayList<Video>();
