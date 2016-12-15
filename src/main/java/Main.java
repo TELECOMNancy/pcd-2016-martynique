@@ -1,5 +1,7 @@
 import app.App;
 import app.SceneManager;
+import db.PlaylistDB;
+import db.PlaylistLinkDB;
 import db.SuggestionDB;
 import db.VideoDB;
 import javafx.application.Application;
@@ -7,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import models.Playlist;
 import models.Video;
 
 import java.util.List;
@@ -19,6 +22,8 @@ public class Main extends Application {
     private void initDB() {
         VideoDB.createTable();
         SuggestionDB.createTable();
+        PlaylistDB.createTable();
+        PlaylistLinkDB.createTable();
     }
 
     private void initUser() {
