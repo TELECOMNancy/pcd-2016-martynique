@@ -24,13 +24,15 @@ public class YoutubeTabPaneController extends Controller {
     public void initialize() {
         loadFavorites();
         loadSuggestion();
+        loadLocalVideos();
         
         this.localVideosTab.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
                 if(localVideosTab.isSelected())
+                    System.out.println("hello");
                     //a remplacer par un file chooser
-                    app.getAppController().playLocalVideo("");
+                    //app.getAppController().playLocalVideo("");
             }
         });
     }
@@ -47,5 +49,12 @@ public class YoutubeTabPaneController extends Controller {
         SuggestionController ctrl = new SuggestionController();
         loader.setController(ctrl);
         this.suggestTab.setContent(SceneManager.getComponent(loader));
+    }
+    
+    private void loadLocalVideos() {
+        FXMLLoader loader = SceneManager.getLoader("videosListView.fxml");
+        LocalListController ctrl = new LocalListController();
+        loader.setController(ctrl);
+        this.localVideosTab.setContent(SceneManager.getComponent(loader));
     }
 }
