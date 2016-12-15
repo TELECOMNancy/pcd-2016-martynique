@@ -25,6 +25,7 @@
 .settings *{
 	-fx-text-fill: white;
 	-fx-text-inner-color: white;
+	-fx-text-font-family: Robot;
 }
 
 .button {
