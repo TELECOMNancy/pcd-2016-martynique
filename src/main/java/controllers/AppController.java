@@ -2,6 +2,8 @@ package controllers;
 
 import app.Configuration;
 import app.SceneManager;
+import app.WebPlayer;
+
 import com.jfoenix.controls.JFXSpinner;
 import db.VideoDB;
 import javafx.concurrent.Task;
@@ -22,7 +24,6 @@ import models.User;
 import models.Video;
 import utils.Search;
 import utils.YTD;
-import views.WebPlayer;
 
 import java.io.File;
 import java.util.List;
@@ -148,7 +149,18 @@ public class AppController {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Download Error");
             alert.setHeaderText("Download failed!");
-            alert.setContentText("It is possible the video is protected.");
+            alert.setContentText("The video : \'" + v.getTitle() +"' couldn't be downloaded.\n"
+                    + "It is possible the video is protected.");
+
+            alert.showAndWait();
+        });
+        
+        task.setOnSucceeded(e -> {            
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Download Success");
+            alert.setHeaderText("Download Succeeded!");
+            alert.setContentText("The video : \'" + v.getTitle() +"' was successfully downloaded.\n"
+                    + "You can now watch it offline by going in the Downloaded tab.");
 
             alert.showAndWait();
         });

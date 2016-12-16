@@ -42,7 +42,7 @@ public class DownloadsController extends TabController implements Observer {
     public void update(Observable o, Object arg) {
         if (arg.equals("add-download")) {
             this.downloadsObservableList.clear();
-            this.downloadsObservableList.addAll(LocalFiles.getDownloads());
+            //this.downloadsObservableList.addAll(LocalFiles.getDownloads());
         }
     }
 }

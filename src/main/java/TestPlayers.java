@@ -1,4 +1,4 @@
-import views.LocalPlayer;
+import app.LocalPlayer;
 import app.VideoPlayer;
 import javafx.application.Application;
 import javafx.scene.Scene;
