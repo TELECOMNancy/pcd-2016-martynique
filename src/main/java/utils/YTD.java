@@ -26,6 +26,10 @@ public class YTD {
     }
     
     public static boolean download(Video v, String path) {
+        // les videos venant des suggestion ne contiennent pas toutes les informations necessaires pour les telecharger 
+        if (v.getTitle().equals("Video choisie"))
+            throw new RuntimeException("Impossible de telecharger cette video");
+        
         System.out.println("#DOWNLOADING '" + v.getTitle() + "'");
         Path filePath = Paths.get(path);
         boolean status = false;
@@ -46,7 +50,7 @@ public class YTD {
             File oldAudio =new File(Paths.get(savePath, fileName+".webm").toString());
             File newAudio =new File(Paths.get(savePath, "audio.webm").toString());
 
-            if(oldVideo.renameTo(newVideo) && oldAudio.renameTo(newAudio)){
+            if(oldAudio.renameTo(newAudio) && oldVideo.renameTo(newVideo) ){
                 // la video a ete telecharger en deux fichiers, un mp4 avec la video et un webm avec le son
                 // on utilise ffmpeg pour les remultiplexer ensemble
                 String ffmpegCmd = "ffmpeg -i \""+ newVideo.getAbsolutePath() +"\" -i \""+ newAudio.getAbsolutePath()+ "\" -c:v copy -c:a aac -strict experimental \"" + Paths.get(savePath, fileName+".mp4") + "\"";

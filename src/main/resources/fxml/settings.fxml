@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -46,13 +47,25 @@
          <children>
             <JFXTextField fx:id="dbPathField" prefHeight="31.0" unFocusColor="WHITE" GridPane.columnIndex="1" />
             <JFXTextField fx:id="savePathField" prefHeight="31.0" unFocusColor="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <JFXButton fx:id="dbLocButton" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" text="Change path" textFill="#ffffff00" GridPane.columnIndex="2" />
-            <JFXButton fx:id="saveLocButton" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" text="Change path" textFill="#ffffff00" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <JFXButton fx:id="saveButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="Save" textFill="TRANSPARENT" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <JFXButton fx:id="resetButton" alignment="TOP_LEFT" contentDisplay="RIGHT" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" textFill="TRANSPARENT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <JFXButton fx:id="dbLocButton" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" text="Change path" textFill="#ffffff00" GridPane.columnIndex="2">
+               <tooltip>
+                  <Tooltip text="Choose database path" />
+               </tooltip></JFXButton>
+            <JFXButton fx:id="saveLocButton" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" text="Change path" textFill="#ffffff00" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Choose download path" />
+               </tooltip></JFXButton>
+            <JFXButton fx:id="saveButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" stylesheets="@../css/style.css" text="Save" textFill="TRANSPARENT" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <tooltip>
+                  <Tooltip text="Save" />
+               </tooltip></JFXButton>
+            <JFXButton fx:id="resetButton" alignment="TOP_LEFT" contentDisplay="RIGHT" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" text="Reset" textFill="TRANSPARENT" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="4.0" />
                </GridPane.margin>
+               <tooltip>
+                  <Tooltip text="Reset settings to default" />
+               </tooltip>
             </JFXButton>
             <Label text="Database path :">
                <font>
