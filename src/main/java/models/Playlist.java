@@ -46,8 +46,12 @@ public class Playlist implements Identifiable {
 			return null;
 		else {
 			Random rand = new Random();
-			int x = rand.nextInt(this.videoList.size()) + this.videoList.size() - 1;
-			return this.videoList.get(x).getThumbnail();
+			if(this.videoList.size() != 0) {
+				int x = rand.nextInt(this.videoList.size()) + this.videoList.size() - 1;
+				return this.videoList.get(x).getThumbnail();
+			}
+			else
+				return null;
 		}
 
 	}

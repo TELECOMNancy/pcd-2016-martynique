@@ -5,6 +5,7 @@ import app.WebPlayer;
 
 import com.jfoenix.controls.JFXSpinner;
 import db.PlaylistDB;
+import db.PlaylistLinkDB;
 import db.VideoDB;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
@@ -232,7 +233,9 @@ public class AppController {
         PlaylistDB.create(p);
     }
 
-    public void pushVideoToPlaylist(Playlist selectedItem, Video v) {
+    public void pushVideoToPlaylist(Playlist selectedItem, Video v)
+    {
+        PlaylistLinkDB.createLink(selectedItem, v);
         this.user.addVideoToPlaylist(v, selectedItem);
     }
 }

@@ -128,7 +128,7 @@ public class VideoListViewCell extends JFXListCell<Video> {
                 dialog.close();
             }
         });
-        dialog.show();
+        //dialog.show();
         dialog.setFocusTraversable(true);
     }
 

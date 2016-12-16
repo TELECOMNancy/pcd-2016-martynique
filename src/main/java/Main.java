@@ -47,7 +47,7 @@ public class Main extends Application {
         fav = VideoDB.getDownloadedVideos();
         for(Video f: fav)
             this.app.getUser().addFavorite(f);
-
+        
         List<Playlist> p = PlaylistDB.all();
         for(Playlist pl: p)
             this.app.getUser().addPlaylist(pl);
