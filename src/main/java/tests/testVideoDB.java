@@ -36,5 +36,18 @@ public class testVideoDB {
 		assertEquals(v2.getThumbnail(),v1.getThumbnail());
 		assertEquals(v2.getID(),v1.getID());
 	}
+	
+	@Test
+	public void testSetFavorite(){
+		Video v1 = new Video("track1", "789", "d4f65sdf652");
+		v1.setFavorite(true);
+		VideoDB.create(v1);
+		Video v2 = VideoDB.findById("d4f65sdf652");
+		assertTrue(v2.isFavorite());
+	}
+	
+	
+	
+
 
 }

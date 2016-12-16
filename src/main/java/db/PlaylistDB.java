@@ -25,11 +25,11 @@ public class PlaylistDB{
             prep.setString(1, playlist.getName());
             prep.executeUpdate();
             
-            /*if(playlist.getVideoList().size() != 0){
+            if(playlist.getVideoList().size() != 0){
             	for(Video i : playlist.getVideoList()){
-            		VideoDB.create(i);
+            		PlaylistLinkDB.createLink(playlist,i);
             	}
-            }*/
+            }
             ResultSet tableKeys = prep.getGeneratedKeys();
             tableKeys.next();
             playlist.setID(new IntegerID(tableKeys.getInt(1)));
@@ -80,6 +80,16 @@ public class PlaylistDB{
  		e.printStackTrace();
  	}
         return playlist;
+    }
+    
+    public static void dropTable(){
+        String createString = "DROP TABLE IF EXISTS "+TABLE;
+        try {
+            Statement st = ConnectionDB.getInstance().createStatement();
+            st.executeUpdate(createString);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static String whereQuery() {
