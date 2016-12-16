@@ -226,4 +226,7 @@ public class AppController {
         PlaylistDB.create(p);
     }
 
+    public void pushVideoToPlaylist(Playlist selectedItem, Video v) {
+        this.user.addVideoToPlaylist(v, selectedItem);
+    }
 }

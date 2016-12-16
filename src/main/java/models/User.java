@@ -47,6 +47,14 @@ public class User extends Observable {
         }
     }
 
+    public void addVideoToPlaylist(Video v, Playlist p) {
+        if(this.getPlaylists().contains(p)) {
+            this.getPlaylists().get(this.getPlaylists().indexOf(p)).addVideo(v);
+            this.setChanged();
+            this.notifyObservers("push-video");
+        }
+    }
+
     public void addDownloadedVideo(Video v) {
         this.downloads.add(v);
         this.setChanged();

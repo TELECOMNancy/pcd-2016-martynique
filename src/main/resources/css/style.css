@@ -248,3 +248,17 @@
 .countVideos {
 -fx-text-fill: rgb(190, 190, 190);
 }
+
+.add-to-playlist {
+    -fx-background-image: url("../assets/add-red.png") no-repeat;
+	-fx-background-size: 40px 40px;
+}
+
+
+.combo {
+    -fx-text-fill: black;
+}
+
+.combo-box .text-field {
+    -fx-prompt-text-fill: black ;
+}

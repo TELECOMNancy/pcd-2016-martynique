@@ -96,5 +96,9 @@ public class PlaylistsController extends TabController implements Observer {
             this.playlistObservableList.clear();
             this.playlistObservableList.addAll(app.getUser().getPlaylists());
         }
+        if(arg.equals("push-video")) {
+            this.playlistObservableList.clear();
+            this.playlistObservableList.addAll(app.getUser().getPlaylists());
+        }
     }
 }

@@ -45,6 +45,8 @@ public class FavoritesController extends TabController implements Observer {
             this.favoritesObservableList.clear();
             this.favoritesObservableList.addAll(app.getUser().getFavorites());
         }
+
+
     }
 
 }

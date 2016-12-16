@@ -15,7 +15,8 @@
   <columnConstraints>
       <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
-      <ColumnConstraints hgrow="ALWAYS" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="50.0" minWidth="70.0" prefWidth="50.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="50.0" minWidth="60.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="100.0" minHeight="80.0" prefHeight="100.0" />
@@ -40,6 +41,11 @@
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="addToPlaylist" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="add-to-playlist" GridPane.columnIndex="3">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
