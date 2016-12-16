@@ -12,12 +12,12 @@ import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 
 import javafx.beans.value.ChangeListener;
-import views.LocalPlayer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ObservableValue;
 
 import com.jfoenix.controls.JFXSlider;
 
+import app.LocalPlayer;
 import javafx.util.Duration;
 
 import java.io.File;
