@@ -47,7 +47,9 @@ public class PlaylistListViewCell extends JFXListCell<Playlist> {
             }
 
             this.playlist.setText(value.getName());
-            this.thumbnail.setImage(new Image(value.getRandomThumbnail()));
+            String url = value.getRandomThumbnail();
+            if(url != null)
+                this.thumbnail.setImage(new Image(value.getRandomThumbnail()));
 
             this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override

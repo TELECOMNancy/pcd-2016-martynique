@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import models.Playlist;
 import models.Video;
@@ -36,6 +37,10 @@ public class Main extends Application {
         fav = VideoDB.getDownloadedVideos();
         for(Video f: fav)
             this.app.getUser().addFavorite(f);
+
+        List<Playlist> p = PlaylistDB.all();
+        for(Playlist pl: p)
+            this.app.getUser().addPlaylist(pl);
     }
 
 
@@ -45,9 +50,9 @@ public class Main extends Application {
         this.initUser();
         
 
-        FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
+        FXMLLoader loader = SceneManager.getLoader("root.fxml");
         loader.setController(this.app.getAppController());
-        BorderPane root = (BorderPane) SceneManager.getComponent(loader);
+        StackPane root = (StackPane) SceneManager.getComponent(loader);
         
         primaryStage.setTitle("Youtube app");
         primaryStage.setMinHeight(400);

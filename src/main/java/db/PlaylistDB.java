@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.javafx.sg.prism.NGShape;
 import models.IntegerID;
 import models.Playlist;
 import models.VarcharID;
@@ -101,6 +102,25 @@ public class PlaylistDB{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<Playlist> all() {
+        List<Playlist> list = new ArrayList<Playlist>();
+        try {
+            PreparedStatement prep;
+            prep = ConnectionDB.getInstance().prepareStatement(ModelDB.allQuery(TABLE));
+            ResultSet rs = prep.executeQuery();
+
+            while(rs.next()) {
+                Playlist p = new Playlist(rs.getString("title"));
+                list.add(p);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 }

@@ -1,8 +1,8 @@
 package controllers;
 
-import app.Configuration;
 import app.SceneManager;
 import com.jfoenix.controls.JFXSpinner;
+import db.PlaylistDB;
 import db.VideoDB;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -32,14 +31,14 @@ import java.util.List;
  */
 public class AppController {
 
+    @FXML private StackPane container;
     @FXML private BorderPane root;
     @FXML private SearchController searchController;
     @FXML private YoutubeTabPaneController youtubeTabPaneController;
     @FXML private ResultsController resultsController;
+
     private BorderPane homepage;
-
     private StackPane loading;
-
     private User user;
     private WebPlayer wp;
 
@@ -56,7 +55,9 @@ public class AppController {
         if(this.homepage == null) {
             FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
             //resetRoot();
-            this.homepage = (BorderPane) SceneManager.getComponent(loader);
+            StackPane p = (StackPane) SceneManager.getComponent(loader);
+            System.out.println(p.getChildren().get(0));
+            this.homepage = (BorderPane)  p.getChildren().get(0);
         }
     }
     
@@ -70,7 +71,7 @@ public class AppController {
     }
     
     public void showHome() {
-        this.root.setTop(this.homepage.getTop());
+        this.root.setTop(this.root.getTop());
         this.root.setCenter(this.homepage.getCenter());
     }
 
@@ -200,8 +201,17 @@ public class AppController {
         return this.root.getScene();
     }
 
+    public StackPane getContainer() {
+        return this.container;
+    }
+
     public void showPlayList(Playlist p) {
         this.youtubeTabPaneController.showPlaylist(p);
+    }
+
+    public void createPlaylist(Playlist p) {
+        this.user.addPlaylist(p);
+        PlaylistDB.create(p);
     }
 
 }
