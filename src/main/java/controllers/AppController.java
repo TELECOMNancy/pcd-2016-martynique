@@ -18,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import models.Playlist;
 import models.User;
@@ -71,8 +72,13 @@ public class AppController {
     }
     
     public void showHome() {
-        this.root.setTop(this.homepage.getTop());
-        this.root.setCenter(this.homepage.getCenter());
+        System.out.println("home");
+        resetRoot();
+        FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
+        BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
+        
+        this.root.setTop(bp.getTop());
+        this.root.setCenter(bp.getCenter());
     }
 
     public void search(String query) {
