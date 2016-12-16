@@ -102,7 +102,10 @@ public class SuggestionController extends Controller {
     		if(queryReturn.size() != 0){
 	    		Random rand = new Random();
 	    		String selected = queryReturn.get(rand.nextInt(queryReturn.size()));
-				//app.getAppController().playWebVideo(selected);
+
+	    		Video vid = new Video("Video choisie", "", selected);
+
+				app.getAppController().playWebVideo(vid);
     		}
     		else{
     			Alert alert = new Alert(AlertType.WARNING);

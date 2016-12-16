@@ -26,6 +26,10 @@ public class YTD {
     }
     
     public static boolean download(Video v, String path) {
+        // les videos venant des suggestion ne contiennent pas toutes les informations necessaires pour les telecharger 
+        if (v.getTitle().equals("Video choisie"))
+            throw new RuntimeException("Impossible de telecharger cette video");
+        
         System.out.println("#DOWNLOADING '" + v.getTitle() + "'");
         Path filePath = Paths.get(path);
         boolean status = false;

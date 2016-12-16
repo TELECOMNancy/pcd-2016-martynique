@@ -81,4 +81,13 @@ public class Playlist implements Identifiable {
 		return this.getName() + ": " + this.videoList.toString();
 	}
 
+	public boolean equals(Object o) {
+		if(o != null && o instanceof Playlist) {
+			Playlist tmp = (Playlist) o;
+			return this.getName().equals(tmp.getName());
+		}
+		return false;
+	}
+
+
 }

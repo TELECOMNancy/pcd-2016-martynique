@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.javafx.sg.prism.NGShape;
 import models.IntegerID;
 import models.Playlist;
 import models.VarcharID;
@@ -25,14 +26,20 @@ public class PlaylistDB{
             prep.setString(1, playlist.getName());
             prep.executeUpdate();
             
-            if(playlist.getVideoList().size() != 0){
-            	for(Video i : playlist.getVideoList()){
-            		PlaylistLinkDB.createLink(playlist,i);
-            	}
-            }
+            System.out.println("Size "+playlist.getVideoList().size());
+            
             ResultSet tableKeys = prep.getGeneratedKeys();
             tableKeys.next();
             playlist.setID(new IntegerID(tableKeys.getInt(1)));
+            
+
+            	for(Video i : playlist.getVideoList()){
+            		System.out.println("link created");
+            		PlaylistLinkDB.createLink(playlist,i);
+            	}
+
+
+            
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,6 +118,25 @@ public class PlaylistDB{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<Playlist> all() {
+        List<Playlist> list = new ArrayList<Playlist>();
+        try {
+            PreparedStatement prep;
+            prep = ConnectionDB.getInstance().prepareStatement(ModelDB.allQuery(TABLE));
+            ResultSet rs = prep.executeQuery();
+
+            while(rs.next()) {
+                Playlist p = new Playlist(rs.getString("title"));
+                list.add(p);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 }

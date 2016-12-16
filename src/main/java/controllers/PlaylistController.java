@@ -10,9 +10,11 @@ import models.Playlist;
 
 public class PlaylistController extends Controller {
 
-    @FXML BorderPane playlistPane;
-    @FXML Label namePlaylist;
+    //@FXML BorderPane playlistPane;
+    //@FXML Label namePlaylist;
     private Playlist playlist;
+    @FXML protected BorderPane tab;
+    @FXML protected Label tabName;
 
     public PlaylistController(Playlist p) {
         this.playlist = p;
@@ -20,10 +22,12 @@ public class PlaylistController extends Controller {
 
     @FXML
     public void initialize() {
-        this.namePlaylist.setText(this.playlist.getName());
-        FXMLLoader loader = SceneManager.getLoader("listView.fxml");
-        SetListController rc = new SetListController(this.playlist.getVideoList());
-        loader.setController(rc);
-        this.playlistPane.setCenter(SceneManager.getComponent(loader));
+        if(this.playlist != null) {
+            this.tabName.setText(this.playlist.getName());
+            FXMLLoader loader = SceneManager.getLoader("listView.fxml");
+            SetListController rc = new SetListController(this.playlist.getVideoList());
+            loader.setController(rc);
+            this.tab.setCenter(SceneManager.getComponent(loader));
+        }
     }
 }
