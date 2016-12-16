@@ -1,5 +1,6 @@
 package controllers;
 
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +36,8 @@ public class PlaylistsController extends TabController {
         this.addPlaylist.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("add");
+                JFXDialog dialog = new JFXDialog();
+                //dialog.setDialogContainer();
             }
         });
     }
