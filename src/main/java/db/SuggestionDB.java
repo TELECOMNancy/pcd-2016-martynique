@@ -24,26 +24,26 @@ public class SuggestionDB {
     public static final String PATH_JSON = "/json/";
 
     private static String generateRequest(HashMap<Flag, String> flags){
-    	String WHERE = "";
-    	String JOIN = "";
-    	for(Flag s : flags.keySet()){
-    		if(!WHERE.equals(""))
-        		WHERE += "AND ";
-		
-			if(s == Flag.TAG){
-				WHERE += "Tags.tag = '" + flags.get(s)+"' ";
-				JOIN = "INNER JOIN Tags ON Suggestions.id = Tags.id_video ";
-			}
-			if(s == Flag.LENGTH)
-    			WHERE += flags.get(s)+" ";
-    	}
-    	
-    	String request = "";
-    	request += "SELECT code FROM " + SuggestionDB.TABLE_SUGGESTIONS + " ";
-    	request += JOIN;
-    	request += "WHERE " + WHERE;
+        String WHERE = "";
+        String JOIN = "";
+        for(Flag s : flags.keySet()){
+            if(!WHERE.equals(""))
+                WHERE += "AND ";
 
-    	return request;
+            if(s == Flag.TAG){
+                WHERE += "Tags.tag = '" + flags.get(s)+"' ";
+                JOIN = "INNER JOIN Tags ON Suggestions.id = Tags.id_video ";
+            }
+            if(s == Flag.LENGTH)
+                WHERE += flags.get(s)+" ";
+        }
+
+        String request = "";
+        request += "SELECT code FROM " + SuggestionDB.TABLE_SUGGESTIONS + " ";
+        request += JOIN;
+        request += "WHERE " + WHERE;
+
+        return request;
     }
 
     public static List<String> runSuggestionQuery(HashMap<Flag, String> flags) {
@@ -61,9 +61,9 @@ public class SuggestionDB {
 
         return list;
     }
-    
+
     public static void insertSuggestion(Suggestion suggestion){
-    	String query = "INSERT INTO "+SuggestionDB.TABLE_SUGGESTIONS+" (code, length) VALUES (?, ?);";
+        String query = "INSERT INTO "+SuggestionDB.TABLE_SUGGESTIONS+" (code, length) VALUES (?, ?);";
         try {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -77,9 +77,9 @@ public class SuggestionDB {
             e.printStackTrace();
         }
     }
-    
+
     public static void insertTag(Tag tag){
-    	String query = "INSERT INTO "+SuggestionDB.TABLE_TAGS+" (id_video, tag) VALUES (?, ?);";
+        String query = "INSERT INTO "+SuggestionDB.TABLE_TAGS+" (id_video, tag) VALUES (?, ?);";
         try {
             PreparedStatement prep;
             prep = ConnectionDB.getInstance().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -93,42 +93,46 @@ public class SuggestionDB {
             e.printStackTrace();
         }
     }
-    
+
     private static void initializeTables(){
-    	File f = new File(SuggestionDB.class.getResource("/suggestions/").getFile());
-    	File[] matchingFiles = f.listFiles(new FilenameFilter(){
-    		public boolean accept(File dir, String name){
-    			return name.startsWith("sug") && name.endsWith(".json");
-    		}
-    	});
-    	
-    	for(int i=0;i<matchingFiles.length;i++){
-	    	JSONTokener tokener;
-			try {
-				tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/"+matchingFiles[i].getName()).openStream());
-				JSONObject root = new JSONObject(tokener);
-		    	JSONArray sug = root.getJSONArray("sug");
-		    	for(int j=0;j<sug.length();j++){
-		    		String code = sug.getJSONObject(j).getString("code");
-		    		int length = sug.getJSONObject(j).getInt("length");
-		    		JSONArray tags = sug.getJSONObject(j).getJSONArray("tags");
-		    		Suggestion curVideo = new Suggestion(code, length);
-		    		insertSuggestion(curVideo);
-		    		for(int k=0;k<tags.length();k++){
-		    			String curTagValue = tags.getString(k);
-		    			Tag curTag = new Tag(new IntegerID(Integer.parseInt(curVideo.getID())), curTagValue);
-		    			insertTag(curTag);
-		    		}
-		    	}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    	}
+        File f = new File(SuggestionDB.class.getResource("/suggestions/").getFile());
+        File[] matchingFiles = f.listFiles(new FilenameFilter(){
+            public boolean accept(File dir, String name){
+                return name.startsWith("sug") && name.endsWith(".json");
+            }
+        });
+        String[] files = {"sug1.json", "sug2.json"};
+
+        //if(matchingFiles != null) {
+        //for(int i=0;i<matchingFiles.length;i++){
+        for(String t: files) {
+            JSONTokener tokener;
+            try {
+                //tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/"+matchingFiles[i].getName()).openStream());
+                tokener = new JSONTokener(SuggestionDB.class.getResource("/suggestions/"+t).openStream());
+                JSONObject root = new JSONObject(tokener);
+                JSONArray sug = root.getJSONArray("sug");
+                for(int j=0;j<sug.length();j++){
+                    String code = sug.getJSONObject(j).getString("code");
+                    int length = sug.getJSONObject(j).getInt("length");
+                    JSONArray tags = sug.getJSONObject(j).getJSONArray("tags");
+                    Suggestion curVideo = new Suggestion(code, length);
+                    insertSuggestion(curVideo);
+                    for(int k=0;k<tags.length();k++){
+                        String curTagValue = tags.getString(k);
+                        Tag curTag = new Tag(new IntegerID(Integer.parseInt(curVideo.getID())), curTagValue);
+                        insertTag(curTag);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
-    	
+
     public static void createTable() {
-    	
-    	String createString1 = "CREATE TABLE IF NOT EXISTS " + TABLE_SUGGESTIONS +  " ( " +
+
+        String createString1 = "CREATE TABLE IF NOT EXISTS " + TABLE_SUGGESTIONS +  " ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "code varchar(255) NOT NULL, " +
                 "length INTEGER NOT NULL)";
@@ -139,7 +143,7 @@ public class SuggestionDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         String createString2 = "CREATE TABLE IF NOT EXISTS " + TABLE_TAGS +  " ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "id_video INTEGER NOT NULL, " +
