@@ -3,6 +3,7 @@ Martynique !
 
 
 Welcome guys for a intensive programming week! We have to develop a desktop app interfacing with Youtube.
+You can find the video presentation at the following link: ([https://youtu.be/AqRh3hZBHRk](https://youtu.be/AqRh3hZBHRk)
 
 
 #Before starting
