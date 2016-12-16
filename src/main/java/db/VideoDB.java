@@ -33,7 +33,7 @@ public class VideoDB {
         }
     }
 
-    public static List<Video> getDownloadedVideo() {
+    public static List<Video> getDownloadedVideos() {
         List<Video> list = new ArrayList<Video>();
         try {
             PreparedStatement prep;
@@ -106,6 +106,8 @@ public class VideoDB {
     public static String updateQuery() {
         return ModelDB.updateQuery(TABLE) + "title = ?, thumbnail  = ?, favorite = ? WHERE id = ?";
     }
+
+
 
     public String deleteQuery() {
         return ModelDB.deleteQuery(TABLE) + " WHERE id = (?)";

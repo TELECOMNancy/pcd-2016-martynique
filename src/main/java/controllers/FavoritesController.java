@@ -4,6 +4,9 @@ import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.BorderPane;
 import models.Video;
 import views.VideoListViewCell;
 import java.util.List;
@@ -11,9 +14,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class FavoritesController extends Controller implements Observer {
+public class FavoritesController extends TabController implements Observer {
 
-    @FXML JFXListView<Video> list;
+    private JFXListView<Video> list;
     private ObservableList<Video> favoritesObservableList;
     private List<Video> favorites;
 
@@ -25,8 +28,15 @@ public class FavoritesController extends Controller implements Observer {
 
     @FXML
     public void initialize() {
+        super.initialize();
         this.list.setItems(this.favoritesObservableList);
         this.list.setCellFactory(param -> new VideoListViewCell(app.getAppController()));
+        this.tab.setCenter(this.list);
+    }
+
+    @Override
+    public String getTabName() {
+        return "Favoris";
     }
 
     @Override

@@ -152,6 +152,10 @@
     -fx-border-color: rgba(200, 200, 200, 0.4);
 }
 
+.loading {
+    -fx-background-color: white;
+}
+
 /* The increment and decrement button CSS class of scrollbar */
 .scroll-bar:vertical .increment-button ,
 .scroll-bar:vertical .decrement-button {
@@ -214,11 +218,24 @@
 	-fx-background-color: #e52d27;
 }
 
-.playlist-name {
+.tab-header {
+    -fx-background-color: rgb(205, 32, 31);
+}
+
+.tab-name {
+    -fx-border-width: 2 0 0 0 ;
+    -fx-text-fill: white;
     -fx-padding: 12px 0px 12px 0px;
     -fx-font-size: 14px;
     -fx-font-weight: 100;
-    -fx-background-color: rgb(205, 32, 31);
-    -fx-border-width: 2 0 0 0 ;
-    -fx-text-fill: white;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: rgba(200, 200, 200, 0.4);
+}
+
+
+.add-playlist {
+    -fx-background-image: url("../assets/add.png") no-repeat;
+	-fx-background-size: 30px 30px;
 }

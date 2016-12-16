@@ -20,6 +20,8 @@ import com.jfoenix.controls.JFXSlider;
 
 import javafx.util.Duration;
 
+import java.io.File;
+
 /**
  * Controller for playing Local videos.
  */
@@ -43,7 +45,7 @@ public class LocalVideoController extends Controller implements VideoController{
     @FXML private BorderPane bottomLayout;
     @FXML private StackPane stackPane;
 
-    public LocalVideoController(String path) {
+    public LocalVideoController(File path) {
         this.savedVolume = -1;
         lp = new LocalPlayer(path);
         

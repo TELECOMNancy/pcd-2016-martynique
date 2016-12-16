@@ -32,6 +32,10 @@ public class Main extends Application {
         List<Video> fav = VideoDB.getFavorites();
         for(Video f: fav)
             this.app.getUser().addFavorite(f);
+
+        fav = VideoDB.getDownloadedVideos();
+        for(Video f: fav)
+            this.app.getUser().addFavorite(f);
     }
 
 

@@ -14,13 +14,12 @@ import javafx.util.Duration;
 public class LocalPlayer extends BorderPane implements VideoPlayer {
     private MediaView player;
     
-    public LocalPlayer(String source) {
+    public LocalPlayer(File videoFile) {
         super();
 
         String url = "";
         try{
-            File video = new File(source);
-            url = video.toURI().toURL().toString();
+            url = videoFile.toURI().toURL().toString();
             System.out.println("URL: "+url);
         }catch(Exception e){
             System.err.println(e.toString());

@@ -2,27 +2,30 @@ package controllers;
 
 import app.Configuration;
 import app.SceneManager;
-import models.Playlist;
-import views.WebPlayer;
+import com.jfoenix.controls.JFXSpinner;
 import db.VideoDB;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import models.Playlist;
 import models.User;
 import models.Video;
-
-import java.util.List;
-
+import utils.Search;
 import utils.YTD;
+import views.WebPlayer;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * The main Controller of the app
@@ -33,17 +36,28 @@ public class AppController {
     @FXML private SearchController searchController;
     @FXML private YoutubeTabPaneController youtubeTabPaneController;
     @FXML private ResultsController resultsController;
+    private BorderPane homepage;
+
+    private StackPane loading;
 
     private User user;
     private WebPlayer wp;
 
     public AppController(User user) {
         this.user = user;
+        this.loading = new StackPane();
+        this.loading.getStyleClass().add("loading");
+        this.loading.getChildren().add(new JFXSpinner());
     }   
 
     @FXML
     private void initialize() {
         wp = new WebPlayer();
+        if(this.homepage == null) {
+            FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
+            //resetRoot();
+            this.homepage = (BorderPane) SceneManager.getComponent(loader);
+        }
     }
     
 
@@ -56,12 +70,22 @@ public class AppController {
     }
     
     public void showHome() {
-        FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
-        resetRoot();
-        
-        BorderPane bp = (BorderPane) SceneManager.getComponent(loader);
-        this.root.setTop(bp.getTop());
-        this.root.setCenter(bp.getCenter());
+        this.root.setTop(this.homepage.getTop());
+        this.root.setCenter(this.homepage.getCenter());
+    }
+
+    public void search(String query) {
+        this.root.setCenter(this.loading);
+        Task<Void> task = new Task<Void>() {
+            Search search = new Search(query);
+            @Override
+            protected Void call() throws Exception {
+                search.executeApiRequest();
+                return null;
+            }
+            @Override protected void succeeded() {  showResults(search.getVideoList());  }
+        };
+        new Thread(task).start();
     }
 
     public void showResults(List<Video> results) {
@@ -91,8 +115,7 @@ public class AppController {
         this.root.setCenter(bp);
     }
 
-    public void playLocalVideo(String videoID) {
-        videoID = Configuration.getInstance().getSavePath() + videoID;
+    public void playLocalVideo(File videoID) {
         FXMLLoader loader = SceneManager.getLoader("localPlayer.fxml");
         LocalVideoController ctrl = new LocalVideoController(videoID);
         loader.setController(ctrl);
@@ -116,7 +139,7 @@ public class AppController {
             public Void call() throws Exception {
                 boolean ok = YTD.download(v, app.Configuration.getInstance().getSavePath());
                 if(ok)
-                    user.addDownloaded(v);
+                    user.addDownloadedVideo(v);
                 return null;
             }
         };
@@ -180,6 +203,5 @@ public class AppController {
     public void showPlayList(Playlist p) {
         this.youtubeTabPaneController.showPlaylist(p);
     }
-
 
 }

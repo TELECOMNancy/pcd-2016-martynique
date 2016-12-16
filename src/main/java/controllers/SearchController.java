@@ -20,9 +20,7 @@ import utils.Search;
 public class SearchController extends Controller {
 
     @FXML private TextField searchField;
-
     @FXML private Button searchButton;
-    
     @FXML private Button returnButton;
 
     @FXML
@@ -43,7 +41,7 @@ public class SearchController extends Controller {
                 if(event.getCode().equals(KeyCode.ENTER)){
                     System.out.println("#QUERY '" + searchField.getText() + "'");
                     setReturnVisible(true);
-                    search();
+                    app.getAppController().search(searchField.getText());
                 }
             }
         });
@@ -53,7 +51,7 @@ public class SearchController extends Controller {
             @Override
             public void handle(MouseEvent event) {
                 setReturnVisible(true);
-                search();
+                app.getAppController().search(searchField.getText());
             }
         });
         
@@ -64,12 +62,5 @@ public class SearchController extends Controller {
         this.returnButton.setVisible(bool);
         this.returnButton.setManaged(bool);
     }
-    
-    private void search() {
-        Search search = new Search(searchField.getText());
-        search.executeApiRequest();
-        app.getAppController().showResults(search.getVideoList());
-    }
-
 
 }

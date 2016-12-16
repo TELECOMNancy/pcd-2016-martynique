@@ -43,7 +43,7 @@ public class User extends Observable {
         return this.playlists;
     }
 
-    public void addDownloaded(Video v) {
+    public void addDownloadedVideo(Video v) {
         this.downloads.add(v);
         this.setChanged();
         this.notifyObservers("add-download");
@@ -53,6 +53,10 @@ public class User extends Observable {
         this.downloads.remove(v);
         this.setChanged();
         this.notifyObservers("remove-download");
+    }
+
+    public List<Video> getDownloads() {
+        return this.downloads;
     }
 
     public boolean hasFavorite(Video v) {
