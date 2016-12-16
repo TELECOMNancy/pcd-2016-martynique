@@ -1,5 +1,4 @@
-package views;
-import app.VideoPlayer;
+package app;
 import javafx.scene.web.WebView;
 
 import javafx.scene.layout.BorderPane;

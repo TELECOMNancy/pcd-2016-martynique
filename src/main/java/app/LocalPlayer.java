@@ -1,8 +1,7 @@
-package views;
+package app;
 import java.io.File;
 //import java.time.Duration;
 
-import app.VideoPlayer;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.media.MediaPlayer;
@@ -24,7 +23,7 @@ public class LocalPlayer extends BorderPane implements VideoPlayer {
         }catch(Exception e){
             System.err.println(e.toString());
         }
-                
+                        
         Media media = new Media(url);
                
         // Create the player and set to play automatically.
