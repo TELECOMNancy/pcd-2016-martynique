@@ -1,6 +1,7 @@
 package controllers;
 
 import com.jfoenix.controls.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import models.Playlist;
 import views.PlaylistListViewCell;
@@ -49,6 +49,8 @@ public class PlaylistsController extends TabController implements Observer {
                 JFXDialogLayout layout = new JFXDialogLayout();
                 layout.setHeading(new Label("Créer une playlist"));
                 JFXTextField field = new JFXTextField();
+                field.setPromptText("Rock, Soundtracks ...");
+
                 field.setFocusColor(Color.rgb(229, 45, 39));
                 layout.setBody(field);
                 JFXButton create = new JFXButton("Créer");
@@ -74,6 +76,7 @@ public class PlaylistsController extends TabController implements Observer {
                     }
                 });
                 dialog.show();
+                dialog.setFocusTraversable(true);
             }
         });
     }

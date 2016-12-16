@@ -244,3 +244,7 @@
     -fx-text-fill: #e52d27;
     -fx-font-size: 2em;
 }
+
+.countVideos {
+-fx-text-fill: rgb(190, 190, 190);
+}

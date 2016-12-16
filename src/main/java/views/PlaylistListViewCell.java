@@ -21,6 +21,7 @@ public class PlaylistListViewCell extends JFXListCell<Playlist> {
 
     @FXML private GridPane cell;
     @FXML private ImageView thumbnail;
+    @FXML private Label countVideos;
     @FXML private Label playlist;
     private AppController ctrl;
 
@@ -50,6 +51,9 @@ public class PlaylistListViewCell extends JFXListCell<Playlist> {
             String url = value.getRandomThumbnail();
             if(url != null)
                 this.thumbnail.setImage(new Image(value.getRandomThumbnail()));
+
+            int count = value.getVideoList().size();
+            this.countVideos.setText((count < 2 ? count + " vidéo" : count + " vidéos"));
 
             this.thumbnail.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override

@@ -23,7 +23,6 @@ public class PlaylistController extends Controller {
     @FXML
     public void initialize() {
         if(this.playlist != null) {
-            System.out.println(playlist);
             this.tabName.setText(this.playlist.getName());
             FXMLLoader loader = SceneManager.getLoader("listView.fxml");
             SetListController rc = new SetListController(this.playlist.getVideoList());

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -14,6 +15,7 @@
   <columnConstraints>
       <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="100.0" minHeight="80.0" prefHeight="100.0" />
@@ -33,6 +35,14 @@
          <font>
             <Font name="Roboto Regular" size="16.0" />
          </font>
+      </Label>
+      <Label fx:id="countVideos" alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="LEFT_TO_RIGHT" styleClass="countVideos" stylesheets="@../css/style.css" text="Label" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+         <font>
+            <Font name="Roboto Regular" size="16.0" />
+         </font>
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
       </Label>
    </children>
 </GridPane>

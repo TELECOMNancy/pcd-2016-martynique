@@ -20,10 +20,6 @@ public class User extends Observable {
         this.favorites = new ArrayList<Video>();
         this.playlists = new ArrayList<Playlist>();
         this.downloads = new ArrayList<Video>();
-
-        //Playlist p = new Playlist("Compil de beauf");
-        //p.addVideo(new Video("THE LATEST BEST FIGHT Compilation in 2016", "https://i.ytimg.com/vi/RvrOqi2hLmU/default.jpg" , "OeYKnC9E4s4"));
-        //this.playlists.add(p);
     }
 
     public void addFavorite(Video v) {
@@ -46,9 +42,9 @@ public class User extends Observable {
     public void addPlaylist(Playlist p) {
         if(!this.playlists.contains(p)) {
             this.playlists.add(p);
+            this.setChanged();
             this.notifyObservers("create-playlist");
         }
-
     }
 
     public void addDownloadedVideo(Video v) {
