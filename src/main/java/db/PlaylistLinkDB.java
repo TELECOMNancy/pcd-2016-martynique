@@ -73,6 +73,16 @@ public class PlaylistLinkDB {
     	
     }
     
+    public static void dropTable(){
+        String createString = "DROP TABLE IF EXISTS "+TABLE;
+        try {
+            Statement st = ConnectionDB.getInstance().createStatement();
+            st.executeUpdate(createString);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     public static String insertQuery() {
         return "INSERT INTO " + TABLE + "(id_playlist, id_video) VALUES(?,?)";

@@ -19,5 +19,7 @@ public abstract class ModelDB {
     public static String allQuery(String table) {
         return "SELECT * FROM " + table;
     }
+    
+
 
 }
