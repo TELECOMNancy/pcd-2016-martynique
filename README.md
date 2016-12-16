@@ -13,6 +13,7 @@ First of all, install all softwares you need to work. Minimum requirements are:
  - [JUnit4](http://junit.org/junit4/) ([Who will make tests?](http://www.commitstrip.com/shop/45-thickbox_default/affiche-tester-c-est-douter.jpg))
  - [SceneBuilder](http://gluonhq.com/labs/scene-builder/) if we choose javaFX (We have choosen JavaFX :D)
  - The build manager maven(useful for dependancies)
+ - FFmpeg
 
 
 Ok, here we are! Be sure you can clone the repo (use [SSH keys](https://help.github.com/articles/generating-an-ssh-key/) to be faster).
@@ -30,14 +31,16 @@ the ID clients OAuth 2.0 is stored in *src/main/resources/secrets.json*
 The API key is stored in *src/main/resources/youtube.properties*
 	
 	youtube.apikey=XXXXX
+	
+To download some videos FFmpeg is required. Please make sure FFmpeg is installed and added to your PATH variable.
 
 #Dependancies
 
 for more details, check the [pom.xml](https://github.com/TELECOMNancy/pcd-2016-martynique/blob/master/pom.xml) !
 
-
 - [Youtube API Client Library for Java](https://developers.google.com/api-client-library/java/), communication with the Youtube API
 - [javaFX](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm), building of modern user interfaces in java 8
+- [FFmpeg] (https://ffmpeg.org/), a powerfull media manipulation tool
 
 
 #Install
@@ -80,40 +83,36 @@ Have fun!
 11. Authentificating the user on Youtube
 12. Commenting or liking  a video
 13. Displaying more information about a video (comments, description)
+14. unit tests
 
 
+# Initial planning
 
-#Day 1#Monday
-
-features
-----
-
-Minious and Answermouth: features 2 and 4
-MartyEz and Mcdostone: features 1 and 9
+https://trello.com/b/R2oF29tT/planning-initial
 
 
-Recap
------
+# Actual Roadmap
 
+https://trello.com/b/BS6gIe2i/pcd-martynique
 
-#Day 2#Tuesday
+# Final features
+- Online viewing
+- Offline viewing
+- Download videos
+- Search
+- Favorite videos
+- Playlists
+- Settings in home
+- Possibility to choose location of database and downloaded files
+- Suggest a curated video depending on certain criterias
 
-features
-----
+# Class diagrammes
 
-Minious and Answermouth: features 3 and 6
-MartyEz and Mcdostone: features 4 and 5
+You can find them in /doc/class_diagrammes
 
+# Unit test
 
-#Day 3#wednesday
-
-
- - Possibility to save favorites in a DB
- - Possibility to watch videos online
- - Start the module of videos suggestions
- - Possibility to watch videos offline
- - Work about design of app
-
+You can find the unit tests in the test package.
 
 
 # Some resources
