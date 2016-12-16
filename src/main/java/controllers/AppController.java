@@ -17,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import models.Playlist;
 import models.User;
@@ -38,7 +39,7 @@ public class AppController {
     @FXML private YoutubeTabPaneController youtubeTabPaneController;
     @FXML private ResultsController resultsController;
 
-    private BorderPane homepage;
+    //private BorderPane homepage;
     private StackPane loading;
     private User user;
     private WebPlayer wp;
@@ -53,6 +54,7 @@ public class AppController {
     @FXML
     private void initialize() {
         wp = new WebPlayer();
+        /*
         if(this.homepage == null) {
             FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
             //resetRoot();
@@ -60,6 +62,7 @@ public class AppController {
             System.out.println(p.getChildren().get(0));
             this.homepage = (BorderPane)  p.getChildren().get(0);
         }
+        */
     }
     
 
@@ -72,8 +75,11 @@ public class AppController {
     }
     
     public void showHome() {
-        this.root.setTop(this.root.getTop());
-        this.root.setCenter(this.homepage.getCenter());
+        FXMLLoader loader = SceneManager.getLoader("homepage.fxml");
+        BorderPane bp = (BorderPane) ((StackPane) SceneManager.getComponent(loader)).getChildren().get(0);
+        
+        this.root.setTop(bp.getTop());
+        this.root.setCenter(bp.getCenter());
     }
 
     public void search(String query) {
